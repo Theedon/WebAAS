@@ -1,0 +1,14 @@
+name: Formatter
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  build-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install all packages
+        run: npm ci
+      - name: Run ESLint
+        run: npm run format:write
