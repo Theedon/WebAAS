@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
 
-export const poppins = Poppins({
+const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   style: ["italic", "normal"],
   variable: "--font-poppins",
   subsets: ["latin"],
 });
 
-export const inter = Inter({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
