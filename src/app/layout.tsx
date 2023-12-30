@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { Poppins, Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -31,13 +32,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("", poppins.className)}>
+      <body className={cn("flex ", poppins.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          <ThemeToggle />
+
           {children}
         </ThemeProvider>
       </body>
