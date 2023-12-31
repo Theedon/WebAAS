@@ -9,8 +9,8 @@
  * This handler is then exported as both GET and POST handlers for the route.
  */
 import { ApolloServer } from "@apollo/server";
-import typeDefs from "@/backend/graphql/typeDefs";
-import resolvers from "@/backend/graphql/resolvers";
+import { typeDefs } from "@/backend/graphql/typeDefs";
+import { resolvers } from "@/backend/graphql/resolvers";
 import { NextRequest, NextResponse } from "next/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { makeExecutableSchema } from "@graphql-tools/schema";
