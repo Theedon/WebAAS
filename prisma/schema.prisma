@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id              String   @id @default(cuid())
+  first_name      String   @db.VarChar(64)
+  middle_name     String?  @db.VarChar(128)
+  last_name       String   @db.VarChar(128)
+  password        String
+  email           String    @unique @db.VarChar(128)
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+  role            Role      @default(student)
+  verified        Boolean   @default(false)
+  onboarded       Boolean   @default(false)
+  faculty_id      String 
+
+  faculty         Faculty @relation(fields: [faculty_id], references: [id])
+
+  @@map("users")
+}
+
+enum Role {
+  admin
+  advisor
+  student
+}
+
+model Faculty {
+  id              String   @id @default(cuid())
+  name            String
+  code            String   @unique
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  subjects        Subject[]
+  users           User[]
+
+  @@map("faculties")
+}
+
+model Subject {
+  id              String   @id @default(cuid())
+  name            String
+  description     String?
+  faculty         Faculty  @relation(fields: [faculty_id], references: [id])
+  faculty_id      String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  questions       Question[]
+
+  @@map("subjects")
+}
+
+model Question {
+  id              String   @id @default(cuid())
+  subject         Subject  @relation(fields: [subject_id], references: [id])
+  subject_id      String
+  question_text   String
+  option_a        String
+  option_b        String
+  option_c        String
+  option_d        String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  @@map("questions")
+  @@index(fields: [question_text])
+}
