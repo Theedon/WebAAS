@@ -10,19 +10,19 @@ datasource db {
 
 model User {
   id              String   @id @default(cuid())
-  firstName       String   @db.VarChar(64)
-  middleName      String?  @db.VarChar(128)
-  lastName        String   @db.VarChar(128)
+  first_name      String   @db.VarChar(64)
+  middle_name     String?  @db.VarChar(128)
+  last_name       String   @db.VarChar(128)
   password        String
   email           String    @unique @db.VarChar(128)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
   role            Role      @default(student)
   verified        Boolean   @default(false)
   onboarded       Boolean   @default(false)
-  facultyId       String 
+  faculty_id      String 
 
-  faculty         Faculty @relation(fields: [facultyId], references: [id])
+  faculty         Faculty @relation(fields: [faculty_id], references: [id])
 
   @@map("users")
 }
@@ -31,17 +31,16 @@ enum Role {
   admin
   advisor
   student
-
 }
 
 model Faculty {
   id              String   @id @default(cuid())
   name            String
   code            String   @unique
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
   subjects        Subject[]
-  users User[]
+  users           User[]
 
   @@map("faculties")
 }
@@ -50,27 +49,28 @@ model Subject {
   id              String   @id @default(cuid())
   name            String
   description     String?
-  faculty         Faculty  @relation(fields: [facultyId], references: [id])
-  facultyId       String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  faculty         Faculty  @relation(fields: [faculty_id], references: [id])
+  faculty_id      String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
 
-  questions         Question[]
+  questions       Question[]
 
   @@map("subjects")
-
 }
 
 model Question {
   id              String   @id @default(cuid())
-  subject         Subject  @relation(fields: [subjectId], references: [id])
-  subjectId       String
-  questionText    String
-  optionA         String
-  optionB         String
-  optionC         String
-  optionD         String
+  subject         Subject  @relation(fields: [subject_id], references: [id])
+  subject_id      String
+  question_text   String
+  option_a        String
+  option_b        String
+  option_c        String
+  option_d        String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
 
-   @@map("questions")
-   @@index(fields: [questionText])
+  @@map("questions")
+  @@index(fields: [question_text])
 }
