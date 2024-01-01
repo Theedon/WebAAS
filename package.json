@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format:write": "npx prettier . --write",
     "format:check": "npx prettier . --check",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",
