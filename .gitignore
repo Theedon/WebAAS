@@ -35,3 +35,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Matches any files or directories inside `/src/app` that start with `ignored`.
+/src/app/**/ignored*/
+
