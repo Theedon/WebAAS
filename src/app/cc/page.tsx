@@ -18,9 +18,12 @@ const AUTHOR_NAME = gql`
 `;
 
 function Page() {
-  const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
-  console.log(data, error);
-  return <div>{JSON.stringify(data)}</div>;
+
+  //   const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
+  //   console.log(data, error);
+  //   return <div>{JSON.stringify(data)}</div>;
+  return <div>cc</div>;
+
 }
 
 export default Page;
