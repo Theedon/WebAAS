@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format:write": "npx prettier . --write",
-    "format:check": "npx prettier . --check"
+    "format:check": "npx prettier . --check",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",
@@ -33,6 +34,11 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/near-operation-file-preset": "^3.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
