@@ -2,6 +2,10 @@ import Image from "next/image";
 
 import { getClient } from "@/lib/apollo-clients/RSCClient";
 import { gql } from "@apollo/client";
+import {
+  AllQuestionsQuery,
+  AllQuestionsQueryVariables,
+} from "./__generated__/page.generated";
 
 const query = gql`
   query AllQuestions {
@@ -18,7 +22,10 @@ const query = gql`
 `;
 
 export default async function Home() {
-  // const { data, error } = await getClient().query<>({ query });
+  const { data, error } = await getClient().query<
+    AllQuestionsQuery,
+    AllQuestionsQueryVariables
+  >({ query });
   // console.log(JSON.stringify(data));
-  return <main className="bg-background">WebAAS</main>;
+  return <main className="bg-background">WebAAS {JSON.stringify(data)}</main>;
 }
