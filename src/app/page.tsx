@@ -1,5 +1,31 @@
 import Image from "next/image";
 
-export default function Home() {
-  return <main className="bg-background">WebAAS</main>;
+import { getClient } from "@/lib/apollo-clients/RSCClient";
+import { gql } from "@apollo/client";
+import {
+  AllQuestionsQuery,
+  AllQuestionsQueryVariables,
+} from "./__generated__/page.generated";
+
+const query = gql`
+  query AllQuestions {
+    allQuestions {
+      id
+      option_a
+      option_b
+      option_c
+      option_d
+      question
+      subject_id
+    }
+  }
+`;
+
+export default async function Home() {
+  const { data, error } = await getClient().query<
+    AllQuestionsQuery,
+    AllQuestionsQueryVariables
+  >({ query });
+  // console.log(JSON.stringify(data));
+  return <main className="bg-background">WebAAS {JSON.stringify(data)}</main>;
 }

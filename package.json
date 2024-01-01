@@ -4,18 +4,28 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format:write": "npx prettier . --write",
-    "format:check": "npx prettier . --check"
+    "format:check": "npx prettier . --check",
+    "generate": "graphql-codegen",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.0-rc.2",
+    "@apollo/experimental-nextjs-app-support": "^0.5.2",
+    "@apollo/server": "^4.9.5",
+    "@as-integrations/next": "^3.0.0",
     "@prisma/client": "^5.7.1",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-slot": "^1.0.2",
+    "@types/lodash": "^4.14.202",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.303.0",
     "next": "14.0.4",
     "next-themes": "^0.2.1",
@@ -25,6 +35,11 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/near-operation-file-preset": "^3.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
