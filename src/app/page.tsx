@@ -22,11 +22,11 @@ const query = gql`
 `;
 
 export default async function Home() {
-  // const { data, error } = await getClient().query<
-  //   AllQuestionsQuery,
-  //   AllQuestionsQueryVariables
-  // >({ query });
-  // console.log(JSON.stringify(data));
-  // return <main className="bg-background">WebAAS {JSON.stringify(data)}</main>;
+  const { data, error } = await getClient().query<
+    AllQuestionsQuery,
+    AllQuestionsQueryVariables
+  >({ query });
+  console.log(JSON.stringify(data));
+  return <main className="bg-background">WebAAS {JSON.stringify(data)}</main>;
   return <main className="bg-background">WebAAS</main>;
 }
