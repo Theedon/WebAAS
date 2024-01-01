@@ -33,6 +33,11 @@ export function middleware() {
     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
   );
 
+  console.error(
+    "This here is the postgresurl",
+    process.env.POSTGRES_PRISMA_URL,
+  );
+
   return res;
 }
 

@@ -18,14 +18,16 @@ const AUTHOR_NAME = gql`
 `;
 
 function Page() {
-
-
-  //   const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
-  //   console.log(data, error);
-  //   return <div>{JSON.stringify(data)}</div>;
-  return <div>cc</div>;
-
-
+  console.error(
+    "This here is the postgresurl",
+    process.env.POSTGRES_PRISMA_URL,
+  );
+  // const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
+  // console.log(data, error);
+  // return <div>{JSON.stringify(data)}</div>;
+  return (
+    <main className="bg-background"> {process.env.POSTGRES_PRISMA_URL}</main>
+  );
 }
 
 export default Page;
