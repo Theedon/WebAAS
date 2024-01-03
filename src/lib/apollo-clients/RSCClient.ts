@@ -17,12 +17,13 @@ import {
   NextSSRApolloClient,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
+import { endpoint } from "../exposeUri";
 
 export const { getClient } = registerApolloClient(() => {
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link: new HttpLink({
-      uri: process.env.API_ROUTE ?? "http://localhost:3000/api/graphql",
+      uri: `${endpoint}/api/graphql`,
     }),
   });
 });
