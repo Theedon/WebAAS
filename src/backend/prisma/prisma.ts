@@ -1,31 +1,23 @@
 /**
- * Initializes Prisma client as a singleton and exports it.
- * - Declares `prisma` as a global variable of type PrismaClient | undefined.
- * - Creates a PrismaSingleton object with a PrismaClient instance.
- * - Exports the PrismaSingleton type.
- * - Freezes the PrismaSingleton object.
- * - Initializes `prisma` global var with PrismaSingleton instance.
- * - In non-production, sets `global.prisma` to the client instance.
- * - Exports the `prisma` instance as default.
+ * Initializes and exports a singleton Prisma client instance.
+ *
+ * Creates a new PrismaClient instance via prismaClientSingleton().
+ * Declares a global prisma variable to hold the client instance.
+ * Exports the client instance as the default export.
+ * In non-production environments, also assigns the client to globalThis.prisma.
  */
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-  // allow global `var` declarations
-  // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
-}
-
-const PrismaSingleton = {
-  instance: new PrismaClient(),
+const prismaClientSingleton = () => {
+  return new PrismaClient();
 };
 
-export type IPrismaSingleton = typeof PrismaSingleton;
+declare global {
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
+}
 
-Object.freeze(PrismaSingleton);
-
-const prisma = global.prisma || PrismaSingleton.instance;
-
-if (process.env.NODE_ENV !== "production") global.prisma = prisma;
+const prisma = globalThis.prisma ?? prismaClientSingleton();
 
 export default prisma;
+
+if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
