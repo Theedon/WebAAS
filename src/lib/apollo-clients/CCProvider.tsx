@@ -14,10 +14,11 @@ import {
   ApolloNextAppProvider,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import React from "react";
+import { endpoint } from "../exposeUri";
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: process.env.API_ROUTE ?? "http://localhost:3000/api/graphql",
+    uri: `${endpoint}/api/graphql`,
   });
 
   return new NextSSRApolloClient({
