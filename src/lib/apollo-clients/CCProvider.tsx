@@ -17,7 +17,7 @@ import React from "react";
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: process.env.API_ROUTE ?? "http://localhost:3000/api/graphql",
+    uri: "https://web-aas.vercel.app/api/graphql",
   });
 
   return new NextSSRApolloClient({

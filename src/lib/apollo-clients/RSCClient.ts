@@ -22,7 +22,7 @@ export const { getClient } = registerApolloClient(() => {
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link: new HttpLink({
-      uri: process.env.API_ROUTE ?? "http://localhost:3000/api/graphql",
+      uri: "https://web-aas.vercel.app/api/graphql"
     }),
   });
 });
