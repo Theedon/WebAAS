@@ -16,10 +16,10 @@ const AUTHOR_NAME = gql`
     }
   }
 `;
-
+export const revalidate = 3600;
 function Page() {
   const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
-  console.log(data, error);
+  console.table(JSON.stringify(data));
   return <div>{JSON.stringify(data)}</div>;
   return <div>cc</div>;
 }

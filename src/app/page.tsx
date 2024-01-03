@@ -21,12 +21,13 @@ const query = gql`
   }
 `;
 
+export const revalidate = 3600;
 export default async function Home() {
   const { data, error } = await getClient().query<
     AllQuestionsQuery,
     AllQuestionsQueryVariables
   >({ query });
-  console.log(JSON.stringify(data));
+  console.table(JSON.stringify(data));
   return <main className="bg-background">WebAAS {JSON.stringify(data)}</main>;
   return <main className="bg-background">WebAAS</main>;
 }
