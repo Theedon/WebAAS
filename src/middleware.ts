@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import NextCors from "nextjs-cors";
+import { endpoint } from "./lib/exposeUri";
 
 // This function can be marked `async` if using `await` inside
 export function middleware() {
@@ -21,7 +22,8 @@ export function middleware() {
   //   "Access-Control-Allow-Origin",
   //   "http://localhost:3000/api/graphql",
   // );
-  res.headers.append("Access-Control-Allow-Origin", "https://web-*"); // replace this your actual origin
+
+  res.headers.append("Access-Control-Allow-Origin", endpoint); // replace this your actual origin
   // replace this your actual origin
 
   res.headers.append(

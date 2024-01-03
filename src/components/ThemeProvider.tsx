@@ -10,7 +10,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
 
 function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  console.log("here");
+  // console.log("here");
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 

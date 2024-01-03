@@ -19,8 +19,13 @@ const AUTHOR_NAME = gql`
 export const revalidate = 3600;
 function Page() {
   const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
-  console.table(JSON.stringify(data));
-  return <div>{JSON.stringify(data)}</div>;
+  console.warn(JSON.stringify(data));
+  return (
+    <div>
+      Client Component::::::::: {JSON.stringify(data.allQuestions[0].option_a)}
+      :::::::::Client Component
+    </div>
+  );
   return <div>cc</div>;
 }
 
