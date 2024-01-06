@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
 import { ApolloWrapper } from "@/lib/apollo-clients/CCProvider";
+import NextAuthProvider from "@/lib/NextAuthProvider";
+import { getServerSession } from "next-auth";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -26,25 +28,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("flex ", poppins.className)}>
         <ApolloWrapper>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ThemeToggle />
-
-            {children}
-          </ThemeProvider>
+          <NextAuthProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ThemeToggle />
+              {children}
+            </ThemeProvider>
+          </NextAuthProvider>
         </ApolloWrapper>
       </body>
     </html>
