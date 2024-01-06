@@ -6,6 +6,7 @@ import {
   AllQuestionsQuery,
   AllQuestionsQueryVariables,
 } from "./__generated__/page.generated";
+import { getServerSession } from "next-auth";
 
 const query = gql`
   query AllQuestions {
@@ -23,16 +24,12 @@ const query = gql`
 
 export const revalidate = 3600;
 export default async function Home() {
+  const session = await getServerSession();
   const { data, error } = await getClient().query<
     AllQuestionsQuery,
     AllQuestionsQueryVariables
   >({ query });
-  console.table(JSON.stringify(data));
-  return (
-    <main className="bg-background">
-      Server Component::::::::: {JSON.stringify(data.allQuestions[0].option_a)}
-      :::::::::Server Component
-    </main>
-  );
-  return <main className="bg-background">WebAAS</main>;
+  console.log(JSON.stringify(session));
+
+  return <main className="bg-background">Server Component</main>;
 }

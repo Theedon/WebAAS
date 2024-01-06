@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const AUTHOR_NAME = gql`
   query AllQuestions {
@@ -16,17 +18,16 @@ const AUTHOR_NAME = gql`
     }
   }
 `;
-export const revalidate = 3600;
 function Page() {
+  const { data: session } = useSession();
   const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
-  console.warn(JSON.stringify(data));
+  console.log(JSON.stringify(session));
+
   return (
     <div>
-      Client Component::::::::: {JSON.stringify(data.allQuestions[0].option_a)}
-      :::::::::Client Component
+      <div>Client Component</div>
     </div>
   );
-  return <div>cc</div>;
 }
 
 export default Page;
