@@ -24,7 +24,7 @@ function NavDrawer({ children }: { children: ReactNode }) {
             Results
           </NavButtons>
           <NavButtons className="w-full border-none" href="/advisors">
-            advisor's contact
+            advisor&apos;s contact
           </NavButtons>
           <NavButtons className="w-full border-none" href="/schedule">
             class schedule

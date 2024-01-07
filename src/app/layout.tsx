@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import { ApolloWrapper } from "@/lib/apollo-clients/CCProvider";
 import Navbar from "@/components/header/Navbar";
+import Footer from "@/components/Footer";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -44,6 +45,7 @@ export default function RootLayout({
             <Navbar />
 
             <main>{children}</main>
+            <Footer />
           </ThemeProvider>
         </ApolloWrapper>
       </body>
