@@ -1,0 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { createUser } from "@/backend/data-sources/createUser";
+import { gql } from "graphql-tag";
+
+export const typeDefs = gql`
+  extend type Mutation {
+    createUser(
+      firstName: String!
+      lastName: String!
+      password: String!
+      email: String!
+    ): String!
+  }
+`;
+
+export const resolvers = {
+  Mutation: {
+    createUser: (
+      _parent: any,
+      args: {
+        firstName: string;
+        lastName: string;
+        password: string;
+        email: string;
+        faculty: any;
+      },
+    ) => {
+      return createUser(
+        args.firstName,
+        args.lastName,
+        args.password,
+        args.email,
+        args.faculty,
+      );
+    },
+  },
+};
