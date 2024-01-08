@@ -3,8 +3,9 @@ import "@/styles/globals.css";
 import { Poppins, Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
-import ThemeToggle from "@/components/ThemeToggle";
 import { ApolloWrapper } from "@/lib/apollo-clients/CCProvider";
+import Navbar from "@/components/header/Navbar";
+import Footer from "@/components/Footer";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -33,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("flex ", poppins.className)}>
+      <body className={cn("flex", poppins.className)}>
         <ApolloWrapper>
           <ThemeProvider
             attribute="class"
@@ -41,9 +42,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <ThemeToggle />
+            <Navbar />
 
-            {children}
+            <main>{children}</main>
+            <Footer />
           </ThemeProvider>
         </ApolloWrapper>
       </body>
