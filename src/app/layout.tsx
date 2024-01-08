@@ -37,7 +37,12 @@ export default async function RootLayout({
   const session = await getServerSession();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("flex", poppins.className)}>
+      <body
+        className={cn(
+          "flex flex-col gap-2 overflow-x-hidden",
+          poppins.className,
+        )}
+      >
         <ApolloWrapper>
           <NextAuthProvider>
             <ThemeProvider
@@ -48,7 +53,7 @@ export default async function RootLayout({
             >
               <Navbar />
 
-              <main>{children}</main>
+              <main className="mx-10 mb-10 mt-16">{children}</main>
               <Footer />
             </ThemeProvider>
           </NextAuthProvider>

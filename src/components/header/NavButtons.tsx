@@ -17,7 +17,7 @@ const NavButtons = ({
       <Button
         variant="ghost"
         className={cn(
-          "rounded-none border-x uppercase hover:text-primary-foreground",
+          "rounded-none border-x font-semibold uppercase hover:text-primary-foreground",
           className,
         )}
       >
