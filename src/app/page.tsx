@@ -22,14 +22,6 @@ const query = gql`
   }
 `;
 
-export const revalidate = 3600;
 export default async function Home() {
-  const session = await getServerSession();
-  const { data, error } = await getClient().query<
-    AllQuestionsQuery,
-    AllQuestionsQueryVariables
-  >({ query });
-  console.log(JSON.stringify(session));
-
-  return <main className="bg-background">Server Component</main>;
+  return <main></main>;
 }
