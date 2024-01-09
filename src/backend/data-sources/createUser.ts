@@ -6,7 +6,7 @@ export const createUser = async (
   lastName: string,
   password: string,
   email: string,
-  faculty: any,
+  facultyCode: string,
 ) => {
   const user = await prisma.user.findUnique({
     where: { email: email },
@@ -16,6 +16,9 @@ export const createUser = async (
   }
 
   const hashedPassword = await bcryptjs.hash(password, 12);
+  const faculty = await prisma.faculty.findFirst({
+    where: { code: facultyCode.toUpperCase() },
+  });
 
   const createdUser = await prisma.user.create({
     data: {
@@ -23,7 +26,7 @@ export const createUser = async (
       last_name: lastName,
       email: email.toLowerCase(),
       password: hashedPassword,
-      faculty: faculty,
+      faculty_id: faculty?.id ?? "",
     },
   });
 

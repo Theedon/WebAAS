@@ -4,12 +4,13 @@ import { createUser } from "@/backend/data-sources/createUser";
 import { gql } from "graphql-tag";
 
 export const typeDefs = gql`
-  extend type Mutation {
+  type Mutation {
     createUser(
       firstName: String!
       lastName: String!
       password: String!
       email: String!
+      facultyCode: String!
     ): String!
   }
 `;
@@ -23,7 +24,7 @@ export const resolvers = {
         lastName: string;
         password: string;
         email: string;
-        faculty: any;
+        facultyCode: string;
       },
     ) => {
       return createUser(
@@ -31,7 +32,7 @@ export const resolvers = {
         args.lastName,
         args.password,
         args.email,
-        args.faculty,
+        args.facultyCode,
       );
     },
   },
