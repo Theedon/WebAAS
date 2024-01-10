@@ -6,7 +6,7 @@ import * as jwtLibrary from "jsonwebtoken";
 
 const useSecureCookies = process.env.NODE_ENV === "production";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET ?? "secret",
   session: {
     // Choose how you want to save the user session.
