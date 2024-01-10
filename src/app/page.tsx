@@ -7,7 +7,7 @@ import {
   AllQuestionsQueryVariables,
 } from "./__generated__/page.generated";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
 const query = gql`
   query AllQuestions {
