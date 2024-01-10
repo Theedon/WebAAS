@@ -6,29 +6,31 @@ import NavButtons from "./header/NavButtons";
 
 function Footer() {
   return (
-    <footer className="fixed bottom-0 mb-0 flex w-full flex-col items-center justify-between rounded-t-xl border-t-2 bg-background px-5 text-foreground md:flex-row">
-      <section className="flex items-center gap-3">
-        <Image src={app_logo} alt="app logo" className="size-20"></Image>
-        <h2 className="text-2xl">WebAAS</h2>
-      </section>
+    <footer className="z-20 rounded-t-xl border-t-2 bg-background text-foreground ">
+      <div className="px-4 py-7 shadow-xl sm:px-12 md:flex md:items-center md:justify-between">
+        <section className="flex items-center gap-3">
+          <Image src={app_logo} alt="app logo" className="size-20"></Image>
+          <h2 className="text-2xl font-semibold">WebAAS</h2>
+        </section>
 
-      <NavButtons className="border-none" href="">
-        Company
-      </NavButtons>
-      <NavButtons className="border-none" href="">
-        Resources
-      </NavButtons>
-      <NavButtons className="border-none" href="">
-        Contact us
-      </NavButtons>
+        <NavButtons className="w-full border-none md:w-auto" href="">
+          Company
+        </NavButtons>
+        <NavButtons className="w-full border-none md:w-auto" href="">
+          Resources
+        </NavButtons>
+        <NavButtons className="w-full border-none md:w-auto" href="">
+          Contact us
+        </NavButtons>
 
-      <div className="flex items-center gap-3">
-        <Link href="">
-          <FacebookIcon />
-        </Link>
-        <Link href="">
-          <TwitterIcon />
-        </Link>
+        <div className="flex w-full justify-center gap-3 md:w-auto">
+          <Link href="">
+            <FacebookIcon />
+          </Link>
+          <Link href="">
+            <TwitterIcon />
+          </Link>
+        </div>
       </div>
     </footer>
   );

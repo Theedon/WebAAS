@@ -4,6 +4,8 @@ import { Poppins, Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import { ApolloWrapper } from "@/lib/apollo-clients/CCProvider";
+import NextAuthProvider from "@/lib/NextAuthProvider";
+import { getServerSession } from "next-auth";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/Footer";
 
@@ -27,26 +29,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("flex", poppins.className)}>
+      <body
+        className={cn(
+          "flex flex-col gap-2 overflow-x-hidden",
+          poppins.className,
+        )}
+      >
         <ApolloWrapper>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
+          <NextAuthProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
 
-            <main>{children}</main>
-            <Footer />
-          </ThemeProvider>
+              <main className="mx-10 mb-10 mt-16">{children}</main>
+              <Footer />
+            </ThemeProvider>
+          </NextAuthProvider>
         </ApolloWrapper>
       </body>
     </html>
