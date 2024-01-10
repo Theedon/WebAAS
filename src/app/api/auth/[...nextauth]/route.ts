@@ -96,7 +96,6 @@ export const authOptions: NextAuthOptions = {
     },
   },
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/require-await
     session: async ({ session, token }) => {
       if (session?.user) {
         return {
@@ -109,7 +108,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    // eslint-disable-next-line @typescript-eslint/require-await
     jwt: async ({ user, token }) => {
       if (user) {
         token.uid = user.id;

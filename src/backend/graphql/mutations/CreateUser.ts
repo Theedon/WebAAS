@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { createUser } from "@/backend/data-sources/createUser";
 import { gql } from "graphql-tag";
 

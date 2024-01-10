@@ -26,7 +26,6 @@ function LoginPage() {
   const session = useSession();
   useEffect(() => {
     if (session.status === "authenticated") {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       console.log(JSON.stringify(session.data.user?.email));
       router.push("/");
     }
