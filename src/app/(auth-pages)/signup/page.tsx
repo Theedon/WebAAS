@@ -84,10 +84,10 @@ function SignUpPage() {
           redirect: false,
           email: values.email.trim(),
           password: values.password.trim(),
-          callbackUrl: "/dashboard",
+          callbackUrl: "/",
         }),
       )
-      .then(() => router.push("/dashboard"))
+      .then(() => router.push("/"))
       .catch((e) => {
         toast({
           title: "Error",

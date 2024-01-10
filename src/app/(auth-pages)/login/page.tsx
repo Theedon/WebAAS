@@ -14,13 +14,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
+  const router = useRouter();
+  const session = useSession();
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      console.log(JSON.stringify(session.data.user?.email));
+      router.push("/");
+    }
+  }, [session, router]);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const { toast } = useToast();

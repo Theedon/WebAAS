@@ -13,7 +13,7 @@ function Navbar() {
         <Image src={app_logo} alt="app logo" className="size-14"></Image>
 
         <div className="hidden md:flex">
-          <NavButtons href="/dashboard">Dashboard</NavButtons>
+          <NavButtons href="/">Dashboard</NavButtons>
           <NavButtons href="/results">Results</NavButtons>
           <NavButtons href="/advisors">advisor&apos;s contact</NavButtons>
           <NavButtons href="/schedule">class schedule</NavButtons>

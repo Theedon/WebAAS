@@ -17,7 +17,7 @@ function NavDrawer({ children }: { children: ReactNode }) {
       <DrawerTrigger className="md:hidden">{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <NavButtons className="w-full border-none" href="/dashboard">
+          <NavButtons className="w-full border-none" href="/">
             Dashboard
           </NavButtons>
           <NavButtons className="w-full border-none" href="/results">
