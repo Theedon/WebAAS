@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
+import Link from "next/link";
 
 function SignUpPage() {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -189,6 +190,9 @@ function SignUpPage() {
         </form>
       </Form>
       <Toaster />
+      <Link className="mt-3 text-xs underline " href={"/login"}>
+        Already have an account? Click here to sign in
+      </Link>
     </div>
   );
 }
