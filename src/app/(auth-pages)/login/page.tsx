@@ -20,6 +20,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function LoginPage() {
   const router = useRouter();
@@ -126,6 +127,9 @@ function LoginPage() {
         </form>
       </Form>
       <Toaster />
+      <Link className="mt-3 text-xs underline " href={"/signup"}>
+        Dont have an account yet? Click here to register
+      </Link>
     </div>
   );
 }
