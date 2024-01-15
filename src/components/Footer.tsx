@@ -6,7 +6,7 @@ import NavButtons from "./header/NavButtons";
 
 function Footer() {
   return (
-    <footer className="z-20 rounded-t-xl border-t-2 bg-background text-foreground ">
+    <footer className="z-20 mt-auto rounded-t-xl border-t-2 bg-background text-foreground">
       <div className="px-4 py-7 shadow-xl sm:px-12 md:flex md:items-center md:justify-between">
         <section className="flex items-center gap-3">
           <Image src={app_logo} alt="app logo" className="size-20"></Image>
