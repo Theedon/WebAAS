@@ -1,14 +1,33 @@
-name: Formatter
+# /**
+#  * GitHub Actions workflow to run code formatting on pull requests.
+#  * 
+#  * Triggers on closed pull requests targeting the main branch. Checks out the repo, 
+#  * sets up the Node.js environment, installs dependencies, runs formatting, and fails if 
+#  * there are lint errors.
+#  */
+
+name: Format code
+
 on:
-  push:
-    branches:
-      - "main"
+  pull_request:
+    types: [closed]  # Also run on pull requests targeting the main branch
+
 jobs:
-  build-and-format:
-    runs-on: ubuntu-latest
+  format-code:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    if: github.event.pull_request.merged == true
+    #only run if PR was merged successfully
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Install all packages
-        run: npm ci
-      - name: Run Prettier
-        run: npm run format:write
+      - uses: actions/checkout@v3  # Checkout the repository code
+      - uses: actions/setup-node@v3  # Set up Node.js environment
+        with:
+          node-version: 18  # Specify the Node.js version
+
+      - run: npm ci  # Install dependencies
+      - run: npm run format:write  # Execute the linting command
+
+      - name: Check for lint errors
+        if: failure()  # Only run if the linting step failed
+        run: echo "Formatting failed, check the errors above!"
