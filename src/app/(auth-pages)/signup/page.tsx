@@ -23,6 +23,13 @@ import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function SignUpPage() {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -55,13 +62,18 @@ function SignUpPage() {
       password: "",
       firstName: "",
       lastName: "",
+      faculty: "",
     },
   });
 
   const disableSubmitButton = (rForm: typeof form) => {
     const errors = rForm.formState.errors;
     const disable: boolean =
-      errors.firstName || errors.lastName || errors.email || errors.password
+      errors.firstName ||
+      errors.lastName ||
+      errors.email ||
+      errors.password ||
+      errors.faculty
         ? true
         : false;
 
@@ -77,7 +89,7 @@ function SignUpPage() {
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
-        faculty: "CS",
+        faculty: values.faculty,
       },
     })
       .then(() =>
@@ -139,6 +151,31 @@ function SignUpPage() {
 
           <FormField
             control={form.control}
+            name="faculty"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Faculty</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Select Faculty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="SCI">Sciences</SelectItem>
+                      <SelectItem value="ART">Arts</SelectItem>
+                      <SelectItem value="COM">Commercial</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
@@ -151,7 +188,7 @@ function SignUpPage() {
                   ></Input>
                 </FormControl>
                 <FormDescription>
-                  Please fill in your password email address
+                  Please fill in your email address
                 </FormDescription>
               </FormItem>
             )}
