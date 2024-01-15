@@ -27,7 +27,8 @@ jobs:
 
       - run: npm ci  # Install dependencies
       - run: npm run format:write  # Execute the linting command
-
-      - name: Check for lint errors
-        if: failure()  # Only run if the linting step failed
-        run: echo "Formatting failed, check the errors above!"
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with: 
+          commit_message: apply formatting changes with prettier workflow
+          branch: ${{ github.head_ref }}
