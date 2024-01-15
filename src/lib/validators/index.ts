@@ -19,6 +19,7 @@ const registerFormSchema = z.object({
     .max(50, { message: "Password must be at most 50 characters long" }),
   firstName: z.string({ required_error: "Enter your first name" }).min(5),
   lastName: z.string({ required_error: "Enter your last name" }).min(5),
+  faculty: z.string({ required_error: "choose faculty" }).min(3),
 });
 
 export { loginFormSchema, registerFormSchema };
