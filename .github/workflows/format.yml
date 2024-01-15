@@ -21,6 +21,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3  # Checkout the repository code
+        with: 
+          ref: ${{ github.head_ref }}
       - uses: actions/setup-node@v3  # Set up Node.js environment
         with:
           node-version: 18  # Specify the Node.js version
@@ -28,7 +30,7 @@ jobs:
       - run: npm ci  # Install dependencies
       - run: npm run format:write  # Execute the linting command
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with: 
           commit_message: apply formatting changes with prettier workflow
           branch: ${{ github.head_ref }}
