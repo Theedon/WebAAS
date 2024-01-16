@@ -227,7 +227,10 @@ function SignUpPage() {
         </form>
       </Form>
       <Toaster />
-      <Link className="mt-3 text-xs underline " href={"/login"}>
+      <Link
+        className="mt-3 text-xs font-semibold text-destructive underline"
+        href={"/login"}
+      >
         Already have an account? Click here to sign in
       </Link>
     </div>

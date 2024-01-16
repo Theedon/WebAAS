@@ -15,7 +15,7 @@ const NavButtons = ({
   return (
     <Link href={href}>
       <Button
-        variant="ghost"
+        variant="default"
         className={cn(
           "rounded-none border-x font-semibold uppercase hover:text-primary-foreground",
           className,

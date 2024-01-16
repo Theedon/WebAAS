@@ -127,7 +127,10 @@ function LoginPage() {
         </form>
       </Form>
       <Toaster />
-      <Link className="mt-3 text-xs underline " href={"/signup"}>
+      <Link
+        className="mt-3 text-xs font-semibold text-destructive underline"
+        href={"/signup"}
+      >
         Dont have an account yet? Click here to register
       </Link>
     </div>

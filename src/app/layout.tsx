@@ -39,7 +39,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "flex flex-col gap-2 overflow-x-hidden min-h-screen",
+          "flex min-h-screen flex-col gap-2 overflow-x-hidden",
           poppins.className,
         )}
       >
@@ -53,7 +53,7 @@ export default async function RootLayout({
             >
               <Navbar />
 
-              <main className="mx-10 mb-10 mt-16">{children}</main>
+              <main className="mx-10 mb-10 mt-[14vh]">{children}</main>
               <Footer />
             </ThemeProvider>
           </NextAuthProvider>
