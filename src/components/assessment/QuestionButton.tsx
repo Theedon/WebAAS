@@ -8,18 +8,20 @@ import { Button } from "../ui/button";
 interface QuestionButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   isAnswered: boolean;
+  isSelected: boolean;
 }
 
 function QuestionButton({
   children,
+  isSelected,
   isAnswered,
   ...props
 }: QuestionButtonProps) {
   return (
     <Button
       variant={"outline"}
-      className={`w-full rounded-none ${
-        isAnswered ? "rounded-md bg-primary" : ""
+      className={`w-full rounded-none  ${isAnswered ? "bg-primary" : ""} ${
+        isSelected ? "rounded-md " : ""
       }`}
       {...props}
     >

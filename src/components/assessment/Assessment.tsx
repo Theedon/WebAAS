@@ -1,37 +1,41 @@
 "use client";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { useState, MouseEvent } from "react";
-import { toast } from "@/components/ui/use-toast";
-import QuestionButton from "@/components/assessment/QuestionButton";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import type { QuestionType } from "@/app/assessment/page";
+import ButtonSection from "./ButtonNavigationSection";
 
 type AssessmentProps = {
   questionsData: QuestionType[];
 };
+
+type OptionsProp = {
+  id: number;
+  chosenOption: string;
+  correctAnswer: string;
+};
 function Assessment({ questionsData }: AssessmentProps) {
   const [currentQuestionId, setCurrentQuestionId] = useState<number>(0);
-
-  const goToPreviousQuestion = (event: MouseEvent<HTMLButtonElement>) => {
-    if (currentQuestionId > 0) {
-      setCurrentQuestionId(currentQuestionId - 1);
-    }
+  let optionData: OptionsProp[] = questionsData.map((question) => {
+    return {
+      id: question.id,
+      chosenOption: question.correct_option,
+      correctAnswer: question.correct_option,
+    };
+  });
+  const [option, setOption] = useState<OptionsProp[]>(optionData);
+  const setOptionData = (id: number, newOption: string) => {
+    setOption((prevOption) =>
+      prevOption.map((opt) =>
+        opt.id === id ? { ...opt, chosenOption: newOption } : opt,
+      ),
+    );
   };
 
-  const goToNextQuestion = (event: MouseEvent<HTMLButtonElement>) => {
-    if (currentQuestionId < questionsData.length - 1) {
-      setCurrentQuestionId(currentQuestionId + 1);
-    }
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const chosenOption = event.target.value;
+    setOptionData(currentQuestionId, chosenOption);
+    alert("changed");
   };
 
   return (
@@ -42,27 +46,42 @@ function Assessment({ questionsData }: AssessmentProps) {
 
       <div className="flex flex-col">
         <p>{questionsData[currentQuestionId].questionBody}</p>
-        <RadioGroup defaultValue="">
+        <RadioGroup
+          value={option[currentQuestionId].chosenOption}
+          name={`radioGroup${currentQuestionId}`}
+        >
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="A" id="A" />
+            <RadioGroupItem
+              value={questionsData[currentQuestionId].option_a}
+              id="A"
+            />
             <Label htmlFor="A">
               {questionsData[currentQuestionId].option_a}
             </Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="B" id="B" />
+            <RadioGroupItem
+              value={questionsData[currentQuestionId].option_b}
+              id="B"
+            />
             <Label htmlFor="B">
               {questionsData[currentQuestionId].option_b}
             </Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="C" id="C" />
+            <RadioGroupItem
+              value={questionsData[currentQuestionId].option_c}
+              id="C"
+            />
             <Label htmlFor="C">
               {questionsData[currentQuestionId].option_c}
             </Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="D" id="D" />
+            <RadioGroupItem
+              value={questionsData[currentQuestionId].option_d}
+              id="D"
+            />
             <Label htmlFor="D">
               {questionsData[currentQuestionId].option_d}
             </Label>
@@ -70,36 +89,15 @@ function Assessment({ questionsData }: AssessmentProps) {
         </RadioGroup>
       </div>
 
-      <section className="grid w-full grid-cols-2">
-        <Button
-          onClick={goToPreviousQuestion}
-          variant={"outline"}
-          className="mr-auto w-fit p-10"
-        >
-          <ArrowBigLeft className="size-14" />
-        </Button>
-        <Button
-          onClick={goToNextQuestion}
-          variant={"outline"}
-          className="ml-auto w-fit p-10"
-        >
-          <ArrowBigRight className="size-14" />
-        </Button>
-      </section>
+      <ButtonSection
+        currentQuestionId={currentQuestionId}
+        questionsData={questionsData}
+        setCurrentQuestionId={setCurrentQuestionId}
+      ></ButtonSection>
 
-      <section className="my-5 grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] place-items-center gap-4 rounded-md border border-secondary bg-card-foreground p-5 shadow-sm">
-        {questionsData.map((question: QuestionType, index) => (
-          <QuestionButton
-            isAnswered={true}
-            key={question.id}
-            onClick={() => {
-              setCurrentQuestionId(question.id - 1);
-            }}
-          >
-            {question.id}
-          </QuestionButton>
-        ))}
-      </section>
+      <button onClick={() => console.table(option)}>
+        HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+      </button>
     </div>
   );
 }
