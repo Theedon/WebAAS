@@ -2,6 +2,7 @@
   "name": "webaas",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
@@ -11,6 +12,9 @@
     "format:check": "npx prettier . --check",
     "generate": "graphql-codegen",
     "postinstall": "prisma generate"
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm ./prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",
@@ -67,6 +71,8 @@
     "prettier-plugin-tailwindcss": "^0.5.10",
     "prisma": "^5.7.1",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "uuidv4": "^6.2.13"
   }
 }
