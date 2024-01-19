@@ -118,7 +118,7 @@ function SignUpPage() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid  space-y-8"
+          className="grid space-y-8 border-muted md:border md:p-5 md:shadow-sm"
         >
           <FormField
             control={form.control}
@@ -129,9 +129,6 @@ function SignUpPage() {
                 <FormControl>
                   <Input type="text" placeholder="John" {...field}></Input>
                 </FormControl>
-                <FormDescription>
-                  Please fill in your first name
-                </FormDescription>
               </FormItem>
             )}
           />
@@ -144,7 +141,6 @@ function SignUpPage() {
                 <FormControl>
                   <Input type="text" placeholder="Doe" {...field}></Input>
                 </FormControl>
-                <FormDescription>Please fill in your last name</FormDescription>
               </FormItem>
             )}
           />
@@ -187,9 +183,6 @@ function SignUpPage() {
                     {...field}
                   ></Input>
                 </FormControl>
-                <FormDescription>
-                  Please fill in your email address
-                </FormDescription>
               </FormItem>
             )}
           />
@@ -206,7 +199,6 @@ function SignUpPage() {
                     {...field}
                   ></Input>
                 </FormControl>
-                <FormDescription>Please fill in your password</FormDescription>
               </FormItem>
             )}
           />
