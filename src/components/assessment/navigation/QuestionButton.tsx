@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 // type QuestionButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 //   children: ReactNode;

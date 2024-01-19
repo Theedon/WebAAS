@@ -3,7 +3,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
 import type { QuestionType } from "@/app/assessment/page";
-import ButtonSection from "./ButtonNavigationSection";
+import ButtonSection from "./navigation/ButtonSection";
+import AssesmentNavigation from "./navigation";
 
 type AssessmentProps = {
   questionsData: QuestionType[];
@@ -88,13 +89,11 @@ function Assessment({ questionsData }: AssessmentProps) {
           </div>
         </RadioGroup>
       </div>
-
-      <ButtonSection
+      <AssesmentNavigation
         currentQuestionId={currentQuestionId}
         questionsData={questionsData}
         setCurrentQuestionId={setCurrentQuestionId}
-      ></ButtonSection>
-
+      />
       <button onClick={() => console.table(option)}>
         HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
       </button>
