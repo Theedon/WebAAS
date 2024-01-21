@@ -9,6 +9,7 @@ class QuestionDomain extends BaseDomain {
     public option_d: string,
     public subject_id: string,
     public question: string,
+    public correct_option: string,
   ) {
     super(id);
     this.id = id;
@@ -18,6 +19,7 @@ class QuestionDomain extends BaseDomain {
     this.option_d = option_d;
     this.subject_id = subject_id;
     this.question = question;
+    this.correct_option = correct_option;
   }
 }
 
