@@ -49,6 +49,7 @@ model Faculty {
 model Subject {
   id              String   @id @default(cuid())
   name            String
+  code            String   @unique
   description     String?
   faculty         Faculty  @relation(fields: [faculty_id], references: [id])
   faculty_id      String
