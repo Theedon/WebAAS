@@ -1,14 +1,14 @@
-import type { QuestionType } from "@/app/assessment/page";
+import { QuestionType } from "../Assessment";
 import QuestionButton from "./QuestionButton";
 import { Dispatch, SetStateAction } from "react";
 type ButtonSectionProps = {
   questionsData: QuestionType[];
-  setCurrentQuestionId: Dispatch<SetStateAction<number>>;
+  setCurrentQuestionIndex: Dispatch<SetStateAction<number>>;
 };
 
 function ButtonSection({
   questionsData,
-  setCurrentQuestionId,
+  setCurrentQuestionIndex,
 }: ButtonSectionProps) {
   return (
     <section className="my-5 grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] place-items-center gap-4 rounded-md border-[5px] border-foreground  p-5 shadow-sm">
@@ -18,10 +18,10 @@ function ButtonSection({
           isAnswered={false}
           key={question.id}
           onClick={() => {
-            setCurrentQuestionId(question.id - 1);
+            setCurrentQuestionIndex(question.index);
           }}
         >
-          {question.id}
+          {question.index + 1}
         </QuestionButton>
       ))}
     </section>

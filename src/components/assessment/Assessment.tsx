@@ -1,50 +1,76 @@
 "use client";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useEffect, useState } from "react";
-import type { QuestionType } from "@/app/assessment/page";
+import { useState } from "react";
 import AssesmentNavigation from "./navigation";
+import { TestQuestionsQuery } from "@/app/assessment/__generated__/page.generated";
 
 type AssessmentProps = {
-  questionsData: QuestionType[];
+  // questionsData: Question[];
+  questionsData: TestQuestionsQuery;
 };
 
-type OptionsProp = {
-  id: number;
-  chosenOption: string;
-  correctAnswer: string;
+export type QuestionType = {
+  id: string;
+  option_a: string;
+  option_b: string;
+  option_c: string;
+  option_d: string;
+  question: string;
+  subject_id: string;
+  correct_option: string;
+  index: number;
+  choice: string;
 };
+
 function Assessment({ questionsData }: AssessmentProps) {
-  const [currentQuestionId, setCurrentQuestionId] = useState<number>(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
 
-  const editQuestionsData = questionsData.map((question, index) => {
-    return {
-      ...question,
-      index,
-      choice: "",
-    };
-  });
-
-  const [options, setOptions] =
-    useState<(QuestionType & { index: number; choice: string })[]>(
-      editQuestionsData,
+  const processQuestionsData = (questionsData: TestQuestionsQuery) => {
+    let processedData = [];
+    for (let subjectArray of questionsData.testQuestions) {
+      processedData.push(...subjectArray);
+    }
+    const filteredQuestionsData: QuestionType[] = processedData.map(
+      (question, index) => {
+        return {
+          id: question.id,
+          option_a: question.option_a ?? "",
+          option_b: question.option_b ?? "",
+          option_c: question.option_c ?? "",
+          option_d: question.option_d ?? "",
+          question: question.question!,
+          subject_id: question.subject_id ?? "",
+          correct_option: question.correct_option ?? "",
+          index,
+          choice: "",
+        };
+      },
     );
+    return filteredQuestionsData;
+  };
+
+  const filteredQuestionsData = processQuestionsData(questionsData);
+
+  const [options, setOptions] = useState<QuestionType[]>(filteredQuestionsData);
 
   return (
     <div className="flex flex-col gap-10">
       <h2 className="text-xl font-semibold">
-        Question {questionsData[currentQuestionId]?.id}
+        Question {filteredQuestionsData[currentQuestionIndex].index + 1}
       </h2>
 
       <div className="flex flex-col">
-        <p>{questionsData[currentQuestionId]?.questionBody}</p>
+        <p>{filteredQuestionsData[currentQuestionIndex]?.question}</p>
         <RadioGroup
-          value={options.find((opt) => opt.index === currentQuestionId)?.choice}
-          name={`radioGroup${currentQuestionId}`}
+          value={
+            options.find((opt) => opt.index === currentQuestionIndex)?.choice
+          }
+          name={`radioGroup${currentQuestionIndex}`}
           onValueChange={(newValue: string) => {
             setOptions((prevOptions) => {
               return prevOptions.map((option) => {
-                if (option.index == currentQuestionId) {
+                if (option.index == currentQuestionIndex) {
                   return {
                     ...option,
                     choice: newValue,
@@ -56,25 +82,27 @@ function Assessment({ questionsData }: AssessmentProps) {
           }}
         >
           {[
-            questionsData[currentQuestionId]?.option_a,
-            questionsData[currentQuestionId]?.option_b,
-            questionsData[currentQuestionId]?.option_c,
-            questionsData[currentQuestionId]?.option_d,
+            filteredQuestionsData[currentQuestionIndex].option_a,
+            filteredQuestionsData[currentQuestionIndex].option_b,
+            filteredQuestionsData[currentQuestionIndex].option_c,
+            filteredQuestionsData[currentQuestionIndex].option_d,
           ].map((option: string) => (
             <div key={option} className="flex items-center space-x-2">
               <RadioGroupItem
                 value={option}
-                id={`${currentQuestionId}_${option}`}
+                id={`${currentQuestionIndex}_${option}`}
               />
-              <Label htmlFor={`${currentQuestionId}_${option}`}>{option}</Label>
+              <Label htmlFor={`${currentQuestionIndex}_${option}`}>
+                {option}
+              </Label>
             </div>
           ))}
         </RadioGroup>
       </div>
       <AssesmentNavigation
-        currentQuestionId={currentQuestionId}
-        questionsData={questionsData}
-        setCurrentQuestionId={setCurrentQuestionId}
+        currentQuestionId={currentQuestionIndex}
+        questionsData={filteredQuestionsData}
+        setCurrentQuestionIndex={setCurrentQuestionIndex}
       />
     </div>
   );

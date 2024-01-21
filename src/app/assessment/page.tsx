@@ -1,21 +1,10 @@
 import Assessment from "@/components/assessment/Assessment";
 import { getClient } from "@/lib/apollo-clients/RSCClient";
 import gql from "graphql-tag";
-import { merge } from "lodash";
 import {
   TestQuestionsQuery,
   TestQuestionsQueryVariables,
 } from "./__generated__/page.generated";
-
-export type QuestionType = {
-  id: number;
-  questionBody: string;
-  option_a: string;
-  option_b: string;
-  option_c: string;
-  option_d: string;
-  correct_option: string;
-};
 
 const query = gql`
   query TestQuestions($faculty: String!) {
@@ -43,7 +32,7 @@ async function AssessmentPage() {
 
   return (
     <div className="flex flex-col gap-10">
-      <Assessment questionsData={merge(data)}></Assessment>
+      <Assessment questionsData={data}></Assessment>
     </div>
   );
 }

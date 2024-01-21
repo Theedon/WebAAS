@@ -1,30 +1,29 @@
-import { QuestionType } from "@/app/assessment/page";
 import { Dispatch, SetStateAction } from "react";
 import { MouseEvent } from "react";
-import QuestionButton from "./QuestionButton";
 import ArrowNavigation from "./ArrowNavigation";
 import ButtonSection from "./ButtonSection";
+import { QuestionType } from "../Assessment";
 
 type AssesmentNavigationProps = {
   currentQuestionId: number;
-  setCurrentQuestionId: Dispatch<SetStateAction<number>>;
+  setCurrentQuestionIndex: Dispatch<SetStateAction<number>>;
   questionsData: QuestionType[];
 };
 
 function AssesmentNavigation({
   currentQuestionId,
-  setCurrentQuestionId,
+  setCurrentQuestionIndex,
   questionsData,
 }: AssesmentNavigationProps) {
   const goToPreviousQuestion = (event: MouseEvent<HTMLButtonElement>) => {
     if (currentQuestionId > 0) {
-      setCurrentQuestionId(currentQuestionId - 1);
+      setCurrentQuestionIndex(currentQuestionId - 1);
     }
   };
 
   const goToNextQuestion = (event: MouseEvent<HTMLButtonElement>) => {
     if (currentQuestionId < questionsData.length - 1) {
-      setCurrentQuestionId(currentQuestionId + 1);
+      setCurrentQuestionIndex(currentQuestionId + 1);
     }
   };
 
@@ -37,7 +36,7 @@ function AssesmentNavigation({
 
       <ButtonSection
         questionsData={questionsData}
-        setCurrentQuestionId={setCurrentQuestionId}
+        setCurrentQuestionIndex={setCurrentQuestionIndex}
       ></ButtonSection>
     </div>
   );
