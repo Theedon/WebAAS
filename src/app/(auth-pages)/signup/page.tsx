@@ -30,6 +30,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  RegisterUserMutation,
+  RegisterUserMutationVariables,
+} from "./__generated__/page.generated";
 
 function SignUpPage() {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -54,7 +58,10 @@ function SignUpPage() {
       )
     }
   `;
-  const [registerMutation, { error }] = useMutation<any>(REGISTER_USER);
+  const [registerMutation, { error }] = useMutation<
+    RegisterUserMutation,
+    RegisterUserMutationVariables
+  >(REGISTER_USER);
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
