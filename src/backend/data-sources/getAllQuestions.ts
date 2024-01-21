@@ -14,6 +14,7 @@ const getAllQuestions = async () => {
       question.option_d,
       question.subject_id,
       question.question_text,
+      question.correct_option,
     );
   });
 };

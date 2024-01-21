@@ -14,14 +14,35 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createUser: Scalars['String']['output'];
+};
+
+
+export type MutationCreateUserArgs = {
+  email: Scalars['String']['input'];
+  facultyCode: Scalars['String']['input'];
+  firstName: Scalars['String']['input'];
+  lastName: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
   allQuestions: Array<Question>;
   allSubjects: Array<Subject>;
+  testQuestions: Array<Array<Question>>;
+};
+
+
+export type QueryTestQuestionsArgs = {
+  faculty: Scalars['String']['input'];
 };
 
 export type Question = {
   __typename?: 'Question';
+  correct_option: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   option_a: Maybe<Scalars['String']['output']>;
   option_b: Maybe<Scalars['String']['output']>;

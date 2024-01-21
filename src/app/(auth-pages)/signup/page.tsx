@@ -30,6 +30,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  RegisterUserMutation,
+  RegisterUserMutationVariables,
+} from "./__generated__/page.generated";
 
 function SignUpPage() {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -54,7 +58,10 @@ function SignUpPage() {
       )
     }
   `;
-  const [registerMutation, { error }] = useMutation<any>(REGISTER_USER);
+  const [registerMutation, { error }] = useMutation<
+    RegisterUserMutation,
+    RegisterUserMutationVariables
+  >(REGISTER_USER);
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -118,7 +125,7 @@ function SignUpPage() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid  space-y-8"
+          className="grid space-y-8 border-muted md:border md:p-5 md:shadow-sm"
         >
           <FormField
             control={form.control}
@@ -129,9 +136,6 @@ function SignUpPage() {
                 <FormControl>
                   <Input type="text" placeholder="John" {...field}></Input>
                 </FormControl>
-                <FormDescription>
-                  Please fill in your first name
-                </FormDescription>
               </FormItem>
             )}
           />
@@ -144,7 +148,6 @@ function SignUpPage() {
                 <FormControl>
                   <Input type="text" placeholder="Doe" {...field}></Input>
                 </FormControl>
-                <FormDescription>Please fill in your last name</FormDescription>
               </FormItem>
             )}
           />
@@ -187,9 +190,6 @@ function SignUpPage() {
                     {...field}
                   ></Input>
                 </FormControl>
-                <FormDescription>
-                  Please fill in your email address
-                </FormDescription>
               </FormItem>
             )}
           />
@@ -206,7 +206,6 @@ function SignUpPage() {
                     {...field}
                   ></Input>
                 </FormControl>
-                <FormDescription>Please fill in your password</FormDescription>
               </FormItem>
             )}
           />
@@ -227,7 +226,10 @@ function SignUpPage() {
         </form>
       </Form>
       <Toaster />
-      <Link className="mt-3 text-xs underline " href={"/login"}>
+      <Link
+        className="mt-3 text-xs font-semibold text-destructive underline"
+        href={"/login"}
+      >
         Already have an account? Click here to sign in
       </Link>
     </div>

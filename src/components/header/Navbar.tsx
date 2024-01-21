@@ -8,8 +8,8 @@ import NavDrawer from "./NavDrawer";
 
 function Navbar() {
   return (
-    <header className="fixed left-0 top-0 z-10 w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md ">
-      <div className="flex items-center justify-between rounded-t-xl bg-background px-7 text-foreground md:px-10">
+    <header className="fixed left-0 top-0 z-10 my-1 w-full max-w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md">
+      <div className="flex h-[10vh] items-center justify-between rounded-b-xl bg-primary px-7 md:px-10 dark:text-background">
         <Image src={app_logo} alt="app logo" className="size-14"></Image>
 
         <div className="hidden md:flex">

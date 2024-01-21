@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useSession, signIn, signOut } from "next-auth/react";
+import {
+  AllQuestionsQuery,
+  AllQuestionsQueryVariables,
+} from "../__generated__/page.generated";
 
 const AUTHOR_NAME = gql`
   query AllQuestions {
@@ -20,7 +24,10 @@ const AUTHOR_NAME = gql`
 `;
 function Page() {
   const { data: session } = useSession();
-  const { data, error } = useSuspenseQuery<any>(AUTHOR_NAME);
+  const { data, error } = useSuspenseQuery<
+    AllQuestionsQuery,
+    AllQuestionsQueryVariables
+  >(AUTHOR_NAME);
   console.log(JSON.stringify(session));
 
   return (

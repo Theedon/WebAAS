@@ -13,17 +13,16 @@ const NavButtons = ({
   children: ReactNode;
 }) => {
   return (
-    <Link href={href}>
-      <Button
-        variant="ghost"
-        className={cn(
-          "rounded-none border-x font-semibold uppercase hover:text-primary-foreground",
-          className,
-        )}
-      >
-        {children}
-      </Button>
-    </Link>
+    <Button
+      asChild
+      variant="default"
+      className={cn(
+        "rounded-none border-x font-semibold uppercase hover:text-primary-foreground",
+        className,
+      )}
+    >
+      <Link href={href}>{children}</Link>
+    </Button>
   );
 };
 

@@ -75,7 +75,10 @@ function LoginPage() {
   return (
     <div className="grid h-full place-items-center md:w-screen">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="grid space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid space-y-8 border-muted md:border md:p-5 md:shadow-sm"
+        >
           <FormField
             control={form.control}
             name="email"
@@ -89,7 +92,6 @@ function LoginPage() {
                     {...field}
                   ></Input>
                 </FormControl>
-                <FormDescription>Email address</FormDescription>
               </FormItem>
             )}
           />
@@ -106,7 +108,6 @@ function LoginPage() {
                     {...field}
                   ></Input>
                 </FormControl>
-                <FormDescription>Password</FormDescription>
               </FormItem>
             )}
           />
@@ -127,7 +128,10 @@ function LoginPage() {
         </form>
       </Form>
       <Toaster />
-      <Link className="mt-3 text-xs underline " href={"/signup"}>
+      <Link
+        className="mt-3 text-xs font-semibold text-destructive underline"
+        href={"/signup"}
+      >
         Dont have an account yet? Click here to register
       </Link>
     </div>
