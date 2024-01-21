@@ -6,25 +6,25 @@ import { getQuestions } from "./data/questions";
 const prisma = new PrismaClient();
 
 async function main() {
-  // //insert faculties data
-  // for (let faculty of Faculties) {
-  //   await prisma.faculty.create({
-  //     data: faculty,
-  //   });
-  // }
+  //insert faculties data
+  for (let faculty of Faculties) {
+    await prisma.faculty.create({
+      data: faculty,
+    });
+  }
 
-  // //insert subjects data
-  // const Subjects = await getSubjects();
-  // console.log(JSON.stringify(Subjects[1]));
-  // for (let subject of Subjects) {
-  //   const { facultyId, facultyCode, ...filteredSubject } = subject;
-  //   await prisma.subject.create({
-  //     data: {
-  //       ...filteredSubject,
-  //       faculty_id: facultyId,
-  //     },
-  //   });
-  // }
+  //insert subjects data
+  const Subjects = await getSubjects();
+  console.log(JSON.stringify(Subjects[1]));
+  for (let subject of Subjects) {
+    const { facultyId, facultyCode, ...filteredSubject } = subject;
+    await prisma.subject.create({
+      data: {
+        ...filteredSubject,
+        faculty_id: facultyId,
+      },
+    });
+  }
 
   // insert questions data
   const Questions = await getQuestions();
