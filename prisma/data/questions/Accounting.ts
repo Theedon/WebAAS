@@ -1,4 +1,3 @@
-import { v4 } from "uuid";
 import { QuestionType, SubjectCode } from "./utils";
 
 const subject_code = SubjectCode.ACCOUNTING;
