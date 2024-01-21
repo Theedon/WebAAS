@@ -19,21 +19,16 @@ function Assessment({ questionsData }: AssessmentProps) {
 
   const editQuestionsData = questionsData.map((question, index) => {
     return {
+      ...question,
       index,
-      questionId: question.id,
       choice: "",
-      correctChoice: question.correct_option,
     };
   });
 
-  const [options, setOptions] = useState<
-    {
-      index: number;
-      questionId: number;
-      choice: string;
-      correctChoice: string;
-    }[]
-  >(editQuestionsData);
+  const [options, setOptions] =
+    useState<(QuestionType & { index: number; choice: string })[]>(
+      editQuestionsData,
+    );
 
   return (
     <div className="flex flex-col gap-10">
@@ -44,11 +39,21 @@ function Assessment({ questionsData }: AssessmentProps) {
       <div className="flex flex-col">
         <p>{questionsData[currentQuestionId]?.questionBody}</p>
         <RadioGroup
-          value={
-            options.find((opt) => opt.questionId === currentQuestionId)?.choice
-          }
+          value={options.find((opt) => opt.index === currentQuestionId)?.choice}
           name={`radioGroup${currentQuestionId}`}
-          onValueChange={(newValue: string) => {}}
+          onValueChange={(newValue: string) => {
+            setOptions((prevOptions) => {
+              return prevOptions.map((option) => {
+                if (option.index == currentQuestionId) {
+                  return {
+                    ...option,
+                    choice: newValue,
+                  };
+                }
+                return option;
+              });
+            });
+          }}
         >
           {[
             questionsData[currentQuestionId]?.option_a,
