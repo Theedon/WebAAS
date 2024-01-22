@@ -12,4 +12,5 @@ export enum FacultyCode {
   SCIENCES = "SCI",
   ARTS = "ART",
   COMMERCIAL = "COM",
+  GENERAL = "GEN",
 }

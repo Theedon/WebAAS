@@ -16,4 +16,8 @@ export const Faculties: FacultiesType[] = [
     name: "Commercial",
     code: "COM",
   },
+  {
+    name: "GENERAL",
+    code: "GEN",
+  },
 ];
