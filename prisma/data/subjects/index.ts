@@ -130,7 +130,7 @@ const RawSubjects: SubjectType[] = [
   },
   {
     name: "Math",
-    code: SubjectCode.MATH,
+    code: SubjectCode.MATHEMATICS,
     description:
       "Master the language of numbers and patterns. Mathematics explores the principles of quantity, structure, space, and change, providing a foundation for various scientific and engineering disciplines.",
     facultyId: "",

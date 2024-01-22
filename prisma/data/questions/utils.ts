@@ -33,7 +33,7 @@ export enum SubjectCode {
   LAW = "LAW",
   LINGUISTICS = "LIN",
   LITERATURE_IN_ENGLISH = "LIT",
-  MATH = "MTH",
+  MATHEMATICS = "MTH",
 }
 
 const getSubjectIdByCode = async (code: string) => {
