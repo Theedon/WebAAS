@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Faculties } from "./data/faculties";
 import { getSubjects } from "./data/subjects";
 import { getQuestions } from "./data/questions";
+import { getUsers } from "./data/users/utils";
 
 const prisma = new PrismaClient();
 
@@ -38,6 +39,18 @@ async function main() {
       },
     });
   }
+
+  //insert users data
+  const Users = await getUsers();
+  for (let user of Users) {
+    const { faculty_id, faculty_code, ...filteredUser } = user;
+    await prisma.user.create({
+      data: {
+        ...filteredUser,
+        faculty_id,
+      },
+    });
+  }
 }
 
 main()
@@ -46,6 +59,8 @@ main()
     process.exit(1);
   })
   .finally(() => {
-    console.log("seeding finished");
+    console.log(
+      "***💃🕺💫🎶🔥✨👯‍♀️👯‍♂️💃🕺SEEDING FINISHED!💃🕺💫🎶🔥✨👯‍♀️👯‍♂️💃🕺***",
+    );
     prisma.$disconnect();
   });
