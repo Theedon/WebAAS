@@ -23,8 +23,17 @@ export type QuestionType = {
 export enum SubjectCode {
   PHYSICS = "PHY",
   ACCOUNTING = "ACC",
-  FRENCH = "FRA",
   COMMERCE = "COM",
+  BIOLOGY = "BIO",
+  BOOK_KEEPING = "BKP",
+  BUSINESS_STUDIES = "BUS",
+  CHEMISTRY = "CHE",
+  CULTURAL_AND_CREATIVE_ARTS = "CCA",
+  ENGLISH = "ENG",
+  LAW = "LAW",
+  LINGUISTICS = "LIN",
+  LITERATURE_IN_ENGLISH = "LIT",
+  MATHEMATICS = "MTH",
 }
 
 const getSubjectIdByCode = async (code: string) => {
