@@ -23,6 +23,7 @@ model User {
   onboarded       Boolean   @default(false)
   faculty_id      String 
   ai_recommendation  Bytes?
+  test_information  Bytes?
 
   faculty         Faculty @relation(fields: [faculty_id], references: [id])
 
