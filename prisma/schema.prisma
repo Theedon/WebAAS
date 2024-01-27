@@ -5,7 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 
@@ -22,6 +22,8 @@ model User {
   verified        Boolean   @default(false)
   onboarded       Boolean   @default(false)
   faculty_id      String 
+  ai_recommendation  Bytes?
+  test_information  Bytes?
 
   faculty         Faculty @relation(fields: [faculty_id], references: [id])
 
@@ -77,3 +79,4 @@ model Question {
   @@map("questions")
   @@index(fields: [question_text])
 }
+
