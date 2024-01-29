@@ -2,9 +2,10 @@ import Image from "next/image";
 import app_logo from "@/assets/images/app-logo.png";
 import ThemeToggle from "../ThemeToggle";
 import { Button } from "../ui/button";
-import { CircleUserRound, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import NavButtons from "./NavButtons";
 import NavDrawer from "./NavDrawer";
+import { UserButton } from "@clerk/nextjs";
 
 function Navbar() {
   return (
@@ -22,12 +23,12 @@ function Navbar() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
 
+          <Button variant={"ghost"} className="flex" size={"icon"}>
+            <UserButton afterSignOutUrl="/" />
+          </Button>
           <NavDrawer>
             <Menu />
           </NavDrawer>
-          <Button variant={"ghost"} className="hidden md:flex" size={"icon"}>
-            <CircleUserRound />
-          </Button>
         </div>
       </div>
     </header>
