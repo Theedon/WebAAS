@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/backend/prisma/prisma";
 import { Faculties } from "./data/faculties";
 import { getSubjects } from "./data/subjects";
 import { getQuestions } from "./data/questions";
 import { getUsers } from "./data/users/utils";
-
-const prisma = new PrismaClient();
 
 async function main() {
   //insert faculties data
