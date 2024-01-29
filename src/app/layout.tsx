@@ -4,8 +4,7 @@ import { Poppins, Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import { ApolloWrapper } from "@/lib/apollo-clients/CCProvider";
-import NextAuthProvider from "@/lib/NextAuthProvider";
-import { getServerSession } from "next-auth";
+import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/Footer";
 
@@ -34,17 +33,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "flex min-h-screen flex-col gap-2 overflow-x-hidden",
-          poppins.className,
-        )}
-      >
-        <ApolloWrapper>
-          <NextAuthProvider>
+    <ClerkProvider>
+      <ApolloWrapper>
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={cn(
+              "flex min-h-screen flex-col gap-2 overflow-x-hidden",
+              poppins.className,
+            )}
+          >
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -56,9 +54,9 @@ export default async function RootLayout({
               <main className="mx-10 mb-10 mt-[14vh]">{children}</main>
               <Footer />
             </ThemeProvider>
-          </NextAuthProvider>
-        </ApolloWrapper>
-      </body>
-    </html>
+          </body>
+        </html>
+      </ApolloWrapper>
+    </ClerkProvider>
   );
 }
