@@ -1,7 +1,7 @@
 import { getClient } from "@/lib/apollo-clients/RSCClient";
 import gql from "graphql-tag";
 import React from "react";
-import getCurrentUserId from "@/lib/globalUserId";
+import getCurrentUserId from "@/lib/globalUserContext";
 import Markdown from "react-markdown";
 
 const GET_RECOMMENDATION = gql`
