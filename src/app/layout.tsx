@@ -7,6 +7,7 @@ import { ApolloWrapper } from "@/lib/apollo-clients/CCProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/Footer";
+import { dark } from "@clerk/themes";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -34,7 +35,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ baseTheme: dark }}>
       <ApolloWrapper>
         <html lang="en" suppressHydrationWarning>
           <body
