@@ -1,9 +1,7 @@
 import { QuestionType } from "@/components/assessment/Assessment";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../prisma/prisma";
 import OpenAI from "openai";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const prisma = new PrismaClient();
 
 async function updateSubjectNames(
   questionsArray: QuestionType[],

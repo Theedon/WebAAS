@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import { FacultyCode, SubjectType } from "./utils";
 import { SubjectCode } from "../questions/utils";
-
-const prisma = new PrismaClient();
+import prisma from "@/backend/prisma/prisma";
 
 const getFacultyIdByCode = async (code: string) => {
   const faculty = await prisma.faculty.findUnique({

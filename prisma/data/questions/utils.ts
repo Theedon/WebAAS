@@ -6,8 +6,7 @@
  * Exports fillQuestionsWithId to populate the subject_id field
  * by looking up the id for the given subject_name.
  */
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "@/backend/prisma/prisma";
 
 export type QuestionType = {
   subject_id: string;

@@ -1,9 +1,8 @@
 import { RawUsers } from ".";
 import { FacultyCode } from "../subjects/utils";
-import { $Enums, PrismaClient } from "@prisma/client";
+import { $Enums } from "@prisma/client";
 import bcryptjs from "bcryptjs";
-
-const prisma = new PrismaClient();
+import prisma from "@/backend/prisma/prisma";
 
 export type UserType = {
   first_name: string;
