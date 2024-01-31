@@ -30,7 +30,7 @@ const getTestQuestions = async (faculty: string) => {
       },
     });
 
-    const filteredSubjectQuestions = subjectQuestions.map((question) => {
+    const filteredSubjectQuestions = subjectQuestions.map((question: any) => {
       return new QuestionDomain(
         question.id,
         question.option_a,

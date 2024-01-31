@@ -5,7 +5,7 @@ const getAllQuestions = async () => {
   let questions = [];
   questions = await prisma.question.findMany();
 
-  return questions.map((question) => {
+  return questions.map((question: any) => {
     return new QuestionDomain(
       question.id,
       question.option_a,
