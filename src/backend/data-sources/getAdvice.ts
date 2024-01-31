@@ -3,7 +3,7 @@ import prisma from "../prisma/prisma";
 export const getAdvice = async (userId: string) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: userId,
+      clerk_id: userId,
     },
   });
 
