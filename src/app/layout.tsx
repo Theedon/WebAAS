@@ -35,7 +35,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
+    <ClerkProvider
+      appearance={{ baseTheme: dark }}
+      afterSignUpUrl="/onboarding"
+      afterSignInUrl="/results"
+    >
       <ApolloWrapper>
         <html lang="en" suppressHydrationWarning>
           <body

@@ -11,6 +11,8 @@ export class UserDomain extends BaseDomain {
     public onboarded: boolean,
     public verified: boolean,
     public role: Role,
+    public clerk_id: string,
+    public faculty_id: string,
   ) {
     super(id);
     this.password = password;
@@ -20,6 +22,8 @@ export class UserDomain extends BaseDomain {
     this.onboarded = onboarded;
     this.verified = verified;
     this.role = role;
+    this.clerk_id = clerk_id;
+    this.faculty_id = faculty_id;
   }
 }
 
@@ -33,5 +37,7 @@ export const createUserDomain = (data: User) => {
     data.onboarded,
     data.verified,
     data.role,
+    data.clerk_id,
+    data.faculty_id,
   );
 };

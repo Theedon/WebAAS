@@ -9,6 +9,7 @@ export const typeDefs = gql`
       password: String!
       email: String!
       facultyCode: String!
+      clerkId: String!
     ): String!
   }
 `;
@@ -23,6 +24,7 @@ export const resolvers = {
         password: string;
         email: string;
         facultyCode: string;
+        clerkId: string;
       },
     ) => {
       return createUser(
@@ -31,6 +33,7 @@ export const resolvers = {
         args.password,
         args.email,
         args.facultyCode,
+        args.clerkId,
       );
     },
   },

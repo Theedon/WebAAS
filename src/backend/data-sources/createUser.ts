@@ -7,6 +7,7 @@ export const createUser = async (
   password: string,
   email: string,
   facultyCode: string,
+  clerkId: string,
 ) => {
   const user = await prisma.user.findUnique({
     where: { email: email },
@@ -27,6 +28,7 @@ export const createUser = async (
       email: email.toLowerCase(),
       password: hashedPassword,
       faculty_id: faculty?.id ?? "",
+      clerk_id: clerkId,
     },
   });
 
