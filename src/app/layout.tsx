@@ -8,7 +8,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/Footer";
 import { dark } from "@clerk/themes";
-
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   style: ["italic", "normal"],
@@ -34,6 +35,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  if (auth().sessionClaims?.metadata.onboardingComplete === true) {
+    redirect("dashboard");
+  }
   return (
     <ClerkProvider
       appearance={{ baseTheme: dark }}
