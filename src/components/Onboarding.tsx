@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useUser } from "@clerk/nextjs";
 
 // import {
 //   RegisterUserMutation,
@@ -47,6 +48,7 @@ function Onboarding({
   const [registerError, setRegisterError] = useState<string | null>(null);
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useUser();
 
   const REGISTER_USER = gql`
     mutation RegisterUser(
@@ -108,8 +110,10 @@ function Onboarding({
         clerkId: userId,
       },
     })
-      .then(() => console.log("user added to db successfully"))
-      .then(() => router.push("/"))
+      .then(() => {
+        console.log("user added to db successfully");
+        user?.reload().then(() => router.push("/"));
+      })
       .catch((e) => {
         toast({
           title: "Error",
