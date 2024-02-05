@@ -20,7 +20,7 @@ const client: CodegenConfig = {
 
   overwrite: true, // overwrite files
   schema: "http://localhost:3000/api/graphql", //file schema
-  documents: ["src/app/**/!(*.generated).{ts,tsx}"], //directories to check
+  documents: ["src/app/**/!(*.generated).{ts,tsx}", "src/components/**/!(*.generated).{ts,tsx}"], //directories to check
   generates: {
     "src/app/types.ts": {
       plugins: ["typescript"], //generate the types to types.ts with the graphql types
