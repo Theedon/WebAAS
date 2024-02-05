@@ -25,11 +25,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useUser } from "@clerk/nextjs";
 
-// import {
-//   RegisterUserMutation,
-//   RegisterUserMutationVariables,
-// } from "./__generated__/page.generated";
+import {
+  RegisterUserMutation,
+  RegisterUserMutationVariables,
+} from "./__generated__/index.generated";
 
 type OnboardingProps = {
   firstName: string;
@@ -47,6 +48,7 @@ function Onboarding({
   const [registerError, setRegisterError] = useState<string | null>(null);
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useUser();
 
   const REGISTER_USER = gql`
     mutation RegisterUser(
@@ -67,7 +69,10 @@ function Onboarding({
       )
     }
   `;
-  const [registerMutation, { error }] = useMutation<any>(REGISTER_USER);
+  const [registerMutation, { error }] = useMutation<
+    RegisterUserMutation,
+    RegisterUserMutationVariables
+  >(REGISTER_USER);
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -76,7 +81,7 @@ function Onboarding({
       firstName: firstName,
       lastName: lastName,
       faculty: "",
-      userId: userId,
+      clerkId: userId,
     },
   });
 
@@ -104,12 +109,13 @@ function Onboarding({
         firstName: firstName,
         lastName: lastName,
         faculty: values.faculty,
-        userId: userId,
         clerkId: userId,
       },
     })
-      .then(() => console.log("user added to db successfully"))
-      .then(() => router.push("/"))
+      .then(() => {
+        console.log("user added to db successfully");
+        user?.reload().then(() => router.push("/"));
+      })
       .catch((e) => {
         toast({
           title: "Error",

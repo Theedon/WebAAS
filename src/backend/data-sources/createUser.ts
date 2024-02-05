@@ -1,3 +1,4 @@
+import { clerkClient } from "@clerk/nextjs/server";
 import prisma from "../prisma/prisma";
 import bcryptjs from "bcryptjs";
 
@@ -31,6 +32,16 @@ export const createUser = async (
       clerk_id: clerkId,
     },
   });
+  if (!clerkId) {
+    return "no logged in user";
+  }
+
+  const res = await clerkClient.users.updateUser(clerkId, {
+    publicMetadata: {
+      onboardingComplete: true,
+    },
+  });
+  console.log(res.publicMetadata);
 
   return createdUser.id;
 };

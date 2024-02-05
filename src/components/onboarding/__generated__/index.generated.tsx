@@ -1,4 +1,4 @@
-import * as Types from '../../../types';
+import * as Types from '../../../app/types';
 
 export type RegisterUserMutationVariables = Types.Exact<{
   firstName: Types.Scalars['String']['input'];
@@ -6,6 +6,7 @@ export type RegisterUserMutationVariables = Types.Exact<{
   email: Types.Scalars['String']['input'];
   password: Types.Scalars['String']['input'];
   faculty: Types.Scalars['String']['input'];
+  clerkId: Types.Scalars['String']['input'];
 }>;
 
 

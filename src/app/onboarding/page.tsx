@@ -1,13 +1,13 @@
-import Onboarding from "@/components/Onboarding";
+import Onboarding from "@/components/onboarding";
 import getCurrentUserId from "@/lib/globalUserContext";
-import { currentUser } from "@clerk/nextjs";
+import { clerkClient } from "@clerk/nextjs";
 
 async function OnboardingPage() {
-  const user = await currentUser();
-  const firstName = user?.firstName ?? "";
-  const lastName = user?.lastName ?? "";
-  const emailAddress = user?.primaryEmailAddressId ?? "";
-  const userId = user?.id ?? "";
+  const userId = getCurrentUserId() as string;
+  const user = await clerkClient.users.getUser(userId);
+  const firstName = user.firstName ?? "";
+  const lastName = user.lastName ?? "";
+  const emailAddress = user.emailAddresses[0].emailAddress ?? "";
 
   console.log(firstName, lastName, emailAddress, userId);
 

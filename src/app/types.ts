@@ -14,13 +14,41 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Advice = {
+  __typename?: 'Advice';
+  ai_recommendation: Maybe<Scalars['String']['output']>;
+  id: Maybe<Scalars['String']['output']>;
+};
+
+export type AssessmentInfoInput = {
+  choice: Scalars['String']['input'];
+  correct_option: Scalars['String']['input'];
+  id: Scalars['String']['input'];
+  index: InputMaybe<Scalars['Int']['input']>;
+  option_a: Scalars['String']['input'];
+  option_b: Scalars['String']['input'];
+  option_c: Scalars['String']['input'];
+  option_d: Scalars['String']['input'];
+  question: Scalars['String']['input'];
+  subject_id: Scalars['String']['input'];
+};
+
+export type Faculty = {
+  __typename?: 'Faculty';
+  code: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: Scalars['String']['output'];
+  saveExam: Scalars['String']['output'];
 };
 
 
 export type MutationCreateUserArgs = {
+  clerkId: Scalars['String']['input'];
   email: Scalars['String']['input'];
   facultyCode: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
@@ -28,16 +56,33 @@ export type MutationCreateUserArgs = {
   password: Scalars['String']['input'];
 };
 
+
+export type MutationSaveExamArgs = {
+  assessmentInfo: Array<AssessmentInfoInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   allQuestions: Array<Question>;
   allSubjects: Array<Subject>;
   testQuestions: Array<Array<Question>>;
+  user: User;
+  userAdvice: Maybe<Advice>;
 };
 
 
 export type QueryTestQuestionsArgs = {
   faculty: Scalars['String']['input'];
+};
+
+
+export type QueryUserArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryUserAdviceArgs = {
+  userId: Scalars['String']['input'];
 };
 
 export type Question = {
@@ -57,4 +102,19 @@ export type Subject = {
   description: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+};
+
+export type User = {
+  __typename?: 'User';
+  ai_recommendation: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
+  faculty: Maybe<Faculty>;
+  faculty_id: Maybe<Scalars['String']['output']>;
+  firstName: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  lastName: Scalars['String']['output'];
+  onboarded: Scalars['Boolean']['output'];
+  role: Scalars['String']['output'];
+  test_information: Maybe<Scalars['String']['output']>;
+  verified: Scalars['Boolean']['output'];
 };
