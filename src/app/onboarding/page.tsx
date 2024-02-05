@@ -1,4 +1,4 @@
-import Onboarding from "@/components/Onboarding";
+import Onboarding from "@/components/onboarding";
 import getCurrentUserId from "@/lib/globalUserContext";
 import { clerkClient } from "@clerk/nextjs";
 

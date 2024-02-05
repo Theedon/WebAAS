@@ -27,10 +27,10 @@ import {
 } from "@/components/ui/select";
 import { useUser } from "@clerk/nextjs";
 
-// import {
-//   RegisterUserMutation,
-//   RegisterUserMutationVariables,
-// } from "./__generated__/page.generated";
+import {
+  RegisterUserMutation,
+  RegisterUserMutationVariables,
+} from "./__generated__/index.generated";
 
 type OnboardingProps = {
   firstName: string;
@@ -69,7 +69,10 @@ function Onboarding({
       )
     }
   `;
-  const [registerMutation, { error }] = useMutation<any>(REGISTER_USER);
+  const [registerMutation, { error }] = useMutation<
+    RegisterUserMutation,
+    RegisterUserMutationVariables
+  >(REGISTER_USER);
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -78,7 +81,7 @@ function Onboarding({
       firstName: firstName,
       lastName: lastName,
       faculty: "",
-      userId: userId,
+      clerkId: userId,
     },
   });
 
@@ -106,7 +109,6 @@ function Onboarding({
         firstName: firstName,
         lastName: lastName,
         faculty: values.faculty,
-        userId: userId,
         clerkId: userId,
       },
     })
