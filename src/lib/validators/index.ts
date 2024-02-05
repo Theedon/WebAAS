@@ -10,7 +10,7 @@ const loginFormSchema = z.object({
 });
 
 const registerFormSchema = z.object({
-  email: z.string({ required_error: "Enter email address" }),
+  email: z.string({ required_error: "Enter email address" }).email(),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
