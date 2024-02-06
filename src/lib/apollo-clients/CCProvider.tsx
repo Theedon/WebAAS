@@ -14,7 +14,10 @@ import {
   ApolloNextAppProvider,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import React from "react";
-import { endpoint } from "../exposeUri";
+import { getEndpoint } from "../exposeUri";
+
+const endpoint = getEndpoint();
+console.log(endpoint);
 
 function makeClient() {
   const httpLink = new HttpLink({
