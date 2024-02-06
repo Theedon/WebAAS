@@ -17,8 +17,10 @@ import {
   NextSSRApolloClient,
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
-import { endpoint } from "../exposeUri";
+import { getEndpoint } from "../exposeUri";
 
+const endpoint = getEndpoint();
+console.log(endpoint);
 export const { getClient } = registerApolloClient(() => {
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
