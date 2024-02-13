@@ -9,11 +9,14 @@ import getCurrentUserId from "@/lib/globalUserContext";
 import { redirect } from "next/navigation";
 
 const query = gql`
-  query TestQuestions($userId: String!, $faculty: String!) {
+  query TestQuestions($userId: String!) {
     user(id: $userId) {
       ai_recommendation
+      faculty {
+        code
+      }
     }
-    testQuestions(faculty: $faculty) {
+    testQuestions(userId: $userId) {
       id
       option_a
       option_b
@@ -33,7 +36,7 @@ async function AssessmentPage() {
     TestQuestionsQueryVariables
   >({
     query,
-    variables: { userId: userId, faculty: "SCI" },
+    variables: { userId: userId },
   });
 
   if (data.user.ai_recommendation) redirect("/results");

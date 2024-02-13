@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type Query {
-    testQuestions(faculty: String!): [[Question!]!]!
+    testQuestions(userId: String!): [[Question!]!]!
   }
 
   type Question {
@@ -20,8 +20,8 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    testQuestions: async (_parent: any, { faculty }: any) => {
-      const questions = await getTestQuestions(faculty);
+    testQuestions: async (_parent: any, { userId }: any) => {
+      const questions = await getTestQuestions(userId);
       return questions;
     },
   },

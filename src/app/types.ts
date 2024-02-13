@@ -73,7 +73,7 @@ export type Query = {
 
 
 export type QueryTestQuestionsArgs = {
-  faculty: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 

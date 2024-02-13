@@ -1,7 +1,24 @@
 import QuestionDomain from "../domains/QuestionDomain";
 import prisma from "../prisma/prisma";
 
-const getTestQuestions = async (faculty: string) => {
+const getTestQuestions = async (userId: string) => {
+  const faculty = await prisma.user.findUnique({
+    where: {
+      clerk_id: userId,
+    },
+    select: {
+      faculty_id: true,
+    },
+  });
+  const facultyCodeObj = await prisma.faculty.findUnique({
+    where: {
+      id: faculty.faculty_id,
+    },
+    select: {
+      code: true,
+    },
+  });
+  const facultyCode = facultyCodeObj.code;
   const SCI = ["Biology", "Chemistry", "Physics", "Mathematics", "English"];
   const COM = [
     "Accounting",
@@ -18,7 +35,8 @@ const getTestQuestions = async (faculty: string) => {
     "English",
   ];
   let questionsArray = [];
-  const subjectList = faculty === "SCI" ? SCI : faculty === "COM" ? COM : ART;
+  const subjectList =
+    facultyCode === "SCI" ? SCI : facultyCode === "COM" ? COM : ART;
 
   for (let subject of subjectList) {
     const subjectQuestions = await prisma.question.findMany({
