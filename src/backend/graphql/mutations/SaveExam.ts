@@ -16,14 +16,17 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    saveExam(assessmentInfo: [AssessmentInfoInput!]!): String!
+    saveExam(userId: String!, assessmentInfo: [AssessmentInfoInput!]!): String!
   }
 `;
 export const resolvers = {
   Mutation: {
-    saveExam: (_parent: any, args: { assessmentInfo: any[] }, context: any) => {
+    saveExam: (
+      _parent: any,
+      args: { userId: string; assessmentInfo: any[] },
+    ) => {
       // Assuming getAIRecommendations expects an array of AssessmentInfo
-      return getAIRecommendations(args.assessmentInfo);
+      return getAIRecommendations(args.userId, args.assessmentInfo);
     },
   },
 };

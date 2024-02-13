@@ -44,12 +44,15 @@ const constructString = (assesmentInfo: QuestionType[]): string => {
   return constructArray.join("; ");
 };
 
-export const getAIRecommendations = async (assesmentInfo: QuestionType[]) => {
+export const getAIRecommendations = async (
+  userId: string,
+  assesmentInfo: QuestionType[],
+) => {
   const assesmentWithSubjectNames = await updateSubjectNames(assesmentInfo);
   const questionStringArray = constructString(assesmentWithSubjectNames);
 
   const prompt = `
-  As an esteemed academic advisor, students seek your expertise in navigating the crucial decision of choosing a college track post-high school. Your mission is to dissect their performance across five subjects, exposing strengths and weaknesses, and offering blunt insights into courses that resonate with their abilities. End your analysis by unapologetically recommending the top three college courses tailored to their strengths. Remember, you're addressing the student directly, so be brutally honest and opinionated, Give as much information as you can.
+  As an esteemed academic advisor, students seek your expertise in navigating the crucial decision of choosing a college track post-high school. Your mission is to dissect their performance across five subjects, exposing strengths and weaknesses, and offering blunt insights into courses that resonate with their abilities. End your analysis by unapologetically recommending the top three college courses tailored to their strengths. Remember, you're addressing the student in first person, so be brutally honest and opinionated, Give as much information as you can and ensure response to be in free flowing markdown designed with beautiful colors.
 
   Here are the test results for this user:
   "${questionStringArray}"  
@@ -66,7 +69,7 @@ export const getAIRecommendations = async (assesmentInfo: QuestionType[]) => {
 
   const updateUser = await prisma.user.update({
     where: {
-      id: "clrozkupz0087wh88ldkkw9ky",
+      clerk_id: userId,
     },
     data: {
       ai_recommendation: Buffer.from(text),

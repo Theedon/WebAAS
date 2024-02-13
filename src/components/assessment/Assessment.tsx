@@ -9,9 +9,14 @@ import { Loader2, SendHorizonalIcon } from "lucide-react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import getCurrentUserId from "@/lib/globalUserContext";
+import {
+  SaveExamMutation,
+  SaveExamMutationVariables,
+} from "./__generated__/Assessment.generated";
 
 type AssessmentProps = {
-  // questionsData: Question[];
+  userId: string;
   questionsData: TestQuestionsQuery;
 };
 
@@ -28,14 +33,20 @@ export type QuestionType = {
   choice: string;
 };
 
-function Assessment({ questionsData }: AssessmentProps) {
+function Assessment({ userId, questionsData }: AssessmentProps) {
   const SAVE_EXAM = gql`
-    mutation SaveExam($assessmentInfo: [AssessmentInfoInput!]!) {
-      saveExam(assessmentInfo: $assessmentInfo)
+    mutation SaveExam(
+      $userId: String!
+      $assessmentInfo: [AssessmentInfoInput!]!
+    ) {
+      saveExam(userId: $userId, assessmentInfo: $assessmentInfo)
     }
   `;
 
-  const [saveMutation, { error }] = useMutation<any>(SAVE_EXAM);
+  const [saveMutation, { error }] = useMutation<
+    SaveExamMutation,
+    SaveExamMutationVariables
+  >(SAVE_EXAM);
   const [testSubmitting, setTestSubmitting] = useState<boolean>(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -73,11 +84,12 @@ function Assessment({ questionsData }: AssessmentProps) {
     setTestSubmitting(true);
     const recommendation = await saveMutation({
       variables: {
+        userId: userId,
         assessmentInfo: options,
       },
     });
     setTestSubmitting(false);
-    if (recommendation.data.saveExam) {
+    if (recommendation?.data?.saveExam) {
       console.log("assesment submitted successfully");
       router.replace("/results");
     }
@@ -146,7 +158,7 @@ function Assessment({ questionsData }: AssessmentProps) {
       </div>
       <AssesmentNavigation
         currentQuestionId={currentQuestionIndex}
-        questionsData={filteredQuestionsData}
+        questionsData={options}
         setCurrentQuestionIndex={setCurrentQuestionIndex}
       />
     </div>

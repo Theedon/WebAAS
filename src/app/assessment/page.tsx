@@ -5,10 +5,18 @@ import {
   TestQuestionsQuery,
   TestQuestionsQueryVariables,
 } from "./__generated__/page.generated";
+import getCurrentUserId from "@/lib/globalUserContext";
+import { redirect } from "next/navigation";
 
 const query = gql`
-  query TestQuestions($faculty: String!) {
-    testQuestions(faculty: $faculty) {
+  query TestQuestions($userId: String!) {
+    user(id: $userId) {
+      ai_recommendation
+      faculty {
+        code
+      }
+    }
+    testQuestions(userId: $userId) {
       id
       option_a
       option_b
@@ -22,17 +30,20 @@ const query = gql`
 `;
 
 async function AssessmentPage() {
+  const userId = getCurrentUserId() as string;
   const { data, error } = await getClient().query<
     TestQuestionsQuery,
     TestQuestionsQueryVariables
   >({
     query,
-    variables: { faculty: "SCI" },
+    variables: { userId: userId },
   });
+
+  // if (data.user.ai_recommendation) redirect("/results");
 
   return (
     <div className="flex flex-col gap-10">
-      <Assessment questionsData={data}></Assessment>
+      <Assessment userId={userId} questionsData={data}></Assessment>
     </div>
   );
 }

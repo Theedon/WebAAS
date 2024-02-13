@@ -37,6 +37,7 @@ function AssesmentNavigation({
       <ButtonSection
         questionsData={questionsData}
         setCurrentQuestionIndex={setCurrentQuestionIndex}
+        currentQuestionIndex={currentQuestionId}
       ></ButtonSection>
     </div>
   );
