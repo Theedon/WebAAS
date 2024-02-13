@@ -21,8 +21,10 @@ function QuestionButton({
     <Button
       variant={"outline"}
       className={`w-full rounded-none  ${isAnswered ? "bg-primary" : ""} ${
-        isSelected ? "rounded-md " : ""
-      }`}
+        isSelected
+          ? "animate-bounce rounded-full bg-foreground text-background transition-all duration-200 ease-in-out"
+          : ""
+      } `}
       {...props}
     >
       {children}

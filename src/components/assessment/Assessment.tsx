@@ -158,7 +158,7 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
       </div>
       <AssesmentNavigation
         currentQuestionId={currentQuestionIndex}
-        questionsData={filteredQuestionsData}
+        questionsData={options}
         setCurrentQuestionIndex={setCurrentQuestionIndex}
       />
     </div>
