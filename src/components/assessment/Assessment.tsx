@@ -82,16 +82,31 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
   const router = useRouter();
   const submitExam = async () => {
     setTestSubmitting(true);
-    const recommendation = await saveMutation({
-      variables: {
-        userId: userId,
-        assessmentInfo: options,
-      },
-    });
-    setTestSubmitting(false);
-    if (recommendation?.data?.saveExam) {
-      console.log("assesment submitted successfully");
-      router.replace("/results");
+
+    try {
+      const recommendation = await saveMutation({
+        variables: {
+          userId: userId,
+          assessmentInfo: options,
+        },
+      });
+
+      if (recommendation?.data?.saveExam) {
+        console.log("Assessment submitted successfully");
+        router.replace("/results");
+      } else {
+        // Handle non-errorful but unsuccessful responses (optional)
+        console.warn("Assessment submitted but did not receive expected data");
+        // Display a user-friendly message or take alternative actions
+      }
+    } catch (error) {
+      // Handle errors here
+      console.error("Error submitting assessment:", error);
+      // Display a user-friendly error message to the user (e.g., using Toast or an alert)
+      // Offer options to retry or provide specific troubleshooting steps
+      // Log the error for debugging and potential reporting
+    } finally {
+      setTestSubmitting(false);
     }
   };
 
