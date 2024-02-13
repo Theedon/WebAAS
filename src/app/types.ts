@@ -59,6 +59,7 @@ export type MutationCreateUserArgs = {
 
 export type MutationSaveExamArgs = {
   assessmentInfo: Array<AssessmentInfoInput>;
+  userId: Scalars['String']['input'];
 };
 
 export type Query = {

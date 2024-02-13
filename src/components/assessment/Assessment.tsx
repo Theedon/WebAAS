@@ -10,6 +10,10 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import getCurrentUserId from "@/lib/globalUserContext";
+import {
+  SaveExamMutation,
+  SaveExamMutationVariables,
+} from "./__generated__/Assessment.generated";
 
 type AssessmentProps = {
   userId: string;
@@ -39,7 +43,10 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
     }
   `;
 
-  const [saveMutation, { error }] = useMutation<any>(SAVE_EXAM);
+  const [saveMutation, { error }] = useMutation<
+    SaveExamMutation,
+    SaveExamMutationVariables
+  >(SAVE_EXAM);
   const [testSubmitting, setTestSubmitting] = useState<boolean>(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -82,7 +89,7 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
       },
     });
     setTestSubmitting(false);
-    if (recommendation.data.saveExam) {
+    if (recommendation?.data?.saveExam) {
       console.log("assesment submitted successfully");
       router.replace("/results");
     }
