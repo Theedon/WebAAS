@@ -9,9 +9,10 @@ import { Loader2, SendHorizonalIcon } from "lucide-react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import getCurrentUserId from "@/lib/globalUserContext";
 
 type AssessmentProps = {
-  // questionsData: Question[];
+  userId: string;
   questionsData: TestQuestionsQuery;
 };
 
@@ -28,10 +29,13 @@ export type QuestionType = {
   choice: string;
 };
 
-function Assessment({ questionsData }: AssessmentProps) {
+function Assessment({ userId, questionsData }: AssessmentProps) {
   const SAVE_EXAM = gql`
-    mutation SaveExam($assessmentInfo: [AssessmentInfoInput!]!) {
-      saveExam(assessmentInfo: $assessmentInfo)
+    mutation SaveExam(
+      $userId: String!
+      $assessmentInfo: [AssessmentInfoInput!]!
+    ) {
+      saveExam(userId: $userId, assessmentInfo: $assessmentInfo)
     }
   `;
 
@@ -73,6 +77,7 @@ function Assessment({ questionsData }: AssessmentProps) {
     setTestSubmitting(true);
     const recommendation = await saveMutation({
       variables: {
+        userId: userId,
         assessmentInfo: options,
       },
     });

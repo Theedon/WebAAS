@@ -5,6 +5,7 @@ import {
   TestQuestionsQuery,
   TestQuestionsQueryVariables,
 } from "./__generated__/page.generated";
+import getCurrentUserId from "@/lib/globalUserContext";
 
 const query = gql`
   query TestQuestions($faculty: String!) {
@@ -29,10 +30,11 @@ async function AssessmentPage() {
     query,
     variables: { faculty: "SCI" },
   });
+  const userId = getCurrentUserId();
 
   return (
     <div className="flex flex-col gap-10">
-      <Assessment questionsData={data}></Assessment>
+      <Assessment userId={userId ?? "hgh"} questionsData={data}></Assessment>
     </div>
   );
 }
