@@ -44,7 +44,7 @@ export default async function RootLayout({
         <html lang="en" suppressHydrationWarning>
           <body
             className={cn(
-              "flex min-h-screen flex-col gap-2 overflow-x-hidden",
+              "flex min-h-screen flex-col overflow-x-hidden",
               poppins.className,
             )}
           >
