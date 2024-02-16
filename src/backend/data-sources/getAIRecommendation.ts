@@ -52,7 +52,7 @@ export const getAIRecommendations = async (
   const questionStringArray = constructString(assesmentWithSubjectNames);
 
   const prompt = `
-  As an esteemed academic advisor, students seek your expertise in navigating the crucial decision of choosing a college track post-high school. Your mission is to dissect their performance across five subjects, exposing strengths and weaknesses, and offering blunt insights into courses that resonate with their abilities. End your analysis by unapologetically recommending the top three college courses tailored to their strengths. Remember, you're addressing the student in first person, so be brutally honest and opinionated, Give as much information as you can and ensure response to be in free flowing markdown designed with beautiful colors.
+  As an esteemed academic advisor, I need your assistance in navigating a crucial decision: choosing a college track post-high school. I will provide you with the test results for analysis across five subjects, revealing strengths and weaknesses in details. Your mission is to offer insights into courses that align with my abilities and recommend the top three college courses tailored to my strengths. Remember, you're addressing me directly, so be honest and as helpful as possible. Please provide as much information as you can and ensure that your response is in pure markdown.
 
   Here are the test results for this user:
   "${questionStringArray}"  
