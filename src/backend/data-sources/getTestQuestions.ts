@@ -1,5 +1,6 @@
 import QuestionDomain from "../domains/QuestionDomain";
 import prisma from "../prisma/prisma";
+import _ from "lodash";
 
 const getTestQuestions = async (userId: string) => {
   const faculty = await prisma.user.findUnique({
@@ -39,7 +40,7 @@ const getTestQuestions = async (userId: string) => {
     facultyCode === "SCI" ? SCI : facultyCode === "COM" ? COM : ART;
 
   for (let subject of subjectList) {
-    const subjectQuestions = await prisma.question.findMany({
+    const subjectQuestionsArr = await prisma.question.findMany({
       take: 10,
       where: {
         subject: {
@@ -47,6 +48,8 @@ const getTestQuestions = async (userId: string) => {
         },
       },
     });
+
+    const subjectQuestions = _.shuffle(subjectQuestionsArr);
 
     const filteredSubjectQuestions = subjectQuestions.map((question: any) => {
       return new QuestionDomain(
