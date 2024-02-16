@@ -1,6 +1,5 @@
 import { QuestionType } from "@/components/assessment/Assessment";
 import prisma from "../prisma/prisma";
-import OpenAI from "openai";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 async function updateSubjectNames(
@@ -50,12 +49,20 @@ export const getAIRecommendations = async (
 ) => {
   const assesmentWithSubjectNames = await updateSubjectNames(assesmentInfo);
   const questionStringArray = constructString(assesmentWithSubjectNames);
+  const userNameObj = await prisma.user.findFirst({
+    where: {
+      clerk_id: userId,
+    },
+    select: { first_name: true },
+  });
 
   const prompt = `
-  As an esteemed academic advisor, I need your assistance in navigating a crucial decision: choosing a college track post-high school. I will provide you with the test results for analysis across five subjects, revealing strengths and weaknesses in details. Your mission is to offer insights into courses that align with my abilities and recommend the top three college courses tailored to my strengths. Remember, you're addressing me directly, so be honest and as helpful as possible. Please provide as much information as you can and ensure that your response is in pure markdown.
+  As an esteemed academic advisor, A student called ${userNameObj.first_name} need your assistance in navigating a crucial decision: choosing a college track post-high school. I will provide you with the test results for analysis across five subjects, revealing strengths and weaknesses in details. Your mission is to offer insights into courses that align with my abilities and recommend the top three college courses tailored to my strengths. Remember, you're addressing me directly, so be honest and as helpful as possible. Please provide as much information as you can. Ensure your response is in pure markdown.
 
-  Here are the test results for this user:
-  "${questionStringArray}"  
+  Here are the test results for this user: "${questionStringArray}"
+  
+  Please organize your response into three bold headings: Analysis of Test Results, Recommended Courses, Least Suitable, Additional Considerations. Add spaces after each heading and make sure that the headings are centered on their lines. Ensure to refer to the student by name
+  "${questionStringArray}"    
   `;
 
   const genAI = new GoogleGenerativeAI(
