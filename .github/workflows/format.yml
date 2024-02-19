@@ -1,8 +1,8 @@
 # /**
 #  * GitHub Actions workflow to run code formatting on pull requests.
-#  * 
-#  * Triggers on closed pull requests targeting the main branch. Checks out the repo, 
-#  * sets up the Node.js environment, installs dependencies, runs formatting, and fails if 
+#  *
+#  * Triggers on closed pull requests targeting the main branch. Checks out the repo,
+#  * sets up the Node.js environment, installs dependencies, runs formatting, and fails if
 #  * there are lint errors.
 #  */
 
@@ -10,11 +10,11 @@ name: Format code
 
 on:
   pull_request:
-    types: [closed]  # Also run on pull requests targeting the main branch
+    types: [closed] # Also run on pull requests targeting the main branch
 
 jobs:
   format-code:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository.
@@ -23,17 +23,17 @@ jobs:
     #only run if PR was merged successfully
 
     steps:
-      - uses: actions/checkout@v3  # Checkout the repository code
-        with: 
-          ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v3  # Set up Node.js environment
+      - uses: actions/checkout@v3 # Checkout the repository code
         with:
-          node-version: 18  # Specify the Node.js version
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v3 # Set up Node.js environment
+        with:
+          node-version: 18 # Specify the Node.js version
 
-      - run: npm ci  # Install dependencies
-      - run: npx prettier --write ./src  # Execute the linting command
+      - run: npm ci # Install dependencies
+      - run: npx prettier --write ./src # Execute the linting command
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
-        with: 
+        with:
           commit_message: apply formatting changes with prettier workflow
-          branch: ${{ github.head_ref }}
+          branch: main
