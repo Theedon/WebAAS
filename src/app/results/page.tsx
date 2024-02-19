@@ -8,6 +8,7 @@ import {
   UserAdviceQuery,
   UserAdviceQueryVariables,
 } from "./__generated__/page.generated";
+import { stripData } from "@/lib/utils";
 
 const GET_RECOMMENDATION = gql`
   query UserAdvice($userId: String!) {
@@ -30,27 +31,6 @@ async function ResultPage() {
   });
 
   if (!data.user.ai_recommendation) redirect("/assessment");
-
-  const stripData = (recommendation: string) => {
-    recommendation = recommendation.trim();
-
-    // Handle the case where all content is within triple quotes
-    if (recommendation.startsWith("`") && recommendation.endsWith("`")) {
-      // Extract content without leading/trailing whitespaces
-      const content = recommendation.slice(3, -3).trim();
-      return content;
-    }
-
-    // Remove leading and trailing triple quotes without affecting middle occurrences
-    if (recommendation.startsWith("```")) {
-      recommendation = recommendation.slice(3);
-    }
-    if (recommendation.endsWith("```")) {
-      recommendation = recommendation.slice(0, -3);
-    }
-
-    return recommendation;
-  };
 
   return (
     <div>
