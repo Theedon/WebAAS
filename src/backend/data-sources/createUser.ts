@@ -14,9 +14,9 @@ export const createUser = async (
   const user: User = await prisma.user.findUnique({
     where: { email: email, clerk_id: clerkId },
   });
-  if (user) {
+  if (user.email === email && user.clerk_id === clerkId) {
     console.log(JSON.stringify(user));
-    throw new Error("User already present. Please log in");
+    throw new Error("User already present in database");
   }
 
   const hashedPassword = await bcryptjs.hash(password, 12);
