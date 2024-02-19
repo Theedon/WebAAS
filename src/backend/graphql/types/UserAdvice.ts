@@ -1,4 +1,4 @@
-import { getAdvice } from "@/backend/data-sources/getAdvice";
+import { getAdvice } from "@/backend/data-sources/getUserExamInfo";
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
