@@ -72,7 +72,8 @@ function Onboarding({
   const [registerMutation, { error }] = useMutation<
     RegisterUserMutation,
     RegisterUserMutationVariables
-  >(REGISTER_USER);
+  >(REGISTER_USER, { fetchPolicy: "network-only" });
+  console.log(error);
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
