@@ -4,29 +4,28 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
   // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-
 model User {
-  id              String   @id @default(cuid())
-  first_name      String   @db.VarChar(64)
-  middle_name     String?  @db.VarChar(128)
-  last_name       String   @db.VarChar(128)
-  password        String
-  email           String    @unique @db.VarChar(128)
-  created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
-  role            Role      @default(student)
-  verified        Boolean   @default(false)
-  onboarded       Boolean   @default(false)
-  faculty_id      String 
-  ai_recommendation  Bytes?
+  id                String   @id @default(cuid())
+  first_name        String   @db.VarChar(64)
+  middle_name       String?  @db.VarChar(128)
+  last_name         String   @db.VarChar(128)
+  password          String
+  email             String   @unique @db.VarChar(128)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  role              Role     @default(student)
+  verified          Boolean  @default(false)
+  onboarded         Boolean  @default(false)
+  faculty_id        String
+  ai_recommendation Bytes?
   test_information  Bytes?
-  clerk_id         String?  @unique
+  clerk_id          String?  @unique
 
-  faculty         Faculty @relation(fields: [faculty_id], references: [id])
+  faculty Faculty @relation(fields: [faculty_id], references: [id])
 
   @@map("users")
 }
@@ -38,46 +37,45 @@ enum Role {
 }
 
 model Faculty {
-  id              String   @id @default(cuid())
-  name            String
-  code            String   @unique
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
-  subjects        Subject[]
-  users           User[]
+  id         String    @id @default(cuid())
+  name       String
+  code       String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  subjects   Subject[]
+  users      User[]
 
   @@map("faculties")
 }
 
 model Subject {
-  id              String   @id @default(cuid())
-  name            String
-  code            String   @unique
-  description     String?
-  faculty         Faculty  @relation(fields: [faculty_id], references: [id])
-  faculty_id      String
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id          String   @id @default(cuid())
+  name        String
+  code        String   @unique
+  description String?
+  faculty     Faculty  @relation(fields: [faculty_id], references: [id])
+  faculty_id  String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
-  questions       Question[]
+  questions Question[]
 
   @@map("subjects")
 }
 
 model Question {
-  id              String   @id @default(cuid())
-  subject         Subject  @relation(fields: [subject_id], references: [id])
-  subject_id      String
-  question_text   String
-  option_a        String
-  option_b        String
-  option_c        String
-  option_d        String
-  correct_option  String
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id             String   @id @default(cuid())
+  subject        Subject  @relation(fields: [subject_id], references: [id])
+  subject_id     String
+  question_text  String
+  option_a       String
+  option_b       String
+  option_c       String
+  option_d       String
+  correct_option String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 
-  @@map("questions")
   @@index(fields: [question_text])
+  @@map("questions")
 }
-
