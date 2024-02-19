@@ -11,9 +11,11 @@ import { redirect } from "next/navigation";
 const query = gql`
   query TestQuestions($userId: String!) {
     user(id: $userId) {
-      ai_recommendation
       faculty {
         code
+      }
+      userExamInfo {
+        ai_recommendation
       }
     }
     testQuestions(userId: $userId) {
@@ -39,7 +41,7 @@ async function AssessmentPage() {
     variables: { userId: userId },
   });
 
-  // if (data.user.ai_recommendation) redirect("/results");
+  // if (data.user.userExamInfo.ai_recommendation) redirect("/results");
 
   return (
     <div className="flex flex-col gap-10">

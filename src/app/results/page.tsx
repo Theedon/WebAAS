@@ -12,11 +12,10 @@ import { stripData } from "@/lib/utils";
 
 const GET_RECOMMENDATION = gql`
   query UserAdvice($userId: String!) {
-    userAdvice(userId: $userId) {
-      ai_recommendation
-    }
     user(id: $userId) {
-      ai_recommendation
+      userExamInfo {
+        ai_recommendation
+      }
     }
   }
 `;
@@ -30,12 +29,14 @@ async function ResultPage() {
     variables: { userId: getCurrentUserId() as string },
   });
 
-  if (!data.user.ai_recommendation) redirect("/assessment");
+  if (!data.user.userExamInfo.ai_recommendation) redirect("/assessment");
 
   return (
     <div>
-      {data?.userAdvice?.ai_recommendation ? (
-        <Markdown>{stripData(data.userAdvice.ai_recommendation)}</Markdown>
+      {data.user.userExamInfo.ai_recommendation ? (
+        <Markdown>
+          {stripData(data.user.userExamInfo.ai_recommendation)}
+        </Markdown>
       ) : (
         <p>No data</p>
       )}
