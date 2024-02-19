@@ -1,6 +1,7 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import prisma from "../prisma/prisma";
 import bcryptjs from "bcryptjs";
+import { User } from "@prisma/client";
 
 export const createUser = async (
   firstName: string,
@@ -10,11 +11,12 @@ export const createUser = async (
   facultyCode: string,
   clerkId: string,
 ) => {
-  const user = await prisma.user.findUnique({
-    where: { email: email },
+  const user: User = await prisma.user.findUnique({
+    where: { email: email, clerk_id: clerkId },
   });
-  if (user) {
-    throw new Error("User already present. Please log in");
+  if (user.email === email && user.clerk_id === clerkId) {
+    console.log(JSON.stringify(user));
+    throw new Error("User already present in database");
   }
 
   const hashedPassword = await bcryptjs.hash(password, 12);
