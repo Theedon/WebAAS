@@ -50,6 +50,7 @@ model UserToExam {
   anti_course_3     String?
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
+  taken_exam        Boolean  @default(false)
 
   user User @relation(fields: [clerk_id], references: [clerk_id])
 
