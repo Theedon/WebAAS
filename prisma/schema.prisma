@@ -26,6 +26,7 @@ model User {
 
   faculty    Faculty     @relation(fields: [faculty_id], references: [id])
   UserToExam UserToExam?
+  Event      Event[]
 
   @@map("users")
 }
@@ -97,4 +98,18 @@ model Question {
 
   @@index(fields: [question_text])
   @@map("questions")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  sender_id   String
+  expired     Boolean
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  advisor User @relation(fields: [sender_id], references: [clerk_id])
+
+  @@map("events")
 }
