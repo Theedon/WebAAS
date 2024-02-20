@@ -34,6 +34,11 @@ export const createUser = async (
       clerk_id: clerkId,
     },
   });
+  const addUserToExam = await prisma.userToExam.create({
+    data: {
+      clerk_id: clerkId,
+    },
+  });
   if (!clerkId) {
     return "no logged in user";
   }
@@ -45,5 +50,5 @@ export const createUser = async (
   });
   console.log(res.publicMetadata);
 
-  return createdUser.id;
+  return createdUser.clerk_id;
 };
