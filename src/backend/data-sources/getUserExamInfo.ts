@@ -25,16 +25,10 @@ export const getUserExamInfo = async (userId: string) => {
       throw new Error(`User with ID ${userId} not found.`);
     }
 
-    // Handle potential conversion errors gracefully
-    try {
+    if (user.test_information)
       user.test_information = user.test_information.toString();
+    if (user.ai_recommendation)
       user.ai_recommendation = user.ai_recommendation.toString();
-    } catch (err) {
-      console.error("Error converting data:", err);
-      // Consider setting default values or logging a specific error message
-      user.test_information = null;
-      user.ai_recommendation = null;
-    }
 
     return user;
   } catch (error: any) {

@@ -1,4 +1,4 @@
-import { getAIRecommendations } from "@/backend/data-sources/getAIRecommendation";
+import { saveExam } from "@/backend/data-sources/saveExam";
 import { gql } from "graphql-tag";
 
 export const typeDefs = gql`
@@ -26,7 +26,7 @@ export const resolvers = {
       args: { userId: string; assessmentInfo: any[] },
     ) => {
       // Assuming getAIRecommendations expects an array of AssessmentInfo
-      return getAIRecommendations(args.userId, args.assessmentInfo);
+      return saveExam(args.userId, args.assessmentInfo);
     },
   },
 };
