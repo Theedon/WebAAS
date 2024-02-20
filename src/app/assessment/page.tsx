@@ -41,7 +41,7 @@ async function AssessmentPage() {
     variables: { userId: userId },
   });
 
-  if (data.user.userExamInfo.ai_recommendation) redirect("/results");
+  // if (data.user.userExamInfo.ai_recommendation) redirect("/results");
 
   return (
     <div className="flex flex-col gap-10">
