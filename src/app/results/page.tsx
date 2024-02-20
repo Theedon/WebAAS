@@ -8,14 +8,14 @@ import {
   UserAdviceQuery,
   UserAdviceQueryVariables,
 } from "./__generated__/page.generated";
+import { stripData } from "@/lib/utils";
 
 const GET_RECOMMENDATION = gql`
   query UserAdvice($userId: String!) {
-    userAdvice(userId: $userId) {
-      ai_recommendation
-    }
     user(id: $userId) {
-      ai_recommendation
+      userExamInfo {
+        ai_recommendation
+      }
     }
   }
 `;
@@ -29,33 +29,14 @@ async function ResultPage() {
     variables: { userId: getCurrentUserId() as string },
   });
 
-  if (!data.user.ai_recommendation) redirect("/assessment");
-
-  const stripData = (recommendation: string) => {
-    recommendation = recommendation.trim();
-
-    // Handle the case where all content is within triple quotes
-    if (recommendation.startsWith("`") && recommendation.endsWith("`")) {
-      // Extract content without leading/trailing whitespaces
-      const content = recommendation.slice(3, -3).trim();
-      return content;
-    }
-
-    // Remove leading and trailing triple quotes without affecting middle occurrences
-    if (recommendation.startsWith("```")) {
-      recommendation = recommendation.slice(3);
-    }
-    if (recommendation.endsWith("```")) {
-      recommendation = recommendation.slice(0, -3);
-    }
-
-    return recommendation;
-  };
+  if (!data.user.userExamInfo.ai_recommendation) redirect("/assessment");
 
   return (
     <div>
-      {data?.userAdvice?.ai_recommendation ? (
-        <Markdown>{stripData(data.userAdvice.ai_recommendation)}</Markdown>
+      {data.user.userExamInfo.ai_recommendation ? (
+        <Markdown>
+          {stripData(data.user.userExamInfo.ai_recommendation)}
+        </Markdown>
       ) : (
         <p>No data</p>
       )}

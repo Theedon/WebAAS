@@ -1,10 +1,8 @@
-import { getAdvice } from "@/backend/data-sources/getAdvice";
 import { getFacultyFromId } from "@/backend/data-sources/getFacultyFromId";
-import { getTestInfo } from "@/backend/data-sources/getTestInfo";
+import { getUserExamInfo } from "@/backend/data-sources/getUserExamInfo";
 import { getUserFromId } from "@/backend/data-sources/getUserFromId";
 import { UserDomain } from "@/backend/domains/UserDomain";
 import gql from "graphql-tag";
-import test from "node:test";
 
 export const typeDefs = gql`
   type Query {
@@ -24,9 +22,8 @@ export const typeDefs = gql`
     verified: Boolean!
     role: String!
     faculty_id: String
-    ai_recommendation: String
-    test_information: String
     faculty: Faculty
+    userExamInfo: UserExamInfo!
   }
 `;
 
@@ -43,13 +40,9 @@ export const resolvers = {
       const faculty = await getFacultyFromId(parent.faculty_id);
       return faculty;
     },
-    test_information: async (parent: UserDomain, args: any) => {
-      const testInfo = await getTestInfo(parent.clerk_id);
-      return testInfo.test_information;
-    },
-    ai_recommendation: async (parent: UserDomain, args: any) => {
-      const advice = await getAdvice(parent.clerk_id);
-      return advice.ai_recommendation;
+    userExamInfo: async (parent: UserDomain, args: any) => {
+      const examInfo = await getUserExamInfo(parent.clerk_id);
+      return examInfo;
     },
   },
 };

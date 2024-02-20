@@ -9,23 +9,24 @@ datasource db {
 }
 
 model User {
-  id                String   @id @default(cuid())
-  first_name        String   @db.VarChar(64)
-  middle_name       String?  @db.VarChar(128)
-  last_name         String   @db.VarChar(128)
-  password          String
-  email             String   @unique @db.VarChar(128)
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
-  role              Role     @default(student)
-  verified          Boolean  @default(false)
-  onboarded         Boolean  @default(false)
-  faculty_id        String
-  ai_recommendation Bytes?
-  test_information  Bytes?
-  clerk_id          String?  @unique
+  id          String   @id @default(cuid())
+  first_name  String   @db.VarChar(64)
+  middle_name String?  @db.VarChar(128)
+  last_name   String   @db.VarChar(128)
+  password    String
+  email       String   @unique @db.VarChar(128)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  role        Role     @default(student)
+  verified    Boolean  @default(false)
+  onboarded   Boolean  @default(false)
+  faculty_id  String
+  clerk_id    String?  @unique
+  phone_no    String?
 
-  faculty Faculty @relation(fields: [faculty_id], references: [id])
+  faculty    Faculty     @relation(fields: [faculty_id], references: [id])
+  UserToExam UserToExam?
+  Event      Event[]
 
   @@map("users")
 }
@@ -34,6 +35,26 @@ enum Role {
   admin
   advisor
   student
+}
+
+model UserToExam {
+  id                String   @id @default(cuid())
+  clerk_id          String   @unique
+  test_information  Bytes?
+  ai_recommendation Bytes?
+  rec_course_1      String?
+  rec_course_2      String?
+  rec_course_3      String?
+  anti_course_1     String?
+  anti_course_2     String?
+  anti_course_3     String?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  taken_exam        Boolean  @default(false)
+
+  user User @relation(fields: [clerk_id], references: [clerk_id])
+
+  @@map("user_to_exam")
 }
 
 model Faculty {
@@ -78,4 +99,18 @@ model Question {
 
   @@index(fields: [question_text])
   @@map("questions")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  sender_id   String
+  expired     Boolean
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  advisor User @relation(fields: [sender_id], references: [clerk_id])
+
+  @@map("events")
 }
