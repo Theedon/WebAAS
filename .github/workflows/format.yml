@@ -35,5 +35,5 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: apply formatting changes with prettier workflow
+          commit_message: "chore(prettier): beautify code"
           branch: main
