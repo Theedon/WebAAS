@@ -1,5 +1,7 @@
 import { QuestionType } from "@/components/assessment/Assessment";
 import prisma from "../prisma/prisma";
+import { getAIRecommendation } from "./getAIRecommendation";
+import { getUserCoursesAI } from "./getUserCoursesAI";
 
 async function updateSubjectNames(
   questionsArray: QuestionType[],
@@ -37,15 +39,14 @@ interface StudentAnswer {
   correctAnswer: string;
 }
 
-const constructStudentAnswers = (
-  assesmentInfo: QuestionType[],
-): StudentAnswer[] => {
-  return assesmentInfo.map((exam) => ({
+const constructStudentAnswers = (assesmentInfo: QuestionType[]): string => {
+  const assesmentObj = assesmentInfo.map((exam) => ({
     subjectName: exam.subject_id,
     question: exam.question,
     studentAnswer: exam.choice || null,
     correctAnswer: exam.correct_option,
   }));
+  return JSON.stringify(assesmentObj);
 };
 
 export const saveExam = async (
@@ -63,16 +64,17 @@ export const saveExam = async (
     },
     update: {
       taken_exam: true,
-      test_information: Buffer.from(JSON.stringify(questionStringArray)),
+      test_information: Buffer.from(questionStringArray),
     },
     create: {
       clerk_id: userId,
       taken_exam: true,
-      test_information: Buffer.from(JSON.stringify(questionStringArray)),
+      test_information: Buffer.from(questionStringArray),
     },
   });
 
+  const userRecommendation = await getAIRecommendation(userId);
   console.log("Exam submitted successfully");
 
-  return `${questionStringArray}`;
+  return `${userRecommendation}`;
 };

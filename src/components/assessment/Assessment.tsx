@@ -14,6 +14,7 @@ import {
   SaveExamMutation,
   SaveExamMutationVariables,
 } from "./__generated__/Assessment.generated";
+import { getUserCoursesAI } from "@/backend/data-sources/getUserCoursesAI";
 
 type AssessmentProps = {
   userId: string;
@@ -92,6 +93,8 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
       });
 
       if (recommendation?.data?.saveExam) {
+        await getUserCoursesAI(userId);
+        console.log("getUserCoursesAI done");
         console.log("Assessment submitted successfully");
         router.replace("/results");
       } else {
