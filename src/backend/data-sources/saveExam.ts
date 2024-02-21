@@ -1,7 +1,6 @@
 import { QuestionType } from "@/components/assessment/Assessment";
 import prisma from "../prisma/prisma";
 import { getAIRecommendation } from "./getAIRecommendation";
-import { getUserCoursesAI } from "./getUserCoursesAI";
 
 async function updateSubjectNames(
   questionsArray: QuestionType[],

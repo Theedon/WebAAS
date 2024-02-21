@@ -9,12 +9,11 @@ import { Loader2, SendHorizonalIcon } from "lucide-react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import getCurrentUserId from "@/lib/globalUserContext";
 import {
   SaveExamMutation,
   SaveExamMutationVariables,
 } from "./__generated__/Assessment.generated";
-import { getUserCoursesAI } from "@/backend/data-sources/getUserCoursesAI";
+import { getUserAISubjects } from "@/actions/getUserAISubjects";
 
 type AssessmentProps = {
   userId: string;
@@ -93,8 +92,8 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
       });
 
       if (recommendation?.data?.saveExam) {
-        await getUserCoursesAI(userId);
-        console.log("getUserCoursesAI done");
+        await getUserAISubjects(userId);
+        console.log("getUserAISubjects done");
         console.log("Assessment submitted successfully");
         router.replace("/results");
       } else {
