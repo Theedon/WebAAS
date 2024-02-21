@@ -30,16 +30,22 @@ async function updateSubjectNames(
   return updatedQuestions;
 }
 
-const constructString = (assesmentInfo: QuestionType[]): string => {
-  const constructArray = assesmentInfo.map((exam) => {
-    return `In the subject ${exam.subject_id}, to ${
-      exam.question
-    }, the student's answer was ${
-      exam.choice || "nil"
-    }, the correct answer is ${exam.correct_option}.`;
-  });
+interface StudentAnswer {
+  subjectName: string;
+  question: string;
+  studentAnswer: string | null;
+  correctAnswer: string;
+}
 
-  return constructArray.join("; ");
+const constructStudentAnswers = (
+  assesmentInfo: QuestionType[],
+): StudentAnswer[] => {
+  return assesmentInfo.map((exam) => ({
+    subjectName: exam.subject_id,
+    question: exam.question,
+    studentAnswer: exam.choice || null,
+    correctAnswer: exam.correct_option,
+  }));
 };
 
 export const saveExam = async (
@@ -47,7 +53,9 @@ export const saveExam = async (
   assesmentInfo: QuestionType[],
 ) => {
   const assesmentWithSubjectNames = await updateSubjectNames(assesmentInfo);
-  const questionStringArray = constructString(assesmentWithSubjectNames);
+  const questionStringArray = constructStudentAnswers(
+    assesmentWithSubjectNames,
+  );
 
   const updateUser = await prisma.userToExam.upsert({
     where: {
@@ -55,17 +63,16 @@ export const saveExam = async (
     },
     update: {
       taken_exam: true,
-      test_information: Buffer.from(questionStringArray),
+      test_information: Buffer.from(JSON.stringify(questionStringArray)),
     },
     create: {
       clerk_id: userId,
       taken_exam: true,
-      test_information: Buffer.from(questionStringArray),
+      test_information: Buffer.from(JSON.stringify(questionStringArray)),
     },
   });
 
   console.log("Exam submitted successfully");
 
-  // console.log`${jsonSuggestedSubjects} | ${fullRecommendation}`;
   return `${questionStringArray}`;
 };
