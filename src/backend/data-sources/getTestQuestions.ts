@@ -39,7 +39,10 @@ const getTestQuestions = async (userId: string) => {
   const subjectList =
     facultyCode === "SCI" ? SCI : facultyCode === "COM" ? COM : ART;
 
-  for (let subject of subjectList) {
+  //remove the below if you do not want the subjects to be shuffled during test
+  const shuffledSubjectList = _.shuffle(subjectList);
+
+  for (let subject of shuffledSubjectList) {
     const subjectQuestionsArr = await prisma.question.findMany({
       take: 10,
       where: {

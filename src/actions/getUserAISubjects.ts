@@ -1,8 +1,9 @@
+"use server";
+import prisma from "@/backend/prisma/prisma";
 import { stripData } from "@/lib/utils";
-import prisma from "../prisma/prisma";
-import { promptGoogleAI } from "./promptGoogleAI";
+import { promptGoogleAI } from "@/backend/data-sources/promptGoogleAI";
 
-export const getUserCoursesAI = async (userId: string) => {
+export const getUserAISubjects = async (userId: string) => {
   const recommendationObj = await prisma.userToExam.findUnique({
     where: {
       clerk_id: userId,
@@ -33,7 +34,7 @@ export const getUserCoursesAI = async (userId: string) => {
     `;
 
   const suggestedSubjects = await promptGoogleAI(suggestedSubjectsPrompt);
-  console.log(stripData(suggestedSubjects, "json"));
+  //   console.log(stripData(suggestedSubjects, "json"));
   const jsonSuggestedSubjects: SuggestedSubjectType = JSON.parse(
     stripData(suggestedSubjects, "json"),
   );
@@ -88,10 +89,9 @@ export const getUserCoursesAI = async (userId: string) => {
     },
   });
 
-  console.log("recommendation added for user successfully");
+  console.log("subjects recommendations added for user successfully");
 
-  // console.log`${jsonSuggestedSubjects} | ${fullRecommendation}`;
-  return `${fullRecommendation}`;
+  return `${jsonSuggestedSubjects}`;
 };
 
 type SuggestedSubjectType = {
