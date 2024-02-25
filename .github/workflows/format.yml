@@ -9,8 +9,11 @@
 name: Format code
 
 on:
-  pull_request:
-    types: [closed] # Also run on pull requests targeting the main branch
+  schedule:
+    #only run every seven days
+    - cron: "0 0 */5 0" # At 00:00 every 7th day
+#  pull_request:
+#    types: [closed] # Also run on pull requests targeting the main branch
 
 jobs:
   format-code:
