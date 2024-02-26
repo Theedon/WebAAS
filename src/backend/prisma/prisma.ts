@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 /**
  * Initializes and exports a singleton Prisma client instance.
  *
