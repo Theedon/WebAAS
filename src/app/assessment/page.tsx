@@ -6,7 +6,6 @@ import {
   TestQuestionsQueryVariables,
 } from "./__generated__/page.generated";
 import getCurrentUserId from "@/lib/globalUserContext";
-import { redirect } from "next/navigation";
 
 const query = gql`
   query TestQuestions($userId: String!) {

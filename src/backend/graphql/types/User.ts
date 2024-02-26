@@ -29,19 +29,19 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    user: async (_parent: any, { id }: any) => {
+    user: async (_parent: unknown, { id }: { id: string }) => {
       if (!id) return null;
       const user = await getUserFromId(id);
       return user;
     },
   },
   User: {
-    faculty: async (parent: UserDomain, args: any) => {
+    faculty: async (parent: UserDomain) => {
       const faculty = await getFacultyFromId(parent.faculty_id);
       return faculty;
     },
-    userExamInfo: async (parent: UserDomain, args: any) => {
-      const examInfo = await getUserExamInfo(parent.clerk_id);
+    userExamInfo: async (parent: UserDomain) => {
+      const examInfo = await getUserExamInfo(parent.clerk_id as string);
       return examInfo;
     },
   },

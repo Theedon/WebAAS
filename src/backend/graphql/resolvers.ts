@@ -15,4 +15,5 @@ const mergedResolvers = [
   UserResolvers,
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const resolvers = merge({}, ...mergedResolvers);

@@ -11,7 +11,7 @@ export class UserDomain extends BaseDomain {
     public onboarded: boolean,
     public verified: boolean,
     public role: Role,
-    public clerk_id: string,
+    public clerk_id: string | null,
     public faculty_id: string,
   ) {
     super(id);

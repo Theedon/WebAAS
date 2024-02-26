@@ -17,7 +17,7 @@ export const typeDefs = gql`
 export const resolvers = {
   Mutation: {
     createUser: (
-      _parent: any,
+      _parent: unknown,
       args: {
         firstName: string;
         lastName: string;

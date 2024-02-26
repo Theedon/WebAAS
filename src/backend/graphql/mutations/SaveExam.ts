@@ -22,10 +22,12 @@ export const typeDefs = gql`
 export const resolvers = {
   Mutation: {
     saveExam: (
-      _parent: any,
+      _parent: unknown,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       args: { userId: string; assessmentInfo: any[] },
     ) => {
       // Assuming getAIRecommendations expects an array of AssessmentInfo
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return saveExam(args.userId, args.assessmentInfo);
     },
   },

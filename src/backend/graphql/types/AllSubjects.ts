@@ -15,7 +15,7 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    allSubjects: (_parent: any) => {
+    allSubjects: (_parent: unknown) => {
       return getAllSubjects();
     },
   },

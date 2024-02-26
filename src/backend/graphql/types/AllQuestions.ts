@@ -19,7 +19,7 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    allQuestions: (_parent: any) => {
+    allQuestions: (_parent: unknown) => {
       return getAllQuestions();
     },
   },

@@ -52,8 +52,8 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
 
   const processQuestionsData = (questionsData: TestQuestionsQuery) => {
-    let processedData = [];
-    for (let subjectArray of questionsData.testQuestions) {
+    const processedData = [];
+    for (const subjectArray of questionsData.testQuestions) {
       processedData.push(...subjectArray);
     }
     const filteredQuestionsData: QuestionType[] = processedData.map(
@@ -64,7 +64,7 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
           option_b: question.option_b ?? "",
           option_c: question.option_c ?? "",
           option_d: question.option_d ?? "",
-          question: question.question!,
+          question: question.question,
           subject_id: question.subject_id ?? "",
           correct_option: question.correct_option ?? "",
           index,
@@ -122,6 +122,7 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
           className="h-400px rounded-none"
           variant={"default"}
           size={"sm"}
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={submitExam}
           disabled={testSubmitting}
         >
