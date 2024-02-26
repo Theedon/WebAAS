@@ -1,3 +1,4 @@
+import { Question } from "@prisma/client";
 import QuestionDomain from "../domains/QuestionDomain";
 import prisma from "../prisma/prisma";
 import _ from "lodash";
@@ -13,13 +14,13 @@ const getTestQuestions = async (userId: string) => {
   });
   const facultyCodeObj = await prisma.faculty.findUnique({
     where: {
-      id: faculty.faculty_id,
+      id: faculty?.faculty_id,
     },
     select: {
       code: true,
     },
   });
-  const facultyCode = facultyCodeObj.code;
+  const facultyCode = facultyCodeObj?.code;
   const SCI = ["Biology", "Chemistry", "Physics", "Mathematics", "English"];
   const COM = [
     "Accounting",
@@ -35,14 +36,14 @@ const getTestQuestions = async (userId: string) => {
     "Cultural and Creative Arts",
     "English",
   ];
-  let questionsArray = [];
+  const questionsArray = [];
   const subjectList =
     facultyCode === "SCI" ? SCI : facultyCode === "COM" ? COM : ART;
 
   //remove the below if you do not want the subjects to be shuffled during test
   const shuffledSubjectList = _.shuffle(subjectList);
 
-  for (let subject of shuffledSubjectList) {
+  for (const subject of shuffledSubjectList) {
     const subjectQuestionsArr = await prisma.question.findMany({
       take: 10,
       where: {
@@ -54,18 +55,20 @@ const getTestQuestions = async (userId: string) => {
 
     const subjectQuestions = _.shuffle(subjectQuestionsArr);
 
-    const filteredSubjectQuestions = subjectQuestions.map((question: any) => {
-      return new QuestionDomain(
-        question.id,
-        question.option_a,
-        question.option_b,
-        question.option_c,
-        question.option_d,
-        question.subject_id,
-        question.question_text,
-        question.correct_option,
-      );
-    });
+    const filteredSubjectQuestions = subjectQuestions.map(
+      (question: Question) => {
+        return new QuestionDomain(
+          question.id,
+          question.option_a,
+          question.option_b,
+          question.option_c,
+          question.option_d,
+          question.subject_id,
+          question.question_text,
+          question.correct_option,
+        );
+      },
+    );
 
     questionsArray.push(filteredSubjectQuestions);
   }

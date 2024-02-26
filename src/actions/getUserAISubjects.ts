@@ -12,6 +12,9 @@ export const getUserAISubjects = async (userId: string) => {
       ai_recommendation: true,
     },
   });
+
+  if (!recommendationObj || !recommendationObj.ai_recommendation)
+    throw new Error("User has no AI recommendation yet");
   const fullRecommendation = recommendationObj.ai_recommendation.toString();
 
   const suggestedSubjectsPrompt = `
@@ -37,7 +40,7 @@ export const getUserAISubjects = async (userId: string) => {
   //   console.log(stripData(suggestedSubjects, "json"));
   const jsonSuggestedSubjects: SuggestedSubjectType = JSON.parse(
     stripData(suggestedSubjects, "json"),
-  );
+  ) as SuggestedSubjectType;
   console.log(jsonSuggestedSubjects);
 
   const updateUser = await prisma.userToExam.upsert({
@@ -91,7 +94,7 @@ export const getUserAISubjects = async (userId: string) => {
 
   console.log("subjects recommendations added for user successfully");
 
-  return `${jsonSuggestedSubjects}`;
+  return `${JSON.stringify(jsonSuggestedSubjects)}`;
 };
 
 type SuggestedSubjectType = {

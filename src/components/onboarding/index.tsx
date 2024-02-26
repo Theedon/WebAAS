@@ -100,33 +100,38 @@ function Onboarding({
     return disable;
   };
 
-  const onSubmit = (values: z.infer<typeof registerFormSchema>): void => {
+  const onSubmit = async (
+    values: z.infer<typeof registerFormSchema>,
+  ): Promise<void> => {
     setSubmitting(true);
     console.log(values);
-    registerMutation({
-      variables: {
-        password: "password",
-        email: emailAddress,
-        firstName: firstName,
-        lastName: lastName,
-        faculty: values.faculty,
-        clerkId: userId,
-      },
-    })
-      .then(() => {
-        console.log("user added to db successfully");
-        user?.reload().then(() => router.push("/"));
-      })
-      .catch((e) => {
-        toast({
-          title: "Error",
-          description: "Please try again later",
-          variant: "destructive",
-        });
-        setRegisterError((e as Error).message);
-        console.error(registerError);
-      })
-      .finally(() => setSubmitting(false));
+
+    try {
+      await registerMutation({
+        variables: {
+          password: "password",
+          email: emailAddress,
+          firstName: firstName,
+          lastName: lastName,
+          faculty: values.faculty,
+          clerkId: userId,
+        },
+      });
+
+      console.log("user added to db successfully");
+      await user?.reload();
+      router.push("/");
+    } catch (e) {
+      toast({
+        title: "Error",
+        description: "Please try again later",
+        variant: "destructive",
+      });
+      setRegisterError((e as Error).message);
+      console.error(registerError);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

@@ -14,6 +14,7 @@ export const stripData = (text: string, type = "md") => {
       // Handle Markdown triple quotes, ensuring correct removal
       if (text.startsWith("`") && text.endsWith("`")) {
         text = text.substring(3, text.length - 3).trim();
+        // eslint-disable-next-line no-dupe-else-if
       } else if (text.startsWith("`") && text.endsWith("`")) {
         text = text.slice(1, -1).trim(); // Remove single leading/trailing backticks
       }

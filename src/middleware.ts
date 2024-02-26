@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { authMiddleware } from "@clerk/nextjs";
 import { redirectToSignIn } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";

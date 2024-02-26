@@ -6,7 +6,7 @@ import { getUsers } from "./data/users/utils";
 
 async function main() {
   //insert faculties data
-  for (let faculty of Faculties) {
+  for (const faculty of Faculties) {
     await prisma.faculty.create({
       data: faculty,
     });
@@ -15,7 +15,7 @@ async function main() {
   //insert subjects data
   const Subjects = await getSubjects();
   console.log(JSON.stringify(Subjects[1]));
-  for (let subject of Subjects) {
+  for (const subject of Subjects) {
     const { facultyId, facultyCode, ...filteredSubject } = subject;
     await prisma.subject.create({
       data: {
@@ -28,7 +28,7 @@ async function main() {
   // insert questions data
   const Questions = await getQuestions();
   console.log(JSON.stringify(Questions[1]));
-  for (let question of Questions) {
+  for (const question of Questions) {
     const { subject_id, subject_code, ...filteredQuestion } = question;
     await prisma.question.create({
       data: {
@@ -40,7 +40,7 @@ async function main() {
 
   //insert users data
   const Users = await getUsers();
-  for (let user of Users) {
+  for (const user of Users) {
     const { faculty_id, faculty_code, ...filteredUser } = user;
     await prisma.user.create({
       data: {
@@ -60,5 +60,8 @@ main()
     console.log(
       "***💃🕺💫🎶🔥✨👯‍♀️👯‍♂️💃🕺SEEDING FINISHED!💃🕺💫🎶🔥✨👯‍♀️👯‍♂️💃🕺***",
     );
-    prisma.$disconnect();
+    prisma
+      .$disconnect()
+      .then(() => console.log("prisma connection terminated successfully"))
+      .catch(() => console.error("error disconnecting prisma instance"));
   });

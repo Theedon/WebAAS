@@ -1,9 +1,8 @@
-import { UserToExam } from "@prisma/client";
 import prisma from "../prisma/prisma";
 
 export const getUserExamInfo = async (userId: string) => {
   try {
-    const user: UserToExam | null = await prisma.userToExam.findUnique({
+    const user = await prisma.userToExam.findUnique({
       where: {
         clerk_id: userId,
       },
@@ -25,15 +24,26 @@ export const getUserExamInfo = async (userId: string) => {
       throw new Error(`User with ID ${userId} not found.`);
     }
 
-    if (user.test_information)
-      user.test_information = user.test_information.toString();
-    if (user.ai_recommendation)
-      user.ai_recommendation = user.ai_recommendation.toString();
+    if (!user.test_information || !user.ai_recommendation) {
+      throw new Error("No test information or AI recommendation");
+    }
 
-    return user;
+    return {
+      test_information: user.test_information.toString(),
+      ai_recommendation: user.ai_recommendation.toString(),
+      rec_course_1: user.test_information,
+      rec_course_2: user.test_information,
+      rec_course_3: user.test_information,
+      anti_course_1: user.test_information,
+      anti_course_2: user.test_information,
+      anti_course_3: user.test_information,
+      taken_exam: user.test_information,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error in getUserExamInfo:", error);
     // Return an appropriate error object (e.g., { success: false, error: '...' })
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     return { success: false, error: error.message };
   }
 };

@@ -11,7 +11,7 @@ export const createUser = async (
   facultyCode: string,
   clerkId: string,
 ) => {
-  const user: User = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: { email: email, clerk_id: clerkId },
   });
   if (user && user.email === email && user.clerk_id === clerkId) {

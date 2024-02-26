@@ -8,6 +8,10 @@ export const getAIRecommendation = async (userId: string) => {
       test_information: true,
     },
   });
+
+  if (!userInfo || !userInfo.test_information) {
+    throw new Error("User test information not found");
+  }
   const questionStringArray = userInfo.test_information.toString();
 
   const fullRecommendationPrompt = `
