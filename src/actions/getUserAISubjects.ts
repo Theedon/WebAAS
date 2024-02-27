@@ -4,6 +4,7 @@ import { stripData } from "@/lib/utils";
 import { promptGoogleAI } from "@/backend/data-sources/promptGoogleAI";
 
 export const getUserAISubjects = async (userId: string) => {
+  "use server";
   const recommendationObj = await prisma.userToExam.findUnique({
     where: {
       clerk_id: userId,

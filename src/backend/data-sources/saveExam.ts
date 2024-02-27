@@ -72,8 +72,8 @@ export const saveExam = async (
     },
   });
 
-  const userRecommendation = await getAIRecommendation(userId);
-  console.log("Exam submitted successfully");
+  // const userRecommendation = await getAIRecommendation(userId);
+  // console.log("Exam submitted successfully");
 
-  return `${userRecommendation}`;
+  return `${questionStringArray}`;
 };

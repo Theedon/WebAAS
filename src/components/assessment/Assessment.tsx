@@ -14,7 +14,8 @@ import {
   SaveExamMutationVariables,
 } from "./__generated__/Assessment.generated";
 import { getUserAISubjects } from "@/actions/getUserAISubjects";
-
+import { getAIRec } from "@/lib/getAIRec";
+import { saveUserRecommendation } from "@/actions/saveUserRecommendation";
 type AssessmentProps = {
   userId: string;
   questionsData: TestQuestionsQuery;
@@ -84,17 +85,23 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
     setTestSubmitting(true);
 
     try {
-      const recommendation = await saveMutation({
+      const saveQuestionsData = await saveMutation({
         variables: {
           userId: userId,
           assessmentInfo: options,
         },
       });
 
-      if (recommendation?.data?.saveExam) {
+      if (saveQuestionsData?.data?.saveExam) {
+        const recommendation = await getAIRec(saveQuestionsData.data.saveExam);
+        console.log("Recommendation retrieved successfully");
+
+        await saveUserRecommendation(userId, recommendation);
+        console.log("Recommendation saved to db successfully");
+
         await getUserAISubjects(userId);
-        console.log("getUserAISubjects done");
-        console.log("Assessment submitted successfully");
+        console.log("Subjects gotten successfully");
+
         router.replace("/results");
       } else {
         // Handle non-errorful but unsuccessful responses (optional)
