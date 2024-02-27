@@ -45,7 +45,7 @@ const getTestQuestions = async (userId: string) => {
 
   for (const subject of shuffledSubjectList) {
     const subjectQuestionsArr = await prisma.question.findMany({
-      take: 5,
+      take: 10,
       where: {
         subject: {
           name: subject,
