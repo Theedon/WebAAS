@@ -36,7 +36,9 @@ export const getUserAISubjects = async (userId: string) => {
     "   
     `;
 
-  const suggestedSubjects = await promptGoogleAI(suggestedSubjectsPrompt);
+  const suggestedSubjects = (await promptGoogleAI(
+    suggestedSubjectsPrompt,
+  )) as string;
   //   console.log(stripData(suggestedSubjects, "json"));
   const jsonSuggestedSubjects: SuggestedSubjectType = JSON.parse(
     stripData(suggestedSubjects, "json"),
