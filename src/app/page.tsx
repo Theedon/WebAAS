@@ -18,5 +18,5 @@ const query = gql`
 `;
 
 export default function Home() {
-  return <main></main>;
+  return <main>Dashboard</main>;
 }

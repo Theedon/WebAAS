@@ -2,7 +2,6 @@ import Image from "next/image";
 import app_logo from "@/assets/images/app-logo.png";
 import ThemeToggle from "../ThemeToggle";
 import { Button } from "../ui/button";
-import { Menu } from "lucide-react";
 import NavButtons from "./NavButtons";
 import NavDrawer from "./NavDrawer";
 import { UserButton } from "@clerk/nextjs";
@@ -16,7 +15,7 @@ function Navbar() {
         <div className="hidden md:flex">
           <NavButtons href="/">Dashboard</NavButtons>
           <NavButtons href="/results">Results</NavButtons>
-          <NavButtons href="/advisors">advisor&apos;s contact</NavButtons>
+          <NavButtons href="/advisors">advisors</NavButtons>
           <NavButtons href="/schedule">class schedule</NavButtons>
         </div>
 
@@ -26,13 +25,22 @@ function Navbar() {
           <Button variant={"ghost"} className="flex" size={"icon"}>
             <UserButton afterSignOutUrl="/" />
           </Button>
-          <NavDrawer>
-            <Menu />
-          </NavDrawer>
+          <NavDrawer NavItems={NavItems} />
         </div>
       </div>
     </header>
   );
 }
+
+const NavItems: {
+  name: string;
+  href: string;
+}[] = [
+  { name: "Dashboard", href: "/" },
+  { name: "Results", href: "/results" },
+  { name: "Advisors", href: "/advisors" },
+  { name: "Schedule", href: "/schedule" },
+  { name: "Settings", href: "/settings" },
+];
 
 export default Navbar;

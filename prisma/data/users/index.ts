@@ -14,6 +14,7 @@ export const RawUsers: UserType[] = [
     onboarded: true,
     faculty_id: "",
     faculty_code: FacultyCode.SCIENCES,
+    phone_no: "08102937463",
   },
   {
     first_name: "Alice",
@@ -26,6 +27,7 @@ export const RawUsers: UserType[] = [
     onboarded: true,
     faculty_id: "",
     faculty_code: FacultyCode.COMMERCIAL,
+    phone_no: "08102937463",
   },
   {
     first_name: "Bob",
@@ -38,6 +40,7 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.ARTS,
+    phone_no: "08102937463",
   },
   {
     first_name: "Eva",
@@ -50,6 +53,7 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.SCIENCES,
+    phone_no: "08102937463",
   },
   {
     first_name: "David",
@@ -62,6 +66,7 @@ export const RawUsers: UserType[] = [
     onboarded: true,
     faculty_id: "",
     faculty_code: FacultyCode.ARTS,
+    phone_no: "08102937463",
   },
   {
     first_name: "Alice",
@@ -72,8 +77,9 @@ export const RawUsers: UserType[] = [
     role: $Enums.Role.advisor,
     verified: true,
     onboarded: true,
-    faculty_id: "FA-1234",
+    faculty_id: "",
     faculty_code: FacultyCode.SCIENCES,
+    phone_no: "08102937463",
   },
   {
     first_name: "Charlie",
@@ -86,6 +92,7 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.SCIENCES,
+    phone_no: "08102937463",
   },
   {
     first_name: "Emily",
@@ -96,8 +103,9 @@ export const RawUsers: UserType[] = [
     role: $Enums.Role.advisor,
     verified: true,
     onboarded: true,
-    faculty_id: "FA-5678",
+    faculty_id: "",
     faculty_code: FacultyCode.SCIENCES,
+    phone_no: "08102937463",
   },
   {
     first_name: "Frank",
@@ -110,6 +118,7 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.SCIENCES,
+    phone_no: "08102937463",
   },
   {
     first_name: "Grace",
@@ -122,6 +131,7 @@ export const RawUsers: UserType[] = [
     onboarded: true,
     faculty_id: "FA-9012",
     faculty_code: FacultyCode.ARTS,
+    phone_no: "091292372372",
   },
   {
     first_name: "Henry",
@@ -134,6 +144,7 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.ARTS,
+    phone_no: "091346534566",
   },
   {
     first_name: "Isabella",
@@ -146,6 +157,7 @@ export const RawUsers: UserType[] = [
     onboarded: true,
     faculty_id: "FA-3456",
     faculty_code: FacultyCode.ARTS,
+    phone_no: "071623646237",
   },
   {
     first_name: "Jack",
@@ -158,6 +170,7 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.ARTS,
+    phone_no: "08063654577",
   },
   {
     first_name: "Olivia",
@@ -170,6 +183,7 @@ export const RawUsers: UserType[] = [
     onboarded: true,
     faculty_id: "", // Add faculty ID
     faculty_code: FacultyCode.COMMERCIAL,
+    phone_no: "09088765433",
   },
   {
     first_name: "William",
@@ -182,5 +196,6 @@ export const RawUsers: UserType[] = [
     onboarded: false,
     faculty_id: "",
     faculty_code: FacultyCode.COMMERCIAL,
+    phone_no: "08087676554",
   },
 ];

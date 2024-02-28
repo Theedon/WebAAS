@@ -15,6 +15,7 @@ export type UserType = {
   onboarded: boolean;
   faculty_id: string;
   faculty_code: FacultyCode;
+  phone_no?: string;
 };
 
 const getFacultyIdByCode = async (code: string) => {

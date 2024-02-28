@@ -23,6 +23,9 @@ export const typeDefs = gql`
     role: String!
     faculty_id: String
     faculty: Faculty
+    created_at: String!
+    updated_at: String!
+    phone_no: String
     userExamInfo: UserExamInfo!
   }
 `;
