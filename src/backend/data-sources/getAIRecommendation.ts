@@ -21,7 +21,9 @@ export const getAIRecommendation = async (userId: string) => {
   
   Please organize your response into four bold headings: Analysis of Test Results, Recommended Courses, Least Suitable, Additional Considerations. Add spaces after each heading and make sure that the headings are centered on their lines. Ensure that you return exactly three recommended courses and three least suitable courses. I need you to be as descriptive as possible
   `;
-  const fullRecommendation = await promptGoogleAI(fullRecommendationPrompt);
+  const fullRecommendation = (await promptGoogleAI(
+    fullRecommendationPrompt,
+  )) as string;
 
   const updateUser = await prisma.userToExam.update({
     where: {

@@ -2,9 +2,13 @@ import {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
+  GenerateContentStreamResult,
 } from "@google/generative-ai";
 
-export const promptGoogleAI = async (prompt: string): Promise<string> => {
+export const promptGoogleAI = async (
+  prompt: string,
+  stream = false,
+): Promise<string | GenerateContentStreamResult> => {
   const genAI = new GoogleGenerativeAI(
     process.env.GOOGLE_GENERATIVE_API_KEY as string,
   );
@@ -35,6 +39,16 @@ export const promptGoogleAI = async (prompt: string): Promise<string> => {
     },
   ];
   const parts = [{ text: prompt }];
+
+  if (stream === true) {
+    const result = await model.generateContentStream({
+      contents: [{ role: "user", parts }],
+      generationConfig,
+      safetySettings,
+    });
+
+    return result;
+  }
 
   const result = await model.generateContent({
     contents: [{ role: "user", parts }],
