@@ -1,12 +1,13 @@
 import axios from "axios";
 
 export const getAIRec = async (text: string) => {
-  const url = "";
+  const url = process.env.NEXT_PUBLIC_WEBAAS_AI_URL;
   const data = {
     info: text,
   };
 
-  let config = {
+  console.log(`url is ${url}`);
+  const config = {
     method: "post",
     maxBodyLength: Infinity,
     url,
