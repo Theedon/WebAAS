@@ -1,3 +1,4 @@
+"use server";
 import prisma from "@/backend/prisma/prisma";
 
 export const saveUserRecommendation = async (
