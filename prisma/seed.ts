@@ -7,8 +7,12 @@ import { getUsers } from "./data/users/utils";
 async function main() {
   //insert faculties data
   for (const faculty of Faculties) {
-    await prisma.faculty.create({
-      data: faculty,
+    await prisma.faculty.upsert({
+      where: {
+        code: faculty.code,
+      },
+      create: faculty,
+      update: faculty,
     });
   }
 
@@ -17,11 +21,15 @@ async function main() {
   console.log(JSON.stringify(Subjects[1]));
   for (const subject of Subjects) {
     const { facultyId, facultyCode, ...filteredSubject } = subject;
-    await prisma.subject.create({
-      data: {
+    await prisma.subject.upsert({
+      where: {
+        code: subject.code,
+      },
+      create: {
         ...filteredSubject,
         faculty_id: facultyId,
       },
+      update: { ...filteredSubject, faculty_id: facultyId },
     });
   }
 
@@ -42,11 +50,15 @@ async function main() {
   const Users = await getUsers();
   for (const user of Users) {
     const { faculty_id, faculty_code, ...filteredUser } = user;
-    await prisma.user.create({
-      data: {
+    await prisma.user.upsert({
+      where: {
+        email: user.email,
+      },
+      create: {
         ...filteredUser,
         faculty_id,
       },
+      update: { ...filteredUser, faculty_id },
     });
   }
 }
