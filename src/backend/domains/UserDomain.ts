@@ -13,6 +13,9 @@ export class UserDomain extends BaseDomain {
     public role: Role,
     public clerk_id: string | null,
     public faculty_id: string,
+    public created_at: string,
+    public updated_at: string,
+    public phone_no: string | null,
   ) {
     super(id);
     this.password = password;
@@ -24,6 +27,9 @@ export class UserDomain extends BaseDomain {
     this.role = role;
     this.clerk_id = clerk_id;
     this.faculty_id = faculty_id;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
+    this.phone_no = phone_no;
   }
 }
 
@@ -39,5 +45,8 @@ export const createUserDomain = (data: User) => {
     data.role,
     data.clerk_id,
     data.faculty_id,
+    data.created_at.toISOString(),
+    data.updated_at.toISOString(),
+    data.phone_no,
   );
 };
