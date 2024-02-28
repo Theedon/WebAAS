@@ -15,7 +15,7 @@ function Navbar() {
         <div className="hidden md:flex">
           <NavButtons href="/">Dashboard</NavButtons>
           <NavButtons href="/results">Results</NavButtons>
-          <NavButtons href="/advisors">advisor&apos;s contact</NavButtons>
+          <NavButtons href="/advisors">advisors</NavButtons>
           <NavButtons href="/schedule">class schedule</NavButtons>
         </div>
 
