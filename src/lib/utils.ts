@@ -48,3 +48,14 @@ export const stripData = (text: string, type = "md") => {
 
   return text;
 };
+
+export const dateWrangler = (date: Date | string) => {
+  // const dbTimeStr = "2024-02-28 11:04:54.419";
+  const dateObj = new Date(date); // Parse the string into a Date object
+
+  const formattedDate = `${dateObj.getDate()}/${
+    dateObj.getMonth() + 1
+  }/${dateObj.getFullYear()}`;
+
+  return formattedDate;
+};
