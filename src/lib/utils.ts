@@ -61,9 +61,14 @@ export const dateWrangler = (date: Date | string) => {
 };
 
 export const getCourseFromFaculty = (courseFacultyString: string) => {
-  const parts = courseFacultyString.split("|");
-  const course = parts[0].trim();
-  const faculty = parts[1].trim();
-
-  return { course, faculty };
+  try {
+    const parts = courseFacultyString.split("|");
+    const course = parts[0].trim();
+    const faculty = parts[1].trim();
+    return { course, faculty };
+  } catch (e: any) {
+    throw new Error("User has no recommended subjects");
+  } finally {
+    return { course: null, faculty: null };
+  }
 };
