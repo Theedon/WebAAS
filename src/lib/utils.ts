@@ -59,3 +59,11 @@ export const dateWrangler = (date: Date | string) => {
 
   return formattedDate;
 };
+
+export const getCourseFromFaculty = (courseFacultyString: string) => {
+  const parts = courseFacultyString.split("|");
+  const course = parts[0].trim();
+  const faculty = parts[1].trim();
+
+  return { course, faculty };
+};
