@@ -5,7 +5,7 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import {
   AllQuestionsQuery,
   AllQuestionsQueryVariables,
-} from "../__generated__/page.generated";
+} from "./__generated__/page.generated";
 
 const AUTHOR_NAME = gql`
   query AllQuestions {
