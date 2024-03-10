@@ -30,11 +30,15 @@ function SubjectCard({ course, faculty }: SubjectCardProps) {
         <div className="grid w-full items-center gap-4">
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="name">Course</Label>
-            <div className="rounded-lg border p-3">{course ?? "Nil"}</div>
+            <div className="rounded-lg border p-3">
+              {course ? course : "Nil"}
+            </div>
           </div>
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="name">Faculty</Label>
-            <div className="rounded-lg border p-3 ">{faculty ?? "Nil"}</div>
+            <div className="rounded-lg border p-3 ">
+              {faculty ? faculty : "Nil"}
+            </div>
           </div>
         </div>
       </CardContent>

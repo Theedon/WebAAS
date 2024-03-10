@@ -1,4 +1,3 @@
-import SubjectCard from "@/components/dashboard/SubjectCard";
 import { getClient } from "@/lib/apollo-clients/RSCClient";
 import getCurrentUserId from "@/lib/globalUserContext";
 import { gql } from "@apollo/client";
@@ -6,9 +5,10 @@ import {
   GetSubjectsQuery,
   GetSubjectsQueryVariables,
 } from "./__generated__/page.generated";
-import { dateWrangler, getCourseFromFaculty } from "@/lib/utils";
+import { dateWrangler } from "@/lib/utils";
 import { AdvisorsDataType, columns } from "@/components/advisors/Columns";
 import { DataTable } from "@/components/advisors/DataTable";
+import SubjectSection from "@/components/dashboard/SubjectSection";
 
 const query = gql`
   query GetSubjects($userId: String!) {
@@ -45,6 +45,8 @@ export default async function Home() {
     query,
     variables: { userId: getCurrentUserId() as string },
   });
+  console.log(data.user.userExamInfo.rec_course_1);
+
   const wrangledData: AdvisorsDataType[] = data.allAdvisors.map((user) => {
     return {
       id: user.id,
@@ -66,7 +68,7 @@ export default async function Home() {
         course_3={data.user.userExamInfo.rec_course_3 ?? ""}
       />
       <SubjectSection
-        header="Not Recommended"
+        header="Least Recommended"
         course_1={data.user.userExamInfo.anti_course_1 ?? ""}
         course_2={data.user.userExamInfo.anti_course_2 ?? ""}
         course_3={data.user.userExamInfo.anti_course_3 ?? ""}
@@ -77,31 +79,3 @@ export default async function Home() {
     </main>
   );
 }
-
-type SubjectSectionProps = {
-  course_1: string;
-  course_2: string;
-  course_3: string;
-  header: string;
-};
-const SubjectSection = ({
-  course_1,
-  course_2,
-  course_3,
-  header,
-}: SubjectSectionProps) => {
-  return (
-    <div>
-      <h2 className="text-center text-lg text-primary">{header}</h2>
-      <section className="flex flex-col items-center justify-center gap-5 md:flex-row">
-        {[course_1, course_2, course_3].map((subject, index) => (
-          <SubjectCard
-            key={index}
-            course={getCourseFromFaculty(subject ?? "").course}
-            faculty={getCourseFromFaculty(subject ?? "").faculty}
-          />
-        ))}
-      </section>
-    </div>
-  );
-};

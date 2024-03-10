@@ -67,8 +67,6 @@ export const getCourseFromFaculty = (courseFacultyString: string) => {
     const faculty = parts[1].trim();
     return { course, faculty };
   } catch (e: any) {
-    throw new Error("User has no recommended subjects");
-  } finally {
-    return { course: null, faculty: null };
+    return { course: "", faculty: "" };
   }
 };
