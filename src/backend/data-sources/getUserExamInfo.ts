@@ -31,13 +31,13 @@ export const getUserExamInfo = async (userId: string) => {
     return {
       test_information: user.test_information.toString(),
       ai_recommendation: user.ai_recommendation.toString(),
-      rec_course_1: user.test_information,
-      rec_course_2: user.test_information,
-      rec_course_3: user.test_information,
-      anti_course_1: user.test_information,
-      anti_course_2: user.test_information,
-      anti_course_3: user.test_information,
-      taken_exam: user.test_information,
+      rec_course_1: user.rec_course_1,
+      rec_course_2: user.rec_course_2,
+      rec_course_3: user.rec_course_3,
+      anti_course_1: user.anti_course_1,
+      anti_course_2: user.anti_course_2,
+      anti_course_3: user.rec_course_3,
+      taken_exam: user.taken_exam,
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
