@@ -8,7 +8,7 @@ import {
 } from "./__generated__/page.generated";
 import { dateWrangler } from "@/lib/utils";
 
-export default async function AdvisorsPage() {
+export default async function StudentsPage() {
   const GET_ALL_STUDENTS = gql`
     query AllStudents {
       allStudents {

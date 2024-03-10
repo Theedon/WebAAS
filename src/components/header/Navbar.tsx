@@ -5,8 +5,30 @@ import { Button } from "../ui/button";
 import NavButtons from "./NavButtons";
 import NavDrawer from "./NavDrawer";
 import { UserButton } from "@clerk/nextjs";
+import gql from "graphql-tag";
+import { getClient } from "@/lib/apollo-clients/RSCClient";
+import {
+  UserQuery,
+  UserQueryVariables,
+} from "./__generated__/Navbar.generated";
+import getCurrentUserId from "@/lib/globalUserContext";
 
-function Navbar() {
+const query = gql`
+  query User($userId: String!) {
+    user(id: $userId) {
+      role
+    }
+  }
+`;
+
+async function Navbar() {
+  const { data, error } = await getClient().query<
+    UserQuery,
+    UserQueryVariables
+  >({
+    query,
+    variables: { userId: getCurrentUserId() as string },
+  });
   return (
     <header className="fixed left-0 top-0 z-10 my-1 w-full max-w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md">
       <div className="flex h-[10vh] items-center justify-between rounded-b-xl bg-primary px-7 md:px-10 dark:text-background">
@@ -15,7 +37,12 @@ function Navbar() {
         <div className="hidden md:flex">
           <NavButtons href="/">Dashboard</NavButtons>
           <NavButtons href="/results">Results</NavButtons>
-          <NavButtons href="/advisors">advisors</NavButtons>
+          {data.user.role === "advisor" && (
+            <NavButtons href="/students">students</NavButtons>
+          )}
+          {data.user.role === "student" && (
+            <NavButtons href="/advisors">advisors</NavButtons>
+          )}
           <NavButtons href="/schedule">class schedule</NavButtons>
         </div>
 
