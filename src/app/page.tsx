@@ -51,7 +51,7 @@ export default async function Home() {
 
       <div></div>
       {data.user.role === "advisor" && <StudentsPage />}
-      {data.user.role === "students" && <AdvisorsPage />}
+      {data.user.role === "student" && <AdvisorsPage />}
     </main>
   );
 }
