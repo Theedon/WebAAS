@@ -1,28 +1,28 @@
 # This GitHub Actions workflow lints the code on pushes and pull requests.
-# It checks out the code, sets up Node.js, installs dependencies, runs linting, 
+# It checks out the code, sets up Node.js, installs dependencies, runs linting,
 # and prints a message if linting fails.
 
 name: Lint code
 
 on:
   push:
-    branches: [main]  # Run the workflow on pushes to the main branch
+    branches: [main] # Run the workflow on pushes to the main branch
   pull_request:
-    branches: [main]  # Also run on pull requests targeting the main branch
+    branches: [main] # Also run on pull requests targeting the main branch
 
 jobs:
   lint:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment
 
     steps:
-      - uses: actions/checkout@v3  # Checkout the repository code
-      - uses: actions/setup-node@v3  # Set up Node.js environment
+      - uses: actions/checkout@v4 # Checkout the repository code
+      - uses: actions/setup-node@v4 # Set up Node.js environment
         with:
-          node-version: 18  # Specify the Node.js version
+          node-version: 20 # Specify the Node.js version
 
-      - run: npm ci  # Install dependencies
-      - run: npm run lint  # Execute the linting command
+      - run: npm ci # Install dependencies
+      - run: npm run lint # Execute the linting command
 
       - name: Check for lint errors
-        if: failure()  # Only run if the linting step failed
+        if: failure() # Only run if the linting step failed
         run: echo "Linting failed, check the errors above!"

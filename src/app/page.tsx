@@ -50,8 +50,12 @@ export default async function Home() {
       />
 
       <div></div>
-      {data.user.role === "advisor" && <StudentsPage />}
-      {data.user.role === "student" && <AdvisorsPage />}
+      {(data.user.role === "advisor" || data.user.role === "admin") && (
+        <StudentsPage />
+      )}
+      {(data.user.role === "student" || data.user.role === "admin") && (
+        <AdvisorsPage />
+      )}
     </main>
   );
 }
