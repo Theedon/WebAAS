@@ -37,10 +37,10 @@ async function Navbar() {
         <div className="hidden md:flex">
           <NavButtons href="/">Dashboard</NavButtons>
           <NavButtons href="/results">Results</NavButtons>
-          {data.user.role === "advisor" && (
+          {(data.user.role === "advisor" || data.user.role === "admin") && (
             <NavButtons href="/students">students</NavButtons>
           )}
-          {data.user.role === "student" && (
+          {(data.user.role === "student" || data.user.role) === "admin" && (
             <NavButtons href="/advisors">advisors</NavButtons>
           )}
           <NavButtons href="/schedule">class schedule</NavButtons>
