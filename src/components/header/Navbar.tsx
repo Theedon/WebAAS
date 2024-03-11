@@ -40,7 +40,7 @@ async function Navbar() {
           {(data.user.role === "advisor" || data.user.role === "admin") && (
             <NavButtons href="/students">students</NavButtons>
           )}
-          {(data.user.role === "student" || data.user.role) === "admin" && (
+          {(data.user.role === "student" || data.user.role === "admin") && (
             <NavButtons href="/advisors">advisors</NavButtons>
           )}
           <NavButtons href="/schedule">class schedule</NavButtons>
