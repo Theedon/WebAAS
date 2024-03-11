@@ -70,3 +70,11 @@ export const getCourseFromFaculty = (courseFacultyString: string) => {
     return { course: "", faculty: "" };
   }
 };
+
+export const extractAfterFirstUnderscore = (str: string): string => {
+  const indexOfUnderscore = str.indexOf("_");
+  if (indexOfUnderscore !== -1) {
+    return str.substring(indexOfUnderscore + 1);
+  }
+  return str; // Return the original string if no underscore is found
+};
