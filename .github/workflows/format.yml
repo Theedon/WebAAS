@@ -18,12 +18,12 @@ jobs:
     runs-on: ubuntu-latest # Use the latest Ubuntu environment
 
     steps:
-      - uses: actions/checkout@v3 # Checkout the repository code
+      - uses: actions/checkout@v4 # Checkout the repository code
         with:
           ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v3 # Set up Node.js environment
+      - uses: actions/setup-node@v4 # Set up Node.js environment
         with:
-          node-version: 18 # Specify the Node.js version
+          node-version: 20 # Specify the Node.js version
 
       - run: npm ci # Install dependencies
       - run: npx prettier --write ./src # Execute the formatting command
