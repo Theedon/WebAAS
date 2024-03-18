@@ -26,36 +26,41 @@ const query = gql`
 `;
 
 export default async function Home() {
-  const { data, error } = await getClient().query<
-    GetSubjectsQuery,
-    GetSubjectsQueryVariables
-  >({
-    query,
-    variables: { userId: getCurrentUserId() as string },
-  });
+  try {
+    const { data, error } = await getClient().query<
+      GetSubjectsQuery,
+      GetSubjectsQueryVariables
+    >({
+      query,
+      variables: { userId: getCurrentUserId() as string },
+    });
 
-  return (
-    <main className="flex flex-col gap-5">
-      <SubjectSection
-        header="Recommended Subjects"
-        course_1={data.user.userExamInfo.rec_course_1 ?? ""}
-        course_2={data.user.userExamInfo.rec_course_2 ?? ""}
-        course_3={data.user.userExamInfo.rec_course_3 ?? ""}
-      />
-      <SubjectSection
-        header="Least Recommended"
-        course_1={data.user.userExamInfo.anti_course_1 ?? ""}
-        course_2={data.user.userExamInfo.anti_course_2 ?? ""}
-        course_3={data.user.userExamInfo.anti_course_3 ?? ""}
-      />
+    return (
+      <main className="flex flex-col gap-5">
+        <SubjectSection
+          header="Recommended Subjects"
+          course_1={data.user.userExamInfo.rec_course_1 ?? ""}
+          course_2={data.user.userExamInfo.rec_course_2 ?? ""}
+          course_3={data.user.userExamInfo.rec_course_3 ?? ""}
+        />
+        <SubjectSection
+          header="Least Recommended"
+          course_1={data.user.userExamInfo.anti_course_1 ?? ""}
+          course_2={data.user.userExamInfo.anti_course_2 ?? ""}
+          course_3={data.user.userExamInfo.anti_course_3 ?? ""}
+        />
 
-      <div></div>
-      {(data.user.role === "advisor" || data.user.role === "admin") && (
-        <StudentsPage />
-      )}
-      {(data.user.role === "student" || data.user.role === "admin") && (
-        <AdvisorsPage />
-      )}
-    </main>
-  );
+        <div></div>
+        {(data.user.role === "advisor" || data.user.role === "admin") && (
+          <StudentsPage />
+        )}
+        {(data.user.role === "student" || data.user.role === "admin") && (
+          <AdvisorsPage />
+        )}
+      </main>
+    );
+  } catch (error: unknown) {
+    console.log(error);
+    return <div>No user</div>;
+  }
 }
