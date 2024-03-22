@@ -20,7 +20,7 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    testQuestions: async (_parent: unknown, { userId }: {userId: string}) => {
+    testQuestions: async (_parent: unknown, { userId }: { userId: string }) => {
       const questions = await getTestQuestions(userId);
       return questions;
     },
