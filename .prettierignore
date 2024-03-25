@@ -1,1 +1,3 @@
+# ignore all graphql generated files
 **/__generated__/**
+src/app/types.ts
