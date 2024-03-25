@@ -17,7 +17,7 @@
     "seed": "tsx ./prisma/seed.ts"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.0-rc.2",
+    "@apollo/client": "^3.9.7",
     "@apollo/experimental-nextjs-app-support": "^0.8.0",
     "@apollo/server": "^4.9.5",
     "@as-integrations/next": "^3.0.0",
