@@ -19,8 +19,7 @@ export const getAIRec = async (text: string) => {
 
   try {
     const response = await axios.request(config);
-    console.log(JSON.stringify(response.data));
-    return response.data;
+    return response.data as string;
   } catch (error: any) {
     console.error(error);
     throw new Error(error);
