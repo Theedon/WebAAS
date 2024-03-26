@@ -5,23 +5,23 @@ import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type Query {
-    allEvents: [Event]!
+    allEvents: [Event!]!
   }
 
   type Event {
-    id: String
-    creator_id: String
-    title: String
-    description: String
-    event_date: String
+    id: String!
+    creator_id: String!
+    title: String!
+    description: String!
+    event_date: Date!
     creator: User
   }
 `;
 
 export const resolvers = {
   Query: {
-    allEvents: (_parent: unknown) => {
-      return getAllEvents();
+    allEvents: async (_parent: unknown) => {
+      return await getAllEvents();
     },
   },
   Event: {

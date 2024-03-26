@@ -6,12 +6,12 @@ export class EventDomain extends BaseDomain {
     public creator_id: string,
     public title: string,
     public description: string,
-    public date: Date,
+    public event_date: Date,
   ) {
     super(creator_id);
     this.creator_id = creator_id;
     this.title = title;
     this.description = description;
-    this.date = date;
+    this.event_date = event_date;
   }
 }
