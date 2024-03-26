@@ -106,7 +106,7 @@ model Event {
   title       String
   description String?
   sender_id   String
-  expired     Boolean
+  expired     Boolean  @default(false)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
