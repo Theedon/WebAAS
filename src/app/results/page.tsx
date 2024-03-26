@@ -36,21 +36,26 @@ async function ResultPage() {
   }
 
   return (
-    <div>
-      {data.user.userExamInfo.ai_recommendation ? (
-        <div>
-          {data.user.userExamInfo.ai_recommendation ? (
-            <Markdown>
-              {stripData(data.user.userExamInfo.ai_recommendation)}
-            </Markdown>
-          ) : (
-            <p>No data</p>
-          )}
-        </div>
-      ) : (
-        <LoadingPage />
-      )}
-    </div>
+    <>
+      <h2 className="mb-5 grid place-items-center text-2xl font-bold text-primary-foreground">
+        <p>AI Results</p>
+      </h2>
+      <div>
+        {data.user.userExamInfo.ai_recommendation ? (
+          <div>
+            {data.user.userExamInfo.ai_recommendation ? (
+              <Markdown>
+                {stripData(data.user.userExamInfo.ai_recommendation)}
+              </Markdown>
+            ) : (
+              <p>No data</p>
+            )}
+          </div>
+        ) : (
+          <LoadingPage />
+        )}
+      </div>
+    </>
   );
 }
 

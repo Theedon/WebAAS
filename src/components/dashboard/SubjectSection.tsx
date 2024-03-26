@@ -16,7 +16,9 @@ function SubjectSection({
 }: SubjectSectionProps) {
   return (
     <div>
-      <h2 className="text-center text-lg text-primary">{header}</h2>
+      <h2 className="mb-3 text-center text-xl font-bold text-primary-foreground">
+        {header}
+      </h2>
       <section className="flex flex-col items-center justify-center gap-5 md:flex-row">
         {[course_1, course_2, course_3].map((subject, index) => (
           <SubjectCard

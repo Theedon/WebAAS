@@ -25,10 +25,6 @@ function EventCard({ title, description, date, creatorName }: EventCardProps) {
         <p>{dateWrangler(date)}</p>
         <p className="font-semibold">{creatorName}</p>
       </CardContent>
-      {/* <CardFooter className="flex justify-between">
-        <Button variant="outline">Delete</Button>
-        <Button>View</Button>
-      </CardFooter> */}
     </Card>
   );
 }

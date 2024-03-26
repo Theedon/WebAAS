@@ -22,6 +22,12 @@ const query = gql`
 `;
 
 async function Navbar() {
+  const navItems = [
+    { name: "Dashboard", href: "/" },
+    { name: "Results", href: "/results" },
+    { name: "Schedule", href: "/schedule" },
+  ];
+
   try {
     const { data, error } = await getClient().query<
       UserQuery,
@@ -32,71 +38,42 @@ async function Navbar() {
       fetchPolicy: "no-cache",
     });
 
-    return (
-      <header className="fixed left-0 top-0 z-10 my-1 w-full max-w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md">
-        <div className="flex h-[10vh] items-center justify-between rounded-b-xl bg-primary px-7 md:px-10 dark:text-background">
-          <Image src={app_logo} alt="app logo" className="size-14"></Image>
-
-          <div className="hidden md:flex">
-            <NavButtons href="/">Dashboard</NavButtons>
-            <NavButtons href="/results">Results</NavButtons>
-            {(data.user.role === "advisor" || data.user.role === "admin") && (
-              <NavButtons href="/students">students</NavButtons>
-            )}
-            {(data.user.role === "student" || data.user.role === "admin") && (
-              <NavButtons href="/advisors">advisors</NavButtons>
-            )}
-            <NavButtons href="/schedule">class schedule</NavButtons>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-
-            <Button variant={"ghost"} className="flex" size={"icon"}>
-              <UserButton afterSignOutUrl="/" />
-            </Button>
-            <NavDrawer NavItems={NavItems} />
-          </div>
-        </div>
-      </header>
-    );
-  } catch (error: unknown) {
-    console.log(error);
-    return (
-      <header className="fixed left-0 top-0 z-10 my-1 w-full max-w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md">
-        <div className="flex h-[10vh] items-center justify-between rounded-b-xl bg-primary px-7 md:px-10 dark:text-background">
-          <Image src={app_logo} alt="app logo" className="size-14"></Image>
-
-          <div className="hidden md:flex">
-            <NavButtons href="/">Dashboard</NavButtons>
-            <NavButtons href="/results">Results</NavButtons>
-
-            <NavButtons href="/schedule">class schedule</NavButtons>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-
-            <Button variant={"ghost"} className="flex" size={"icon"}>
-              <UserButton afterSignOutUrl="/" />
-            </Button>
-            <NavDrawer NavItems={NavItems} />
-          </div>
-        </div>
-      </header>
-    );
+    if (data?.user?.role === "admin") {
+      navItems.push({ name: "Students", href: "/students" });
+      navItems.push({ name: "Advisors", href: "/advisors" });
+      navItems.push({ name: "Add Event", href: "/add-event" });
+    } else if (data?.user?.role === "advisor") {
+      navItems.push({ name: "Students", href: "/students" });
+    } else if (data?.user?.role === "student") {
+      navItems.push({ name: "Advisors", href: "/advisors" });
+    }
+  } catch (error) {
+    console.error(error);
   }
-}
 
-const NavItems: {
-  name: string;
-  href: string;
-}[] = [
-  { name: "Dashboard", href: "/" },
-  { name: "Results", href: "/results" },
-  { name: "Advisors", href: "/advisors" },
-  { name: "Schedule", href: "/schedule" },
-  { name: "Settings", href: "/settings" },
-];
+  return (
+    <header className="fixed left-0 top-0 z-10 my-1 w-full max-w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md">
+      <div className="flex h-[10vh] items-center justify-between rounded-b-xl bg-primary px-7 md:px-10 dark:text-background">
+        <Image src={app_logo} alt="app logo" className="size-14" />
+
+        <div className="hidden md:flex">
+          {navItems.map((item, index) => (
+            <NavButtons key={index} href={item.href}>
+              {item.name}
+            </NavButtons>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button variant={"ghost"} className="flex" size={"icon"}>
+            <UserButton afterSignOutUrl="/" />
+          </Button>
+          <NavDrawer NavItems={navItems} />
+        </div>
+      </div>
+    </header>
+  );
+}
 
 export default Navbar;
