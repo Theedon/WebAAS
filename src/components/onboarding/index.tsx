@@ -16,7 +16,6 @@ import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import {
   Select,
@@ -135,54 +134,51 @@ function Onboarding({
   };
 
   return (
-    <div className="grid h-full place-items-center md:w-screen">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="grid space-y-8 border-muted md:border md:p-5 md:shadow-sm"
-        >
-          <FormField
-            control={form.control}
-            name="faculty"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Faculty</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select Faculty" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="SCI">Sciences</SelectItem>
-                      <SelectItem value="ART">Arts</SelectItem>
-                      <SelectItem value="COM">Commercial</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-              </FormItem>
-            )}
-          />
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid space-y-8 border-muted md:border md:p-5 md:shadow-sm"
+      >
+        <FormField
+          control={form.control}
+          name="faculty"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Faculty</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select Faculty" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="SCI">Sciences</SelectItem>
+                    <SelectItem value="ART">Arts</SelectItem>
+                    <SelectItem value="COM">Commercial</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
 
-          <Button
-            disabled={disableSubmitButton(form)}
-            type="submit"
-            className={`${
-              disableSubmitButton(form) ? "bg-foreground text-background" : ""
-            }`}
-          >
-            {submitting ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <p>Submit</p>
-            )}
-          </Button>
-        </form>
-      </Form>
-      <Toaster />
-    </div>
+        <Button
+          disabled={disableSubmitButton(form)}
+          type="submit"
+          className={`${
+            disableSubmitButton(form) ? "bg-foreground text-background" : ""
+          }`}
+        >
+          {submitting ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <p>Submit</p>
+          )}
+        </Button>
+      </form>
+    </Form>
   );
 }
 
