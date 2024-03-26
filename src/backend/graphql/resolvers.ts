@@ -9,6 +9,7 @@ import { resolvers as AllUsersResolvers } from "./types/AllUsers";
 import { resolvers as AllStudentsResolvers } from "./types/AllStudents";
 import { resolvers as AllAdvisorsResolvers } from "./types/AllAdvisors";
 import { resolvers as CreateEventResolvers } from "./mutations/CreateEvent";
+import { resolvers as AllEventsResolvers } from "./types/AllEvents";
 
 const mergedResolvers = [
   SubjectResolvers,
@@ -21,6 +22,7 @@ const mergedResolvers = [
   AllStudentsResolvers,
   AllAdvisorsResolvers,
   CreateEventResolvers,
+  AllEventsResolvers,
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
