@@ -46,8 +46,13 @@ export default async function StudentsPage() {
     };
   });
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={wrangledData} />
-    </div>
+    <>
+      <h2 className="grid place-items-center text-2xl font-bold text-primary-foreground">
+        <p>Students</p>
+      </h2>
+      <div className="container mx-auto py-10">
+        <DataTable columns={columns} data={wrangledData} />
+      </div>
+    </>
   );
 }

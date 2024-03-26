@@ -81,7 +81,22 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
   const [options, setOptions] = useState<QuestionType[]>(filteredQuestionsData);
 
   const router = useRouter();
+  const checkIfExamIsCompleted = (options: QuestionType[]) => {
+    for (const option of options) {
+      if (option.choice !== "" || option.choice !== null) {
+        return false;
+      }
+    }
+    return true;
+  };
   const submitExam = async () => {
+    if (
+      process.env.USE_RIGID_RULES === "TRUE" &&
+      !checkIfExamIsCompleted(options)
+    ) {
+      alert("please answer every question in assesment");
+      return;
+    }
     setTestSubmitting(true);
 
     try {

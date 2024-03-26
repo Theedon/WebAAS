@@ -46,8 +46,13 @@ export default async function AdvisorsPage() {
     };
   });
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={wrangledData} />
-    </div>
+    <>
+      <h2 className="grid place-items-center text-2xl font-bold text-primary-foreground">
+        <p>Advisors</p>
+      </h2>
+      <div className="container mx-auto py-10">
+        <DataTable columns={columns} data={wrangledData} />
+      </div>
+    </>
   );
 }

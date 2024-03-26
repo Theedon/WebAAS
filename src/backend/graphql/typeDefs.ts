@@ -8,6 +8,9 @@ import { typeDefs as UserExamInfoTypeDefs } from "./types/UserExamInfo";
 import { typeDefs as AllUsersTypeDefs } from "./types/AllUsers";
 import { typeDefs as AllStudentsTypeDefs } from "./types/AllStudents";
 import { typeDefs as AllAdvisorsTypeDefs } from "./types/AllAdvisors";
+import { typeDefs as CreateEventTypeDefs } from "./mutations/CreateEvent";
+import { typeDefs as AllEventsTypeDefs } from "./types/AllEvents";
+import { typeDefs as DateTypedefs } from "./types/Date";
 
 export const typeDefs = [
   SubjectTypeDefs,
@@ -20,4 +23,7 @@ export const typeDefs = [
   AllUsersTypeDefs,
   AllStudentsTypeDefs,
   AllAdvisorsTypeDefs,
+  CreateEventTypeDefs,
+  AllEventsTypeDefs,
+  DateTypedefs,
 ];

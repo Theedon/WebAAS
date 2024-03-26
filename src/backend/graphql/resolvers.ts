@@ -8,6 +8,9 @@ import { resolvers as UserResolvers } from "./types/User";
 import { resolvers as AllUsersResolvers } from "./types/AllUsers";
 import { resolvers as AllStudentsResolvers } from "./types/AllStudents";
 import { resolvers as AllAdvisorsResolvers } from "./types/AllAdvisors";
+import { resolvers as CreateEventResolvers } from "./mutations/CreateEvent";
+import { resolvers as AllEventsResolvers } from "./types/AllEvents";
+import { resolvers as DateResolvers } from "./types/Date";
 
 const mergedResolvers = [
   SubjectResolvers,
@@ -19,6 +22,9 @@ const mergedResolvers = [
   AllUsersResolvers,
   AllStudentsResolvers,
   AllAdvisorsResolvers,
+  CreateEventResolvers,
+  AllEventsResolvers,
+  DateResolvers,
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
