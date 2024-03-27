@@ -26,13 +26,14 @@ const query = gql`
 `;
 
 export default async function Home() {
+  const userId = getCurrentUserId() as string;
   try {
     const { data, error } = await getClient().query<
       GetSubjectsQuery,
       GetSubjectsQueryVariables
     >({
       query,
-      variables: { userId: getCurrentUserId() as string },
+      variables: { userId },
     });
 
     return (
