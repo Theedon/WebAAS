@@ -1,10 +1,12 @@
 import app_logo from "@/assets/images/app-logo.png";
 import Image from "next/image";
-import { FacebookIcon, TwitterIcon } from "lucide-react";
+import { Facebook, Twitter } from "lucide-react";
 import Link from "next/link";
 import NavButtons from "./header/NavButtons";
 
 function Footer() {
+  const FACEBOOK_LINK = "https://www.facebook.com/johnny.cruize.39";
+  const TWITTER_LINK = "https://x.com/johnnycruize";
   return (
     <footer className="z-20 mt-auto rounded-t-xl border-t-2 bg-primary ">
       <div className="px-4 py-7 shadow-xl sm:px-12 md:flex md:items-center md:justify-between dark:text-background">
@@ -24,14 +26,14 @@ function Footer() {
         </NavButtons>
 
         <div className="mt-5 flex w-full justify-center gap-3 md:w-auto">
-          <Link href="">
+          <Link href={FACEBOOK_LINK}>
             <p className="md:hidden">Facebook</p>
 
-            <FacebookIcon className="hidden md:flex" />
+            <Facebook className="hidden md:flex" />
           </Link>
-          <Link href="">
+          <Link href={TWITTER_LINK}>
             <p className="md:hidden">Twitter</p>
-            <TwitterIcon className="hidden md:flex" />
+            <Twitter className="hidden md:flex" />
           </Link>
         </div>
         <section className="mt-10 flex items-center justify-center md:hidden">
