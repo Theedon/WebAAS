@@ -7,6 +7,7 @@ import {
 } from "./__generated__/page.generated";
 import EventCard from "@/components/schedule/EventCard";
 
+export const revalidate = 0;
 async function SchedulePage() {
   const ALL_EVENTS = gql`
     query AllEvents {
