@@ -56,7 +56,7 @@ export default function RootLayout({
             >
               <Navbar />
 
-              <main className="mb-10 mt-[14vh] md:mx-10">{children}</main>
+              <main className="mx-1 mb-10 mt-[14vh] md:mx-10">{children}</main>
               <Footer />
             </ThemeProvider>
           </body>
