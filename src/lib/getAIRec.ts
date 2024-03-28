@@ -6,7 +6,7 @@ export const getAIRec = async (text: string) => {
     info: text,
   };
 
-  console.log(`url is ${url}`);
+  // console.log(`url is ${url}`);
   const config = {
     method: "post",
     maxBodyLength: Infinity,

@@ -62,14 +62,14 @@ export const getUserAISubjects = async (userId: string) => {
       } | ${jsonSuggestedSubjects.most_suitable_courses[2].faculty ?? ""}`,
 
       anti_course_1: `${
-        jsonSuggestedSubjects.least_suitable_course[0].course ?? ""
-      } | ${jsonSuggestedSubjects.least_suitable_course[0].faculty ?? ""}`,
+        jsonSuggestedSubjects.least_suitable_courses[0].course ?? ""
+      } | ${jsonSuggestedSubjects.least_suitable_courses[0].faculty ?? ""}`,
       anti_course_2: `${
-        jsonSuggestedSubjects.least_suitable_course[1].course ?? ""
-      } | ${jsonSuggestedSubjects.least_suitable_course[1].faculty ?? ""}`,
+        jsonSuggestedSubjects.least_suitable_courses[1].course ?? ""
+      } | ${jsonSuggestedSubjects.least_suitable_courses[1].faculty ?? ""}`,
       anti_course_3: `${
-        jsonSuggestedSubjects.least_suitable_course[2].course ?? ""
-      } | ${jsonSuggestedSubjects.least_suitable_course[2].faculty ?? ""}`,
+        jsonSuggestedSubjects.least_suitable_courses[2].course ?? ""
+      } | ${jsonSuggestedSubjects.least_suitable_courses[2].faculty ?? ""}`,
     },
     create: {
       clerk_id: userId,
@@ -84,14 +84,14 @@ export const getUserAISubjects = async (userId: string) => {
       } | ${jsonSuggestedSubjects.most_suitable_courses[2].faculty ?? ""}`,
 
       anti_course_1: `${
-        jsonSuggestedSubjects.least_suitable_course[0].course ?? ""
-      } | ${jsonSuggestedSubjects.least_suitable_course[0].faculty ?? ""}`,
+        jsonSuggestedSubjects.least_suitable_courses[0].course ?? ""
+      } | ${jsonSuggestedSubjects.least_suitable_courses[0].faculty ?? ""}`,
       anti_course_2: `${
-        jsonSuggestedSubjects.least_suitable_course[1].course ?? ""
-      } | ${jsonSuggestedSubjects.least_suitable_course[1].faculty ?? ""}`,
+        jsonSuggestedSubjects.least_suitable_courses[1].course ?? ""
+      } | ${jsonSuggestedSubjects.least_suitable_courses[1].faculty ?? ""}`,
       anti_course_3: `${
-        jsonSuggestedSubjects.least_suitable_course[2].course ?? ""
-      } | ${jsonSuggestedSubjects.least_suitable_course[2].faculty ?? ""}`,
+        jsonSuggestedSubjects.least_suitable_courses[2].course ?? ""
+      } | ${jsonSuggestedSubjects.least_suitable_courses[2].faculty ?? ""}`,
     },
   });
 
@@ -105,7 +105,7 @@ type SuggestedSubjectType = {
     course: string;
     faculty: string;
   }[];
-  least_suitable_course: {
+  least_suitable_courses: {
     course: string;
     faculty: string;
   }[];
