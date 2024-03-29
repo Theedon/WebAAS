@@ -91,7 +91,7 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
   };
   const submitExam = async () => {
     if (
-      process.env.USE_RIGID_RULES === "TRUE" &&
+      process.env.NODE_ENV !== "development" &&
       !checkIfExamIsCompleted(options)
     ) {
       alert("please answer every question in assesment");
