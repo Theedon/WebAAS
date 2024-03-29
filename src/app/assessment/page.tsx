@@ -7,6 +7,8 @@ import {
 } from "./__generated__/page.generated";
 import getCurrentUserId from "@/lib/globalUserContext";
 import { redirect } from "next/navigation";
+import { hasDaysElapsed } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 const query = gql`
   query TestQuestions($userId: String!) {
@@ -16,7 +18,9 @@ const query = gql`
       }
       userExamInfo {
         ai_recommendation
+        updated_at
       }
+      role
     }
     testQuestions(userId: $userId) {
       id
@@ -41,14 +45,23 @@ async function AssessmentPage() {
     variables: { userId: userId },
   });
 
-  if (process.env.NODE_ENV !== "development") {
-    if (data.user.userExamInfo.ai_recommendation) redirect("/results");
+  if (process.env.NODE_ENV !== "development" && data.user.role !== "admin") {
+    const date = new Date(data.user.userExamInfo.updated_at);
+    const has20DaysElapsed = hasDaysElapsed(date, 20);
+    if (data.user.userExamInfo.ai_recommendation) {
+      if (!has20DaysElapsed) {
+        redirect("/results");
+      }
+    }
   }
 
   return (
-    <div className="flex flex-col gap-10">
-      <Assessment userId={userId} questionsData={data}></Assessment>
-    </div>
+    <>
+      <Toaster />
+      <div className="flex flex-col gap-10">
+        <Assessment userId={userId} questionsData={data}></Assessment>
+      </div>
+    </>
   );
 }
 

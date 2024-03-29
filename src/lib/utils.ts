@@ -78,3 +78,10 @@ export const extractAfterFirstUnderscore = (str: string): string => {
   }
   return str; // Return the original string if no underscore is found
 };
+
+export const hasDaysElapsed = (date: Date, numberOfDays = 20) => {
+  const today = new Date();
+  const differenceInMs = today.getTime() - date.getTime();
+  const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
+  return differenceInDays >= numberOfDays;
+};

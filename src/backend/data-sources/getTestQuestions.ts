@@ -21,7 +21,7 @@ const getTestQuestions = async (userId: string) => {
     },
   });
   const facultyCode = facultyCodeObj?.code;
-  const SCI = ["Biology", "Chemistry", "Physics", "Mathematics", "English"];
+  const SCI = ["Biology", "Chemistry", "Physics", "Math", "English"];
   const COM = [
     "Accounting",
     "Commerce",
@@ -45,7 +45,7 @@ const getTestQuestions = async (userId: string) => {
 
   for (const subject of shuffledSubjectList) {
     const subjectQuestionsArr = await prisma.question.findMany({
-      take: 10,
+      take: 6,
       where: {
         subject: {
           name: subject,

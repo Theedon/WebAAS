@@ -145,4 +145,5 @@ export type UserExamInfo = {
   rec_course_3: Maybe<Scalars['String']['output']>;
   taken_exam: Scalars['Boolean']['output'];
   test_information: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['Date']['output'];
 };
