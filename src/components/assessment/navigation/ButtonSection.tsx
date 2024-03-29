@@ -28,7 +28,7 @@ function ButtonSection({
           isAnswered={checkIfAnswered(question.index, questionsData)}
           key={question.id}
           onClick={() => {
-            console.log(question.index);
+            // console.log(question.index);
             setCurrentQuestionIndex(question.index);
           }}
         >

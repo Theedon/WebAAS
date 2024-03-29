@@ -16,6 +16,7 @@ export const getUserExamInfo = async (userId: string) => {
         anti_course_2: true,
         anti_course_3: true,
         taken_exam: true,
+        updated_at: true,
       },
     });
 
@@ -38,6 +39,7 @@ export const getUserExamInfo = async (userId: string) => {
       anti_course_2: user.anti_course_2,
       anti_course_3: user.rec_course_3,
       taken_exam: user.taken_exam,
+      updated_at: user.updated_at,
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

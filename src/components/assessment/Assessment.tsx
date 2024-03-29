@@ -16,6 +16,8 @@ import {
 import { getUserAISubjects } from "@/actions/getUserAISubjects";
 import { getAIRec } from "@/lib/getAIRec";
 import { saveUserRecommendation } from "@/actions/saveUserRecommendation";
+import { useToast } from "../ui/use-toast";
+
 type AssessmentProps = {
   userId: string;
   questionsData: TestQuestionsQuery;
@@ -35,6 +37,7 @@ export type QuestionType = {
 };
 
 function Assessment({ userId, questionsData }: AssessmentProps) {
+  const { toast } = useToast();
   const SAVE_EXAM = gql`
     mutation SaveExam(
       $userId: String!
@@ -83,7 +86,7 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
   const router = useRouter();
   const checkIfExamIsCompleted = (options: QuestionType[]) => {
     for (const option of options) {
-      if (option.choice !== "" || option.choice !== null) {
+      if (option.choice === "" || option.choice === null) {
         return false;
       }
     }
@@ -91,10 +94,13 @@ function Assessment({ userId, questionsData }: AssessmentProps) {
   };
   const submitExam = async () => {
     if (
-      process.env.USE_RIGID_RULES === "TRUE" &&
+      process.env.NODE_ENV !== "development" &&
       !checkIfExamIsCompleted(options)
     ) {
-      alert("please answer every question in assesment");
+      toast({
+        title: "Please answer all questions ",
+        variant: "destructive",
+      });
       return;
     }
     setTestSubmitting(true);

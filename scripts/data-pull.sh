@@ -2,7 +2,7 @@
 POSTGRES_USER="default"
 POSTGRES_USER_LOCAL=$USER
 POSTGRES_HOST="ep-black-lab-41931945-pooler.us-east-1.postgres.vercel-storage.com"
-POSTGRES_PASSWORD="1XAK3n7ZTzdaW2"
+POSTGRES_PASSWORD="1XAK3n17ZTz2daW2"
 POSTGRES_DATABASE="verceldb"
 POSTGRES_DATABASE_LOCAL="webaas_development"
 
