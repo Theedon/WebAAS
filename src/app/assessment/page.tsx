@@ -6,6 +6,7 @@ import {
   TestQuestionsQueryVariables,
 } from "./__generated__/page.generated";
 import getCurrentUserId from "@/lib/globalUserContext";
+import { redirect } from "next/navigation";
 
 const query = gql`
   query TestQuestions($userId: String!) {
@@ -40,7 +41,9 @@ async function AssessmentPage() {
     variables: { userId: userId },
   });
 
-  // if (data.user.userExamInfo.ai_recommendation) redirect("/results");
+  if (process.env.NODE_ENV !== "development") {
+    if (data.user.userExamInfo.ai_recommendation) redirect("/results");
+  }
 
   return (
     <div className="flex flex-col gap-10">
