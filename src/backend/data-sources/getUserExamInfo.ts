@@ -37,7 +37,7 @@ export const getUserExamInfo = async (userId: string) => {
       rec_course_3: user.rec_course_3,
       anti_course_1: user.anti_course_1,
       anti_course_2: user.anti_course_2,
-      anti_course_3: user.rec_course_3,
+      anti_course_3: user.anti_course_3,
       taken_exam: user.taken_exam,
       updated_at: user.updated_at,
     };

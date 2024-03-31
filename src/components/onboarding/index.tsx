@@ -123,7 +123,7 @@ function Onboarding({
     } catch (e) {
       toast({
         title: "Error",
-        description: "Please try again later",
+        description: "Please refresh page or try again later",
         variant: "destructive",
       });
       setRegisterError((e as Error).message);

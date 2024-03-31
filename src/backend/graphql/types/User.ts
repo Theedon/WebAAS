@@ -26,7 +26,7 @@ export const typeDefs = gql`
     created_at: String!
     updated_at: String!
     phone_no: String
-    userExamInfo: UserExamInfo!
+    userExamInfo: UserExamInfo
   }
 `;
 
