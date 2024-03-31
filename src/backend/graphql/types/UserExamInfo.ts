@@ -10,7 +10,7 @@ export const typeDefs = gql`
     anti_course_1: String
     anti_course_2: String
     anti_course_3: String
-    taken_exam: Boolean!
-    updated_at: Date!
+    taken_exam: Boolean
+    updated_at: Date
   }
 `;
