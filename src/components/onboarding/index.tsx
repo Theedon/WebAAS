@@ -130,6 +130,7 @@ function Onboarding({
       console.error(registerError);
     } finally {
       setSubmitting(false);
+      window.location.reload();
     }
   };
 
