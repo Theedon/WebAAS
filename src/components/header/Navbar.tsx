@@ -12,6 +12,7 @@ import {
   UserQueryVariables,
 } from "./__generated__/Navbar.generated";
 import getCurrentUserId from "@/lib/globalUserContext";
+import Link from "next/link";
 
 const query = gql`
   query User($userId: String!) {
@@ -54,7 +55,9 @@ async function Navbar() {
   return (
     <header className="fixed left-0 top-0 z-10 my-1 w-full max-w-full border-b-2 bg-opacity-30 shadow-md backdrop-blur-md">
       <div className="flex h-[10vh] items-center justify-between rounded-b-xl bg-primary px-7 md:px-10 dark:text-background">
-        <Image src={app_logo} alt="app logo" className="size-14" />
+        <Link href="/">
+          <Image src={app_logo} alt="app logo" className="size-14" />
+        </Link>
 
         <div className="hidden md:flex">
           {navItems.map((item, index) => (
