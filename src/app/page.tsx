@@ -40,15 +40,15 @@ export default async function Home() {
       <main className="flex flex-col gap-5">
         <SubjectSection
           header="Recommended Subjects"
-          course_1={data.user.userExamInfo.rec_course_1 ?? ""}
-          course_2={data.user.userExamInfo.rec_course_2 ?? ""}
-          course_3={data.user.userExamInfo.rec_course_3 ?? ""}
+          course_2={data.user.userExamInfo?.rec_course_2 ?? ""}
+          course_3={data.user.userExamInfo?.rec_course_3 ?? ""}
+          course_1={data.user.userExamInfo?.rec_course_1 ?? ""}
         />
         <SubjectSection
           header="Least Recommended"
-          course_1={data.user.userExamInfo.anti_course_1 ?? ""}
-          course_2={data.user.userExamInfo.anti_course_2 ?? ""}
-          course_3={data.user.userExamInfo.anti_course_3 ?? ""}
+          course_1={data.user.userExamInfo?.anti_course_1 ?? ""}
+          course_2={data.user.userExamInfo?.anti_course_2 ?? ""}
+          course_3={data.user.userExamInfo?.anti_course_3 ?? ""}
         />
 
         <div></div>

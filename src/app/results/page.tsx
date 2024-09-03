@@ -45,13 +45,7 @@ async function ResultPage() {
       data.user.role !== "admin" &&
       data.user.userExamInfo?.updated_at
     ) {
-      const date = new Date(data.user.userExamInfo.updated_at);
-      const has20DaysElapsed = hasDaysElapsed(date, 20);
-      if (data.user.userExamInfo.ai_recommendation) {
-        if (!has20DaysElapsed) {
-          return false;
-        }
-      }
+      return false;
     }
 
     return true;
