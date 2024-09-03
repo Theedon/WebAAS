@@ -5,4 +5,4 @@ export type TestQuestionsQueryVariables = Types.Exact<{
 }>;
 
 
-export type TestQuestionsQuery = { __typename?: 'Query', user: { __typename?: 'User', role: string, faculty: { __typename?: 'Faculty', code: string } | null, userExamInfo: { __typename?: 'UserExamInfo', ai_recommendation: string | null, updated_at: any } }, testQuestions: Array<Array<{ __typename?: 'Question', id: string, option_a: string | null, option_b: string | null, option_c: string | null, option_d: string | null, subject_id: string | null, question: string, correct_option: string | null }>> };
+export type TestQuestionsQuery = { __typename?: 'Query', user: { __typename?: 'User', role: string, faculty: { __typename?: 'Faculty', code: string } | null, userExamInfo: { __typename?: 'UserExamInfo', ai_recommendation: string | null, updated_at: any | null } | null }, testQuestions: Array<Array<{ __typename?: 'Question', id: string, option_a: string | null, option_b: string | null, option_c: string | null, option_d: string | null, subject_id: string | null, question: string, correct_option: string | null }>> };

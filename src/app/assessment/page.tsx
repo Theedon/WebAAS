@@ -48,7 +48,7 @@ async function AssessmentPage() {
   if (
     process.env.NODE_ENV !== "development" &&
     data.user.role !== "admin" &&
-    data.user.userExamInfo.updated_at
+    data.user.userExamInfo?.updated_at
   ) {
     const date = new Date(data.user.userExamInfo.updated_at);
     const has20DaysElapsed = hasDaysElapsed(date, 20);

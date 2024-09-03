@@ -5,4 +5,4 @@ export type UserAdviceQueryVariables = Types.Exact<{
 }>;
 
 
-export type UserAdviceQuery = { __typename?: 'Query', user: { __typename?: 'User', userExamInfo: { __typename?: 'UserExamInfo', ai_recommendation: string | null } } };
+export type UserAdviceQuery = { __typename?: 'Query', user: { __typename?: 'User', role: string, userExamInfo: { __typename?: 'UserExamInfo', ai_recommendation: string | null, updated_at: any | null } | null } };
