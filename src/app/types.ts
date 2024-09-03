@@ -130,7 +130,7 @@ export type User = {
   phone_no: Maybe<Scalars['String']['output']>;
   role: Scalars['String']['output'];
   updated_at: Scalars['String']['output'];
-  userExamInfo: UserExamInfo;
+  userExamInfo: Maybe<UserExamInfo>;
   verified: Scalars['Boolean']['output'];
 };
 
@@ -143,7 +143,7 @@ export type UserExamInfo = {
   rec_course_1: Maybe<Scalars['String']['output']>;
   rec_course_2: Maybe<Scalars['String']['output']>;
   rec_course_3: Maybe<Scalars['String']['output']>;
-  taken_exam: Scalars['Boolean']['output'];
+  taken_exam: Maybe<Scalars['Boolean']['output']>;
   test_information: Maybe<Scalars['String']['output']>;
-  updated_at: Scalars['Date']['output'];
+  updated_at: Maybe<Scalars['Date']['output']>;
 };

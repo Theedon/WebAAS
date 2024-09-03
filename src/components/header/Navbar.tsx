@@ -42,7 +42,7 @@ async function Navbar() {
     if (data?.user?.role === "admin") {
       navItems.push({ name: "Students", href: "/students" });
       navItems.push({ name: "Advisors", href: "/advisors" });
-      navItems.push({ name: "Add Event", href: "/add-event" });
+      navItems.push({ name: "Add Event", href: "/add-events" });
     } else if (data?.user?.role === "advisor") {
       navItems.push({ name: "Students", href: "/students" });
     } else if (data?.user?.role === "student") {
